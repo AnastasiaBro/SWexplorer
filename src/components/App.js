@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
-import styles from './App.css';
+//import ReactDOM from 'react-dom';
+import './App.css';
 
 
 class App extends React.Component {
@@ -40,20 +40,26 @@ class App extends React.Component {
         return <img src='/i/preloader.gif' alt='загружаю...' /> // рисуем прелоадер
       } else {
         if (data.results !== undefined) { //проверка, что data.results загружен
-            const results = [];
+            const results = [];  //данные
+            const opening = [];  //чтобы абзацами вывести титры
 
             for (var i = 0; i < this.state.data.results.length; i++) {
                 results[i] = this.state.data.results[i];
+                opening[i] = this.state.data.results[i].opening_crawl.split('\r\n');
             }
+
+            console.log(opening);
 
             const listResults = results.map((results, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
                     <img className = 'film__image' src={'/img/' + results.title.toString() + '.jpg'} alt="film"></img>
                     <p className = 'film__item-text film__item-text--first'>{results.title}</p>
-                    <p className = 'film__item-text'>{results.release_date.substring(0,4)}</p>
-                    <p className = 'film__item-text'>{results.director}</p>
                     <h6 className = 'visually-hidden'>{index + 1}</h6>
                 </li>
+            );
+
+            const listOpening = opening[1].map((results, index) =>
+                <li className = 'film__opening' key={index}>{opening[1][index]}<span className = 'transparent'>space</span></li>
             );
 
             return (
@@ -65,6 +71,33 @@ class App extends React.Component {
                 </div>
                 <div className = 'film__logo'>
                     <img className = 'film__logo-image' src='/img/logo-sw.jpg' alt='logo'></img>
+                    <div className = 'film__logo-left'>
+                      <ul className = 'film__opening-list'>{listOpening}</ul>
+                    </div>
+                    <div className = 'film__logo-right'>
+                      <div className = 'film__logo-container'>
+                        <div className = 'film__logo-row'>
+                          <p className = 'film__logo-right-text'>Episode number:</p>
+                          <p className = 'film__logo-right-text'>{results[1].episode_id}</p>
+                        </div>
+                        <div className = 'film__logo-row'>
+                          <p className = 'film__logo-right-text'>Director:</p>
+                          <p className = 'film__logo-right-text'>{results[1].director}</p>
+                        </div>
+                        <div className = 'film__logo-row'>
+                          <p className = 'film__logo-right-text'>Release date:</p>
+                          <p className = 'film__logo-right-text'>{results[1].release_date.substring(0,4)}</p>
+                        </div>
+                        <div className = 'film__logo-row'>
+                          <p className = 'film__logo-right-text'>Characters:</p>
+                          <p className = 'film__logo-right-text'>loading...</p>
+                        </div>
+                        <div className = 'film__logo-row'>
+                          <p className = 'film__logo-right-text'>Planets:</p>
+                          <p className = 'film__logo-right-text'>loading...</p>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>)
         }
@@ -72,12 +105,14 @@ class App extends React.Component {
     }
 
     handleClick = (e) => {
-        if (e.target.parentNode.className === 'film__item') {
-            console.log('this is:', e.target.parentNode.querySelector('h6').innerText);
-        } else if (e.target.className === 'film__item') {
-            console.log('this is:', e.target.querySelector('h6').innerText);
-        }
+      if (e.target.parentNode.className === 'film__item') {
+          const number = e.target.parentNode.querySelector('h6').innerText;
+          console.log(number);
+      } else if (e.target.className === 'film__item') {
+          const number = e.target.querySelector('h6').innerText;
+          console.log(number);
       }
+    }
 
     render() {
       return (
