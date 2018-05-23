@@ -1,4 +1,6 @@
 import React from 'react';
+import {render} from 'react-dom';
+//import People from './People.js';
 
 
 class ActiveFilm extends React.Component {
@@ -43,7 +45,7 @@ class ActiveFilm extends React.Component {
                 opening[i] = this.state.data.results[i].opening_crawl.split('\r\n');
             }
 
-            console.log(opening);
+            //console.log(opening);
 
             const listOpening = opening[window.id].map((results, index) =>
                 <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>space</span></li>
@@ -56,7 +58,9 @@ class ActiveFilm extends React.Component {
 				  <div>
             <div className = 'film__logo-left'>
               <ul className = 'film__opening-list'>{listOpening}</ul>
+              
             </div>
+            {/*<ul className = 'film__people-list character' id = 'people'>{listCharacters}</ul>*/}
             <div className = 'film__logo-right'>
               <div className = 'film__logo-container'>
                 <div className = 'film__logo-row'>
@@ -73,11 +77,11 @@ class ActiveFilm extends React.Component {
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Characters:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.peopleClick}>Open a list</span></p>
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Planets:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.planetsClick}>Open a list</span></p>
                 </div>
               </div>
             </div>
@@ -85,6 +89,10 @@ class ActiveFilm extends React.Component {
           )
       }
     }
+
+    /*peopleClick = (e) => {
+      render({listCharacters}, document.getElementById('people'));
+    }*/
     
     render() {
         return (

@@ -50,7 +50,7 @@ class App extends React.Component {
                 opening[i] = this.state.data.results[i].opening_crawl.split('\r\n');
             }
 
-            console.log(opening);
+            //console.log(opening);
 
             const listResults = results.map((results, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
