@@ -2,7 +2,7 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import ActiveFilm from './ActiveFilm.js';
 import './App.css';
-window.id = 0;
+window.id = 0; //изначально первый элемент с данными
 
 
 class App extends React.Component {
@@ -79,20 +79,23 @@ class App extends React.Component {
     }
 
     handleClick = (e) => {
-      document.querySelector('.film__appear').classList.add('visually-hidden');
-      document.querySelectorAll('.film__item')[window.id].classList.remove('film__item--active');
+      const windowFilmInfo = document.querySelector('.film__appear');
+      const filmItem = document.querySelectorAll('.film__item');
+
+      windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
+      filmItem[window.id].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+
       if (e.target.parentNode.className === 'film__item') {
-          window.id = e.target.parentNode.querySelector('h6').innerText;
-          console.log(window.id);
+          window.id = e.target.parentNode.querySelector('h6').innerText; //номер элемента
           this.setState({id: window.id});
-          document.querySelector('.film__appear').classList.remove('visually-hidden');
-          document.querySelectorAll('.film__item')[window.id].classList.add('film__item--active');
-      } else if (e.target.className === 'film__item') {
+          windowFilmInfo.classList.remove('visually-hidden');  //показываем данные выбранного элемента
+          filmItem[window.id].classList.add('film__item--active'); //обводка
+      } 
+      else if (e.target.className === 'film__item') {
           window.id = e.target.querySelector('h6').innerText;
-          console.log(window.id);
           this.setState({id: window.id});
-          document.querySelector('.film__appear').classList.remove('visually-hidden');
-          document.querySelectorAll('.film__item')[window.id].classList.add('film__item--active');
+          windowFilmInfo.classList.remove('visually-hidden');
+          filmItem[window.id].classList.add('film__item--active');
       }
     }
 

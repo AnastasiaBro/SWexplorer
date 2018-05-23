@@ -48,6 +48,10 @@ class ActiveFilm extends React.Component {
             const listOpening = opening[window.id].map((results, index) =>
                 <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>space</span></li>
             );
+
+            const listCharacters = results[window.id].characters.map((characters, index) =>
+                <li className = 'character__item' key={index}><a href={characters}>{index}</a></li>
+            );
 			return (
 				<div>
                       <div className = 'film__logo-left'>
@@ -69,11 +73,11 @@ class ActiveFilm extends React.Component {
                           </div>
                           <div className = 'film__logo-row'>
                             <p className = 'film__logo-right-text'>Characters:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'>loading...</p>
+                            <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
                           </div>
                           <div className = 'film__logo-row'>
                             <p className = 'film__logo-right-text'>Planets:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'>loading...</p>
+                            <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
                           </div>
                         </div>
                       </div>
