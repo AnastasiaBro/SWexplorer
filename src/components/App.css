@@ -58,7 +58,7 @@
     content: "";
     width: 5px;
     height: 100px;
-    background-color: #fccc07;
+    background-color: white;
     position: absolute;
     bottom: -110px;
     border-radius: 50px;
@@ -76,6 +76,17 @@
 }
 
 .film__item--active:after {
+    content: "";
+    width: 5px;
+    height: 100px;
+    background-color: #fccc07;
+    position: absolute;
+    bottom: -110px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.film__item--active:hover:after {
     content: "";
     width: 5px;
     height: 100px;
