@@ -1,7 +1,7 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import ActiveFilm from './ActiveFilm.js';
 import './App.css';
+import {render} from 'react-dom';
 window.id = 0; //изначально первый элемент с данными
 
 
@@ -69,8 +69,8 @@ class App extends React.Component {
                 </div>
                 <div className = 'film__logo' id = 'logo'>
                     <img className = 'film__logo-image' src='/img/logo-sw.jpg' alt='logo'></img>
-
-                    <ActiveFilm />
+                    <div id="logo-active">
+                    </div>                    
 
                 </div>
             </div>)
@@ -79,6 +79,7 @@ class App extends React.Component {
     }
 
     handleClick = (e) => {
+      render(<ActiveFilm/>, document.getElementById('logo-active'));
       const windowFilmInfo = document.querySelector('.film__appear');
       const filmItem = document.querySelectorAll('.film__item');
 
@@ -90,6 +91,7 @@ class App extends React.Component {
           this.setState({id: window.id});
           windowFilmInfo.classList.remove('visually-hidden');  //показываем данные выбранного элемента
           filmItem[window.id].classList.add('film__item--active'); //обводка
+          
       } 
       else if (e.target.className === 'film__item') {
           window.id = e.target.querySelector('h6').innerText;

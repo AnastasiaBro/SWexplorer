@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 
 class ActiveFilm extends React.Component {
@@ -53,41 +53,37 @@ class ActiveFilm extends React.Component {
                 <li className = 'character__item' key={index}><a href={characters}>{index}</a></li>
             );
 			return (
-				<div>
-                      <div className = 'film__logo-left'>
-                        <ul className = 'film__opening-list'>{listOpening}</ul>
-                      </div>
-                      <div className = 'film__logo-right'>
-                        <div className = 'film__logo-container'>
-                          <div className = 'film__logo-row'>
-                            <p className = 'film__logo-right-text'>Episode number:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].episode_id}</p>
-                          </div>
-                          <div className = 'film__logo-row'>
-                            <p className = 'film__logo-right-text'>Director:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].director}</p>
-                          </div>
-                          <div className = 'film__logo-row'>
-                            <p className = 'film__logo-right-text'>Release date:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].release_date.substring(0,4)}</p>
-                          </div>
-                          <div className = 'film__logo-row'>
-                            <p className = 'film__logo-right-text'>Characters:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
-                          </div>
-                          <div className = 'film__logo-row'>
-                            <p className = 'film__logo-right-text'>Planets:</p>
-                            <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
-                          </div>
-                        </div>
-                      </div>
+				  <div>
+            <div className = 'film__logo-left'>
+              <ul className = 'film__opening-list'>{listOpening}</ul>
+            </div>
+            <div className = 'film__logo-right'>
+              <div className = 'film__logo-container'>
+                <div className = 'film__logo-row'>
+                  <p className = 'film__logo-right-text'>Episode number:</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].episode_id}</p>
                 </div>
-                )
-            }else{
-                return (
-                    <h3>Данных нет.</h3>
-            )
-		}
+                <div className = 'film__logo-row'>
+                  <p className = 'film__logo-right-text'>Director:</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].director}</p>
+                </div>
+                <div className = 'film__logo-row'>
+                  <p className = 'film__logo-right-text'>Release date:</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].release_date.substring(0,4)}</p>
+                </div>
+                <div className = 'film__logo-row'>
+                  <p className = 'film__logo-right-text'>Characters:</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
+                </div>
+                <div className = 'film__logo-row'>
+                  <p className = 'film__logo-right-text'>Planets:</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><a className = 'film__link' href="#">Open a list</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          )
+      }
     }
     
     render() {
