@@ -1,6 +1,7 @@
 import React from 'react';
-//import {render} from 'react-dom';
-//import People from './People.js';
+import {render} from 'react-dom';
+import Person from './Person.js';
+window.personId = 0;
 
 
 class ActiveFilm extends React.Component {
@@ -52,12 +53,14 @@ class ActiveFilm extends React.Component {
             );
 
             const listCharacters = results[window.id].characters.map((characters, index) =>
-                <li className = 'character__item' key={index}><a className = 'character__link' href={characters}>{characters.replace(/\D+/g,"")}</a></li>
+                <li className = 'character__item character__link' key={index}><span className = 'character__span visually-hidden'>{characters.replace(/\D+/g,"")}</span>{characters.replace(/\D+/g,"")}</li>
             );
 
             const listPlanets = results[window.id].planets.map((planets, index) =>
                 <li className = 'character__item' key={index}><a className = 'character__link' href={planets}>{planets.replace(/\D+/g,"")}</a></li>
             );
+            
+            //<ul className = 'film__people-list character' id = 'people' onClick={this.personClick}>{listCharacters}</ul>
 			return (
 				  <div>
             <div className = 'film__logo-left'>
@@ -66,18 +69,18 @@ class ActiveFilm extends React.Component {
             </div>
             
             <div className = 'film__logo-right'>
-              <div className = 'film__first-window visually-hidden'>
+              <div className = 'film__first-window visually-hidden' id='first-window'>
                 <div className = 'film__window-container'>
-                  <p className = 'film__title-people'>Characters list</p>
+                  <p className = 'film__title-people'>Character card</p>
                   <button className="film__close-button" onClick={this.closePeopleList}><span className = 'visually-hidden'>close</span></button>
                 </div>
-                <p className = 'film__title-people film__title-people--small'>Click one to see person</p>
-                <ul className = 'film__people-list character' id = 'people'>{listCharacters}</ul>
+                
+                <div id = 'first-window-line'></div>
               </div>
               
               <div className = 'film__second-window visually-hidden'>
                 <div className = 'film__window-container'>
-                  <p className = 'film__title-people'>Planets list</p>
+                  <p className = 'film__title-people'>Planet card</p>
                   <button className="film__close-button" onClick={this.closePlanetsList}><span className = 'visually-hidden'>close</span></button>
                 </div>
                 <p className = 'film__title-people film__title-people--small'>Click one to see planet</p>
@@ -114,6 +117,14 @@ class ActiveFilm extends React.Component {
 
     peopleClick = (e) => {
       document.querySelector('.film__first-window').classList.remove('visually-hidden');
+      document.querySelector('.film__second-window').classList.add('visually-hidden');
+      //if (e.target.className === 'character__item character__link') {
+        //window.personId = e.target.querySelector('.character__span').innerText; //номер элемента
+        //console.log(e.target);
+        //console.log(window.personId);
+      window.personId = (this.state.data.results[window.id].characters[0].replace(/\D+/g,""));
+      render(<Person url="https://swapi.co/api/people/" reset={() => this.forceUpdate()} />, document.getElementById('first-window-line'));
+      //}
     }
 
     closePeopleList = (e) => {
@@ -122,19 +133,24 @@ class ActiveFilm extends React.Component {
 
     planetsClick = (e) => {
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
+      document.querySelector('.film__first-window').classList.add('visually-hidden');
     }
 
     closePlanetsList = (e) => {
       document.querySelector('.film__second-window').classList.add('visually-hidden');
     }
+
+    personClick = (e) => {
+      
+    }
     
     render() {
-        return (
-          <div className = 'film__appear visually-hidden' id = 'logo-container'>
-              {this.renderOneFilm()}
-          </div>
-        )
-      }
+      return (
+        <div className = 'film__appear visually-hidden' id = 'logo-container'>
+            {this.renderOneFilm()}
+        </div>
+      )
+    }
 }
 
 export default ActiveFilm;

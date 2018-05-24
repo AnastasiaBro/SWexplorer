@@ -79,7 +79,7 @@ class App extends React.Component {
     }
 
     handleClick = (e) => {
-      render(<ActiveFilm/>, document.getElementById('logo-active'));
+      render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
       const windowFilmInfo = document.querySelector('.film__appear');
       const filmItem = document.querySelectorAll('.film__item');
 

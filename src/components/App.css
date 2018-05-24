@@ -329,7 +329,7 @@
     height: 210px;
     position: absolute;
     top: 20px;
-    left: -385px;
+    left: -770px;
     z-index: 10;
     background-color: black;
     border: 1px solid rgb(71, 71, 71);
@@ -443,6 +443,7 @@
     height: 20px;
     margin-right: 3px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .character__link {
@@ -459,4 +460,46 @@
 .character__link:hover {
     background-color: #fccc07;
     color: black;
+}
+
+.character__link:active {
+    opacity: 0.8;
+    color: black;
+}
+
+.person__name {
+    display: block;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.person__text {
+    margin-left: 20px;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 80px;
+}
+
+.person__elem {
+    color: #fccc07;
+    font-size: 18px;
+}
+
+.person__link {
+    color: white;
+    text-decoration: none;
+}
+
+.person__link:hover {
+    color: #fccc07;
+}
+
+.person__row {
+    display: flex;
+    flex-direction: row;
 }
