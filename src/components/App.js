@@ -85,6 +85,7 @@ class App extends React.Component {
 
       windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
       filmItem[window.id].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+      //document.querySelector('.film__center-window').classList.add('visually-hidden');
 
       if (e.target.parentNode.className === 'film__item') {
           window.id = e.target.parentNode.querySelector('h6').innerText; //номер элемента
