@@ -467,6 +467,31 @@
     color: black;
 }
 
+.person {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.person__blocks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.person__left-block {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.person__right-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 25px;
+}
+
 .person__name {
     display: block;
     margin-top: 10px;
@@ -502,4 +527,165 @@
 .person__row {
     display: flex;
     flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+
+.person__image {
+    width: 55px;
+    height: 70px;
+    border: 1px solid grey;
+}
+
+.person__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.person__button-left, .person__button-right {
+    width: 25px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.person__button-left:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.person__button-right:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.person__button-left:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.person__button-right:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.person__button-left:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.person__button-right:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.person__button-left:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.person__button-right:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.person__button-left:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}
+
+.person__button-right:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.person__button-left:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.person__button-right:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
 }

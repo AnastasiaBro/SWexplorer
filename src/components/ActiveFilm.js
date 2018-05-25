@@ -50,6 +50,7 @@ class ActiveFilm extends React.Component {
             }
 
             const userToShow = this.state.data.results[window.id].characters[0];
+            const allCharacters = this.state.data.results[window.id].characters;
             console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
@@ -125,7 +126,7 @@ class ActiveFilm extends React.Component {
       console.log(window.id);
       console.log(this.state.data.results[window.id].characters);
 
-      render(<Person user={this.state.data.results[window.id].characters[0]} />, document.getElementById('first-window-line'));
+      render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} />, document.getElementById('first-window-line'));
     }
 
     closePeopleList = (e) => {
