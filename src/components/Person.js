@@ -98,6 +98,7 @@ class Person extends React.Component {
       if (window.point === Number(arrLength)) {
         window.point = 0;
       }
+      console.log(window.point);
       console.log('стало ', this.props.characters[window.point]);
       render(<Person user={this.props.characters[window.point]} characters={this.props.characters} />, document.getElementById('first-window-line'));
     }
@@ -109,6 +110,7 @@ class Person extends React.Component {
       if (window.point === -1) {
         window.point = Number(arrLength) - 1;
       }
+      console.log(window.point);
       console.log('стало ', this.props.characters[window.point]);
       render(<Person user={this.props.characters[window.point]} characters={this.props.characters} />, document.getElementById('first-window-line'));
     }

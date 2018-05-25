@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import Person from './Person.js';
+import Planet from './Planet.js';
 //window.personId = 0;
 
 class ActiveFilm extends React.Component {
@@ -38,7 +39,7 @@ class ActiveFilm extends React.Component {
         }
       }
 	renderOneFilm(){
-        const { data, userToShow } = this.state
+        const { data, userToShow, elemToShow } = this.state
 
 		if (data.results !== undefined) { //проверка, что data.results загружен
             const results = [];  //данные
@@ -50,8 +51,9 @@ class ActiveFilm extends React.Component {
             }
 
             const userToShow = this.state.data.results[window.id].characters[0];
+            const elemToShow = this.state.data.results[window.id].planets[0];
             const allCharacters = this.state.data.results[window.id].characters;
-            console.log(userToShow);
+            //console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
                 <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>space</span></li>
@@ -83,13 +85,13 @@ class ActiveFilm extends React.Component {
                 <div id = 'first-window-line'></div>
               </div>
               
-              <div className = 'film__second-window visually-hidden'>
+              <div className = 'film__second-window visually-hidden' id='second-window'>
                 <div className = 'film__window-container'>
                   <p className = 'film__title-people'>Planet card</p>
                   <button className="film__close-button" onClick={this.closePlanetsList}><span className = 'visually-hidden'>close</span></button>
                 </div>
-                <p className = 'film__title-people film__title-people--small'>Click one to see planet</p>
-                <ul className = 'film__people-list character' id = 'people'>{listPlanets}</ul>
+                
+                <div id = 'second-window-line'></div>
               </div>
 
               <div className = 'film__logo-container'>
@@ -136,6 +138,8 @@ class ActiveFilm extends React.Component {
     planetsClick = (e) => {
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
       document.querySelector('.film__first-window').classList.add('visually-hidden');
+
+      render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} />, document.getElementById('second-window-line'));
     }
 
     closePlanetsList = (e) => {
