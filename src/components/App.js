@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ActiveFilm from './ActiveFilm.js';
 import './App.css';
 import {render} from 'react-dom';
@@ -80,8 +81,21 @@ class App extends React.Component {
 
     handleClick = (e) => {
       render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
+
       const windowFilmInfo = document.querySelector('.film__appear');
       const filmItem = document.querySelectorAll('.film__item');
+
+      if (document.getElementById('first-window-line')) {
+        ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
+      }
+
+      if (document.querySelector('.film__first-window')) {
+        document.querySelector('.film__first-window').classList.add('visually-hidden');
+      }
+
+      if (document.querySelector('.film__second-window')) {
+        document.querySelector('.film__second-window').classList.add('visually-hidden');
+      }
 
       windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
       filmItem[window.id].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается

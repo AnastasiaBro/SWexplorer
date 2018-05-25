@@ -1,8 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import Person from './Person.js';
-window.personId = 0;
-
+//window.personId = 0;
 
 class ActiveFilm extends React.Component {
 	constructor(props) {
@@ -10,12 +10,14 @@ class ActiveFilm extends React.Component {
         this.state = {
           data: [],
           isLoading: false,
+          //userToShow: null
         }
       }
       componentDidMount() {
         const xhr = new XMLHttpRequest();
         const URL = 'https://swapi.co/api/films';
         xhr.open('GET', URL, true);
+        //console.log(window.id);
         xhr.send();
         this.setState({ isLoading: true })
     
@@ -30,12 +32,13 @@ class ActiveFilm extends React.Component {
             this.setState({
               data: JSON.parse(xhr.responseText),
               isLoading: false,
+              //userToShow: JSON.parse(xhr.responseText).results[window.id].characters[0]
             })
           }
         }
       }
 	renderOneFilm(){
-        const { data } = this.state
+        const { data, userToShow } = this.state
 
 		if (data.results !== undefined) { //проверка, что data.results загружен
             const results = [];  //данные
@@ -46,7 +49,8 @@ class ActiveFilm extends React.Component {
                 opening[i] = this.state.data.results[i].opening_crawl.split('\r\n');
             }
 
-            //console.log(opening);
+            const userToShow = this.state.data.results[window.id].characters[0];
+            console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
                 <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>space</span></li>
@@ -102,11 +106,11 @@ class ActiveFilm extends React.Component {
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Characters:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.peopleClick}>Open a list</span></p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.peopleClick}>Open a card</span></p>
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Planets:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.planetsClick}>Open a list</span></p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'><span className = 'film__link' onClick={this.planetsClick}>Open a card</span></p>
                 </div>
               </div>
             </div>
@@ -118,13 +122,10 @@ class ActiveFilm extends React.Component {
     peopleClick = (e) => {
       document.querySelector('.film__first-window').classList.remove('visually-hidden');
       document.querySelector('.film__second-window').classList.add('visually-hidden');
-      //if (e.target.className === 'character__item character__link') {
-        //window.personId = e.target.querySelector('.character__span').innerText; //номер элемента
-        //console.log(e.target);
-        //console.log(window.personId);
-      window.personId = (this.state.data.results[window.id].characters[0].replace(/\D+/g,""));
-      render(<Person url="https://swapi.co/api/people/" reset={() => this.forceUpdate()} />, document.getElementById('first-window-line'));
-      //}
+      console.log(window.id);
+      console.log(this.state.data.results[window.id].characters);
+
+      render(<Person user={this.state.data.results[window.id].characters[0]} />, document.getElementById('first-window-line'));
     }
 
     closePeopleList = (e) => {

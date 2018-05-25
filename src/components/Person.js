@@ -8,15 +8,20 @@ class Person extends React.Component {
         this.state = {
           data: [],
           isLoading: false,
+          user: ''
         }
+      }
+
+      componentWillreceiveProps() {
+        this.setState({ user: this.props.userToShow });
       }
 
       componentDidMount() {
         const xhr = new XMLHttpRequest();
-        console.log(window.personId);
-        const URL = 'https://swapi.co/api/people/' + window.personId;
-        console.log(URL);
-        xhr.open('GET', URL, true);
+        //console.log(window.personId);
+        //const URL = 'https://swapi.co/api/people/';
+        console.log(this.props.user);
+        xhr.open('GET', this.props.user, true);
         xhr.send();
         this.setState({ isLoading: true })
     
@@ -43,25 +48,27 @@ class Person extends React.Component {
             return (
                 <div>
                   <p className = 'person__name'><span className = 'person__elem'>[ </span><a className = 'person__link' href={data.url}>{data.name}</a><span className = 'person__elem'> ]</span></p>
-                  <div className = 'person__row'>
-                    <p className = 'person__text'>Birth year:</p>
-                    <p className = 'person__text'>{data.birth_year}</p>
-                  </div>
-                  <div className = 'person__row'>
-                    <p className = 'person__text'>Height:</p>
-                    <p className = 'person__text'>{data.height}</p>
-                  </div>
-                  <div className = 'person__row'>
-                    <p className = 'person__text'>Mass:</p>
-                    <p className = 'person__text'>{data.mass}</p>
-                  </div>
-                  <div className = 'person__row'>
-                    <p className = 'person__text'>Hair color:</p>
-                    <p className = 'person__text'>{data.hair_color}</p>
-                  </div>
-                  <div className = 'person__row'>
-                    <p className = 'person__text'>Eye color:</p>
-                    <p className = 'person__text'>{data.eye_color}</p>
+                  <div>  
+                    <div className = 'person__row'>
+                      <p className = 'person__text'>Birth year:</p>
+                      <p className = 'person__text'>{data.birth_year}</p>
+                    </div>
+                    <div className = 'person__row'>
+                      <p className = 'person__text'>Height:</p>
+                      <p className = 'person__text'>{data.height}</p>
+                    </div>
+                    <div className = 'person__row'>
+                      <p className = 'person__text'>Mass:</p>
+                      <p className = 'person__text'>{data.mass}</p>
+                    </div>
+                    <div className = 'person__row'>
+                      <p className = 'person__text'>Hair color:</p>
+                      <p className = 'person__text'>{data.hair_color}</p>
+                    </div>
+                    <div className = 'person__row'>
+                      <p className = 'person__text'>Eye color:</p>
+                      <p className = 'person__text'>{data.eye_color}</p>
+                    </div>
                   </div>
                 </div>
               )
