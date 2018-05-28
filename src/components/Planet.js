@@ -37,10 +37,12 @@ class Planet extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
+            console.log('HERE');
             this.setState({
               data: JSON.parse(xhr.responseText),
               isLoading: false,
             })
+          
           }
         }
       }

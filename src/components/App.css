@@ -756,3 +756,48 @@
     text-decoration: none;
     margin-bottom: 10px;
 }
+
+.weather {
+    width: 1150px;
+    margin: auto;
+}
+
+.weather__title {
+    font-size: 20px;
+    color: white;
+}
+
+.weather__text {
+    color: white;
+}
+
+.weather__block {
+    position: relative;
+}
+
+.weather__image {
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.weather__gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.weather__name {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+}
