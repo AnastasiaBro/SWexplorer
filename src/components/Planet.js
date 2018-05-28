@@ -71,16 +71,16 @@ class Planet extends React.Component {
                         <p className = 'planet__text planet__text--wide'>{data.climate}</p>
                       </li>
                       <li className = 'person__row'>
-                        <p className = 'planet__text'>Terrain:</p>
-                        <p className = 'planet__text planet__text--wide'>{data.terrain}</p>
-                      </li>
-                      <li className = 'person__row'>
                         <p className = 'planet__text'>Population:</p>
                         <p className = 'planet__text'>{data.population}</p>
                       </li>
+                      <li className = 'person__row'>
+                        <p className = 'planet__text'>Terrain:</p>
+                        <p className = 'planet__text planet__text--wide'>{data.terrain}</p>
+                      </li>
                     </ul>
                     <div className = 'planet__right-block'>
-                      <img className = 'person__image' alt="photo"></img>
+                      <img className = 'planet__image' src={'/img/' + data.name + '.jpg'} alt=""></img>
                       <div className = 'planet__button-container'>
                         <button className = 'person__button-left' type = 'button' onClick={this.planetLeftClick}><span className = 'visually-hidden'>left</span></button>
                         <button className = 'person__button-right' type = 'button' onClick={this.planetRightClick}><span className = 'visually-hidden'>right</span></button>

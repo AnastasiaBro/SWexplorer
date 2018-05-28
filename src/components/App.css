@@ -1,3 +1,11 @@
+.first-text {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-top: 200px;
+}
+
 .film {
     width: 1150px;
     margin: auto;
@@ -198,6 +206,7 @@
     height: 270px;
     width: 350px;
     overflow-y: hidden;
+    perspective: 600px;
 }
 
 .film__logo-left-text {
@@ -267,7 +276,8 @@
     animation-duration: 25s;
     animation-name: up;
     animation-timing-function: linear;
-    transform: translateY(-500px);
+    transform: rotateX(55deg) translateY(-500px) translateZ(300px);
+    visibility: visible;
 }
 
 @keyframes up {
@@ -497,6 +507,7 @@
     flex-direction: column;
     justify-content: flex-start;
     margin-right: 25px;
+    position: relative;
 }
 
 .person__name {
@@ -539,20 +550,42 @@
 }
 
 .person__image {
-    width: 55px;
-    height: 70px;
-    border: 1px solid grey;
+    width: 75px;
+    height: 100px;
+    /*border: 1px solid grey;*/
+    position: absolute;
+    top: 55px;
+    right: 40px;
+    border-radius: 2px;
+}
+
+.planet__image {
+    width: 150px;
+    height: 90px;
+    /*border: 1px solid grey;*/
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    border-radius: 2px;
 }
 
 .person__button-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 90px;
+    margin-right: 18px;
+    /*position: absolute;
+    right: 60px;
+    bottom: 35px;*/
 }
 
 .planet__button-container {
-    margin-top: 37px;
+    /*margin-top: 105px;*/
+    width: 70px;
+    position: absolute;
+    right: -15px;
+    top: 115px;
 }
 
 .person__button-left, .person__button-right {
@@ -563,6 +596,7 @@
     position: relative;
     cursor: pointer;
     outline: none;
+    margin-right: 7px;
 }
 
 .person__button-left:before {

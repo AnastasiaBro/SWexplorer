@@ -40,7 +40,7 @@ class App extends React.Component {
     renderFilms() {
       const { data, isLoading } = this.state
       if (isLoading) {
-        return <img src='/i/preloader.gif' alt='загружаю...' /> // рисуем прелоадер
+        return <p className = 'first-text'>far far away...</p> // рисуем прелоадер
       } else {
         if (data.results !== undefined) { //проверка, что data.results загружен
             const results = [];  //данные
@@ -87,6 +87,12 @@ class App extends React.Component {
 
       if (document.getElementById('first-window-line')) {
         ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
+        window.point = 0;
+        window.planet = 0;
+      }
+
+      if (document.getElementById('second-window-line')) {
+        ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
         window.point = 0;
         window.planet = 0;
       }

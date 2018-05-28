@@ -53,6 +53,7 @@ class ActiveFilm extends React.Component {
             const userToShow = this.state.data.results[window.id].characters[0];
             const elemToShow = this.state.data.results[window.id].planets[0];
             const allCharacters = this.state.data.results[window.id].characters;
+            const allPlanets = this.state.data.results[window.id].planets;
             //console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
@@ -138,6 +139,8 @@ class ActiveFilm extends React.Component {
     planetsClick = (e) => {
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
       document.querySelector('.film__first-window').classList.add('visually-hidden');
+      console.log(window.id);
+      console.log(this.state.data.results[window.id].planets);
 
       render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} />, document.getElementById('second-window-line'));
     }
