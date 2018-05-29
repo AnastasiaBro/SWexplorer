@@ -82,7 +82,7 @@ class Planet extends React.Component {
                       </li>
                     </ul>
                     <div className = 'planet__right-block'>
-                      <img className = 'planet__image' src={'/img/' + data.name + '.jpg'} alt=""></img>
+                      <img className = 'planet__image' src={'./img/' + data.name + '.jpg'} alt=""></img>
                       <div className = 'planet__button-container'>
                         <button className = 'person__button-left' type = 'button' onClick={this.planetLeftClick}><span className = 'visually-hidden'>left</span></button>
                         <button className = 'person__button-right' type = 'button' onClick={this.planetRightClick}><span className = 'visually-hidden'>right</span></button>

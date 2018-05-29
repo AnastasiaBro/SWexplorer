@@ -76,7 +76,7 @@ class Person extends React.Component {
                       </li>
                     </ul>
                     <div className = 'person__right-block'>
-                      <img className = 'person__image' src={'/img/' + data.name + '.jpg'} alt=""></img>
+                      <img className = 'person__image' src={'./img/' + data.name + '.jpg'} alt=""></img>
                       <div className = 'person__button-container'>
                         <button className = 'person__button-left' type = 'button' onClick={this.personLeftClick}><span className = 'visually-hidden'>left</span></button>
                         <button className = 'person__button-right' type = 'button' onClick={this.personRightClick}><span className = 'visually-hidden'>right</span></button>

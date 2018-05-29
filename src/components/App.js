@@ -55,7 +55,7 @@ class App extends React.Component {
 
             const listResults = results.map((results, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
-                    <img className = 'film__image' src={'/img/' + results.title.toString() + '.jpg'} alt="film"></img>
+                    <img className = 'film__image' src={'./img/' + results.title.toString() + '.jpg'} alt="film"></img>
                     <p className = 'film__item-text film__item-text--first'>{results.title}</p>
                     <h6 className = 'visually-hidden'>{index}</h6>
                 </li>
@@ -69,7 +69,7 @@ class App extends React.Component {
                     <ul className = 'film__list'>{listResults}</ul>
                 </div>
                 <div className = 'film__logo' id = 'logo'>
-                    <img className = 'film__logo-image' src='/img/logo-sw.jpg' alt='logo'></img>
+                    <img className = 'film__logo-image' src='./img/logo-sw.jpg' alt='logo'></img>
                     <div id="logo-active">
                     </div>                    
 

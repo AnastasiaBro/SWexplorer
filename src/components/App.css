@@ -762,6 +762,12 @@
     margin: auto;
 }
 
+.weather__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .weather__title {
     font-size: 10px;
     color: white;
@@ -817,7 +823,7 @@
     width: 100px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 0px;
     background-color: rgba(18, 64, 95, 0.4);
     display: flex;
     flex-direction: column;
@@ -877,4 +883,129 @@
     z-index: 10;
     margin-left: auto;
     margin-right: auto;
+}
+
+.cite__block {
+    width: 300px;
+    height: 150px;
+    /*border: 1px solid rgb(6, 56, 71);*/
+    border-radius: 5px;
+    padding: 0px;
+    background-image: url(/img/Tatooine.jpg);
+    background-size: 100%;
+    background-position: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+
+.cite__right-block {
+    width: 100px;
+    height: 150px;
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cite__text {
+    color: rgb(5, 61, 68);    
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin-left: 110px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    width: 180px;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.cite__text:before {
+    content: '';
+    background-image: url(/img/cite-icon.png);
+    background-size: 100%;
+    position: absolute;
+    top: -18px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.cite__text:after {
+    content: '';
+    background-image: url(/img/cite-icon.png);
+    background-size: 100%;
+    position: absolute;
+    bottom: -18px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    transform: rotate(180deg);
+}
+
+.cite__image {
+    width: 80px;
+    height: 140px;
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
+
+.cite__desc {
+    color: black;
+    margin-top: 0;
+    margin-bottom: 7px;
+    text-align: center;
+}
+
+.cite__block .cite__film {
+    font-size: 14px;
+    position: absolute;
+    bottom: -10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 100px;
+    display: none;
+    z-index: 10;
+    transition: all 0.5s ease;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 3px;
+}
+
+.cite__block:hover .cite__film {
+    display: block;
+    transition: all 0.5s ease;
+    animation-name: moving;
+    animation-duration: 0.8s;
+}
+
+@keyframes moving {
+    0% {
+        transform: translate(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px);
+        opacity: 1;
+    }
+}
+
+.cite__block:hover .cite__text {
+    transform: translateY(-5px);
+    transition: all 0.5s ease;
 }
