@@ -250,7 +250,7 @@
     z-index: 10;
     transform: scale(1);
     animation-name: star-wars;
-    animation-duration: 30s;
+    animation-duration: 32s;
     animation-timing-function: linear;
 }
 
@@ -367,7 +367,7 @@
     animation-duration: 30s;
     animation-name: up;
     animation-timing-function: linear;
-    transform: translateY(-500px);
+    transform: translateY(-510px);
     visibility: visible;
     text-align: justify;
 }
