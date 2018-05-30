@@ -73,7 +73,7 @@ class ActiveFilm extends React.Component {
             //<ul className = 'film__people-list character' id = 'people' onClick={this.personClick}>{listCharacters}</ul>
 			return (
 				  <div>
-            <img className = 'film__logo-central' src='./img/logo-star.png'></img>
+            <img className = 'film__logo-central' src='./img/logo-star2.png'></img>
             <div className = 'film__logo-left'>
               <ul className = 'film__opening-list'>{listOpening}</ul>
               

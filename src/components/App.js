@@ -70,7 +70,7 @@ class App extends React.Component {
                 </div>
                 <div className = 'film__logo' id = 'logo'>
                     <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
-                    
+                    <h2 className = 'film__logo-text'>Click one film to start...</h2>
                     <div id="logo-active">
                     </div>                    
 
@@ -84,10 +84,10 @@ class App extends React.Component {
       render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
       //document.querySelector('.film__logo-first').classList.remove('film__logo-central');
 
-      //document.querySelector('.film__logo-first').classList.add('hidding');
+      document.querySelector('.film__logo-text').classList.add('hidding');
 
       //function logoAppear() {
-      //<img className = 'film__logo-first' src='./img/logo-star.png' alt='logo'></img>
+      
       //}
       
       //setTimeout(logoAppear, 100);
