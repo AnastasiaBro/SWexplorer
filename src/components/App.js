@@ -69,7 +69,8 @@ class App extends React.Component {
                     <ul className = 'film__list'>{listResults}</ul>
                 </div>
                 <div className = 'film__logo' id = 'logo'>
-                    <img className = 'film__logo-image' src='./img/logo-sw.jpg' alt='logo'></img>
+                    <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
+                    
                     <div id="logo-active">
                     </div>                    
 
@@ -81,20 +82,25 @@ class App extends React.Component {
 
     handleClick = (e) => {
       render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
+      //document.querySelector('.film__logo-first').classList.remove('film__logo-central');
+
+      //document.querySelector('.film__logo-first').classList.add('hidding');
+
+      //function logoAppear() {
+      //<img className = 'film__logo-first' src='./img/logo-star.png' alt='logo'></img>
+      //}
+      
+      //setTimeout(logoAppear, 100);
 
       const windowFilmInfo = document.querySelector('.film__appear');
       const filmItem = document.querySelectorAll('.film__item');
 
       if (document.getElementById('first-window-line')) {
         ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-        //window.point = 0;
-        //window.planet = 0;
       }
 
       if (document.getElementById('second-window-line')) {
         ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
-        //window.point = 0;
-        //window.planet = 0;
       }
 
       if (document.querySelector('.film__first-window')) {
@@ -107,7 +113,6 @@ class App extends React.Component {
 
       windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
       filmItem[window.id].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
-      //document.querySelector('.film__center-window').classList.add('visually-hidden');
 
       if (e.target.parentNode.className === 'film__item') {
           window.id = e.target.parentNode.querySelector('h6').innerText; //номер элемента

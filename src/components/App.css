@@ -169,6 +169,16 @@
     display: block;
 }
 
+.film__logo-first {
+    position: absolute;
+    width: 340px;
+    height: 160px;
+    top: 55px;
+    left: 400px;
+    z-index: 5;
+    transform: scale(1);
+}
+
 .film__field {
     width: 300px;
     height: 320px;
@@ -202,11 +212,80 @@
     position: absolute;
     display: flex;
     top: 0px;
-    left: 80px;
+    left: 420px;
     height: 270px;
     width: 350px;
     overflow-y: hidden;
     perspective: 600px;
+
+	font-family: "Droid Sans", arial, verdana, sans-serif;
+	font-weight: 100;
+	color: #ff6;
+    background-color: transparent;
+    
+	font-weight: bold;
+	text-align: justify;
+	overflow: hidden;
+	transform-origin: 50% 100%;
+	transform: perspective(100px) rotateX(20deg);
+}
+
+.film__logo-central {
+    position: absolute;
+    width: 340px;
+    height: 160px;
+    top: 55px;
+    left: 400px;
+    z-index: 5;
+    transform: scale(1);
+    animation-name: star-wars;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+}
+
+@keyframes star-wars {
+    0% {
+      transform: scale(1);
+    }
+
+    6% {
+        transform: scale(0);
+    }
+
+    95% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.hidding {
+    animation-name: hiding;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
+    opacity: 0;
+}
+
+@keyframes hiding {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+}
+
+.film__logo-left:after {
+	position: absolute;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 60%;
+	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+	pointer-events: none;
 }
 
 .film__logo-left-text {
@@ -269,15 +348,22 @@
 }
 
 .film__opening-list {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 22px;
     list-style: none;
     padding: 0;
-    animation-duration: 25s;
+    animation-duration: 30s;
     animation-name: up;
     animation-timing-function: linear;
     transform: rotateX(55deg) translateY(-500px) translateZ(300px);
     visibility: visible;
+    text-align: justify;
+}
+
+.film__opening:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
 }
 
 @keyframes up {
@@ -288,6 +374,10 @@
     100% {
       transform: translateY(-500px);
     }
+}
+.film__opening {
+    text-align: justify;
+    height: 20px;
 }
 
 .transparent {
@@ -941,7 +1031,7 @@
 
 .cite__text:before {
     content: '';
-    background-image: url(/img/cite-icon.png);
+    background-image: url(/SWexplorer/img/cite-icon.png);
     background-size: 100%;
     position: absolute;
     top: -18px;
@@ -952,7 +1042,7 @@
 
 .cite__text:after {
     content: '';
-    background-image: url(/img/cite-icon.png);
+    background-image: url(/SWexplorer/img/cite-icon.png);
     background-size: 100%;
     position: absolute;
     bottom: -18px;

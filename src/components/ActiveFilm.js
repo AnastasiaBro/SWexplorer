@@ -59,7 +59,7 @@ class ActiveFilm extends React.Component {
             //console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
-                <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>space</span></li>
+                <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>.</span></li>
             );
 
             const listCharacters = results[window.id].characters.map((characters, index) =>
@@ -73,6 +73,7 @@ class ActiveFilm extends React.Component {
             //<ul className = 'film__people-list character' id = 'people' onClick={this.personClick}>{listCharacters}</ul>
 			return (
 				  <div>
+            <img className = 'film__logo-central' src='./img/logo-star.png'></img>
             <div className = 'film__logo-left'>
               <ul className = 'film__opening-list'>{listOpening}</ul>
               

@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
-//import {render} from 'react-dom';
-//window.point = 0;
 
 
 class Person extends React.Component {
@@ -23,9 +21,6 @@ class Person extends React.Component {
 
       componentDidMount() {
         const xhr = new XMLHttpRequest();
-        //console.log(window.personId);
-        //const URL = 'https://swapi.co/api/people/';
-        console.log(this.props.user);
         xhr.open('GET', this.props.user, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -92,19 +87,12 @@ class Person extends React.Component {
     personRightClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
       const arrLength = this.props.characters.length;
-
-      console.log('state ' + (this.state.point));
-      console.log('props ' + (this.props.point));
       
       if ((this.state.point + 1) === Number(arrLength)) {
         this.state.point = 0;
       } else {
         this.state.point = this.state.point + 1;
-        console.log('state ' + this.state.point);
-        console.log('props ' + this.props.point);
       }
-
-      console.log('Это передается при новом компоненте ' + this.state.point);
 
       render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
@@ -118,8 +106,7 @@ class Person extends React.Component {
       } else {
         this.state.point = this.state.point -1;
       }
-      //console.log(window.point);
-      //console.log('стало ', this.props.characters[window.point]);
+      
       render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
     
