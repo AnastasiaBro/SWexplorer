@@ -91,6 +91,7 @@ class Apphome extends React.Component {
               </div>
 
               <div className = 'cite__block'>
+                <img className = 'cite__bg' src='./img/Tatooine.jpg'></img>
                 <div className = 'cite__right-block'>
                   <img className = 'cite__image' src='./img/Yoda-cite.png'></img>
                 </div>

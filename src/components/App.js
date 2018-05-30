@@ -87,14 +87,14 @@ class App extends React.Component {
 
       if (document.getElementById('first-window-line')) {
         ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-        window.point = 0;
-        window.planet = 0;
+        //window.point = 0;
+        //window.planet = 0;
       }
 
       if (document.getElementById('second-window-line')) {
         ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
-        window.point = 0;
-        window.planet = 0;
+        //window.point = 0;
+        //window.planet = 0;
       }
 
       if (document.querySelector('.film__first-window')) {

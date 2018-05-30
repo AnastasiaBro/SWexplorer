@@ -11,7 +11,8 @@ class ActiveFilm extends React.Component {
         this.state = {
           data: [],
           isLoading: false,
-          //userToShow: null
+          point: null,
+          planetPoint: null
         }
       }
       componentDidMount() {
@@ -33,7 +34,8 @@ class ActiveFilm extends React.Component {
             this.setState({
               data: JSON.parse(xhr.responseText),
               isLoading: false,
-              //userToShow: JSON.parse(xhr.responseText).results[window.id].characters[0]
+              point: 0,
+              planetPoint: 0
             })
           }
         }
@@ -128,8 +130,10 @@ class ActiveFilm extends React.Component {
       document.querySelector('.film__second-window').classList.add('visually-hidden');
       console.log(window.id);
       console.log(this.state.data.results[window.id].characters);
+      
+      console.log(this.state.point);
 
-      render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} />, document.getElementById('first-window-line'));
+      render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
 
     closePeopleList = (e) => {
@@ -142,7 +146,9 @@ class ActiveFilm extends React.Component {
       console.log(window.id);
       console.log(this.state.data.results[window.id].planets);
 
-      render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} />, document.getElementById('second-window-line'));
+      console.log(this.state.planetPoint);
+
+      render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
     }
 
     closePlanetsList = (e) => {

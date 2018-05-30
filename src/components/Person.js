@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 //import {render} from 'react-dom';
-window.point = 0;
+//window.point = 0;
 
 
 class Person extends React.Component {
@@ -11,13 +11,14 @@ class Person extends React.Component {
         this.state = {
           data: [],
           isLoading: false,
-          user: '',
-          characters: []
+          //user: '',
+          //characters: [],
+          point: this.props.point //это счетчик - по нему вывожу следующий элемента массива
         }
       }
 
       componentWillreceiveProps() {
-        this.setState({ user: this.props.userToShow,  characters: this.props.characters});
+        //this.setState({ user: this.props.user,  characters: this.props.characters, point: this.props.point});
       }
 
       componentDidMount() {
@@ -90,29 +91,36 @@ class Person extends React.Component {
 
     personRightClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      //console.log(this.props.characters);
-      //console.log('было ', this.props.characters[window.point]);
       const arrLength = this.props.characters.length;
-      //console.log(Number(arrLength) - 1);
-      window.point++;
-      if (window.point === Number(arrLength)) {
-        window.point = 0;
+
+      console.log('state ' + (this.state.point));
+      console.log('props ' + (this.props.point));
+      
+      if ((this.state.point + 1) === Number(arrLength)) {
+        this.state.point = 0;
+      } else {
+        this.state.point = this.state.point + 1;
+        console.log('state ' + this.state.point);
+        console.log('props ' + this.props.point);
       }
-      console.log(window.point);
-      console.log('стало ', this.props.characters[window.point]);
-      render(<Person user={this.props.characters[window.point]} characters={this.props.characters} />, document.getElementById('first-window-line'));
+
+      console.log('Это передается при новом компоненте ' + this.state.point);
+
+      render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
 
     personLeftClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
       const arrLength = this.props.characters.length;
-      window.point--;
-      if (window.point === -1) {
-        window.point = Number(arrLength) - 1;
+
+      if ((this.state.point - 1) === -1) {
+        this.state.point = Number(arrLength) - 1;
+      } else {
+        this.state.point = this.state.point -1;
       }
-      console.log(window.point);
-      console.log('стало ', this.props.characters[window.point]);
-      render(<Person user={this.props.characters[window.point]} characters={this.props.characters} />, document.getElementById('first-window-line'));
+      //console.log(window.point);
+      //console.log('стало ', this.props.characters[window.point]);
+      render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
     
     render() {

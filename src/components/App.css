@@ -891,11 +891,7 @@
     /*border: 1px solid rgb(6, 56, 71);*/
     border-radius: 5px;
     padding: 0px;
-    background-image: url(/img/Tatooine.jpg);
-    background-size: 100%;
-    background-position: cover;
-    background-repeat: no-repeat;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -904,6 +900,15 @@
     cursor: pointer;
     transform: translateY(0);
     transition: all 0.5s ease;
+}
+
+.cite__bg {
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
 }
 
 .cite__right-block {

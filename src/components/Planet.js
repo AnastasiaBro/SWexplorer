@@ -11,13 +11,14 @@ class Planet extends React.Component {
         this.state = {
           data: [],
           isLoading: false,
-          elem: '',
-          planets: []
+          //elem: '',
+          planets: [],
+          planetPoint: this.props.planetPoint //это счетчик - по нему вывожу следующий элемента массива
         }
       }
 
       componentWillreceiveProps() {
-        this.setState({ elem: this.props.elemToShow,  planets: this.props.planets});
+        //this.setState({ elem: this.props.elem,  planets: this.props.planets, planetPoint: this.props.planetPoint});
       }
 
       componentDidMount() {
@@ -97,24 +98,28 @@ class Planet extends React.Component {
     planetRightClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
       const arrLength = this.props.planets.length;
-      console.log('было ', this.props.planets[window.point]);
-      window.planet++;
-      if (window.planet === Number(arrLength)) {
-        window.planet = 0;
+      console.log('было ', this.props.planets[this.state.planetPoint]);
+      if ((this.state.planetPoint + 1) === Number(arrLength)) {
+        this.state.planetPoint = 0;
+      } else {
+        this.state.planetPoint = this.state.planetPoint + 1;
+        console.log('state ' + this.state.planetPoint);
+        console.log('props ' + this.props.planetPoint);
       }
-      console.log('стало ', this.props.planets[window.planet]);
-      render(<Planet elem={this.props.planets[window.planet]} planets={this.props.planets} />, document.getElementById('second-window-line'));
+      console.log('стало ', this.props.planets[this.state.planetPoint]);
+      render(<Planet elem={this.props.planets[this.state.planetPoint]} planets={this.props.planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
     }
 
     planetLeftClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
       const arrLength = this.props.planets.length;
-      window.planet--;
-      if (window.planet === -1) {
-        window.planet = Number(arrLength) - 1;
+      if ((this.state.planetPoint - 1) === -1) {
+        this.state.planetPoint = Number(arrLength) - 1;
+      } else {
+        this.state.planetPoint = this.state.planetPoint -1;
       }
-      console.log('стало ', this.props.planets[window.planet]);
-      render(<Planet elem={this.props.planets[window.planet]} planets={this.props.planets} />, document.getElementById('second-window-line'));
+      console.log('стало ', this.props.planets[this.state.planetPoint]);
+      render(<Planet elem={this.props.planets[this.state.planetPoint]} planets={this.props.planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
     }
     
     render() {
