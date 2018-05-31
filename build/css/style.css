@@ -63,7 +63,7 @@
     margin: 0 auto;
     min-width: 960px;
     position: relative;
-    background-image: url(../img/location2.jpg);
+    background-image: url(../img/logo-sw3.jpg);
     background-color: black;
     background-repeat: no-repeat;
     background-size: cover;
@@ -166,7 +166,7 @@ input[type="radio"].visually-hidden {
   height: 5px;
   background-color: #c90505;
   position: absolute;
-  top: -18px;
+  top: -17px;
 }
 .main-nav__link--active::after {
   display: none;

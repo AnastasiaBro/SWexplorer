@@ -40,7 +40,7 @@ class App extends React.Component {
     renderFilms() {
       const { data, isLoading } = this.state
       if (isLoading) {
-        return <p className = 'first-text'>far far away...</p> // рисуем прелоадер
+        return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
       } else {
         if (data.results !== undefined) { //проверка, что data.results загружен
             const results = [];  //данные

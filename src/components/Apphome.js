@@ -56,7 +56,7 @@ class Apphome extends React.Component {
   renderWeather() {
     const { data, isLoading } = this.state
     if (isLoading) {
-      return <p className = 'first-text'></p> // рисуем прелоадер
+      return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
     } else {
       if (data.results !== undefined) { //проверка, что data.results загружен
           const results = [];  //данные
@@ -78,7 +78,8 @@ class Apphome extends React.Component {
           );
 
           return (
-          <div className='weather__container'>
+          <div>
+            <div className='weather__container'>
               <div className = 'weather__block'>
                 <img className = 'weather__image' src={'./img/' + results[number].name + '.jpg'}></img>
                 <img className = 'weather__gif' src={WEATHER[variant]}></img>
@@ -98,6 +99,15 @@ class Apphome extends React.Component {
                 <p className = 'cite__text'>{CITES[citeRandom]}</p>
                 <p className = 'cite__film'>{FILMS[citeRandom]}</p>
               </div>
+            </div>
+
+            <div className = 'description'>
+              <div className = 'description__container'>
+                <p className = 'description__text'>Welcome to SWexplorer!</p>
+                <p className = 'description__text description__text--second'>This is an application with Star Wars data.</p>
+              </div>
+
+            </div>
           </div>
           )
       }
