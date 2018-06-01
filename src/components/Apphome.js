@@ -100,7 +100,23 @@ class Apphome extends React.Component {
               </div>
 
               <div className = 'description-third__container'>
-                <p className = 'description-third__text description-trird__text--first'>It is Star Wars Universe</p>
+                <h1 className = 'description-third__text description-third__text--first'>Star Wars</h1>
+                <div className = 'description-third__blocks'>
+                  <div className = 'description-third__left-block'>
+                    <h2 className = 'description-third__title'>SWexplorer</h2>
+                    <p className = 'description-third__left-block-text'>This application named Star Wars explorer is a set of web pages and scripts for visual display of the received data.</p>
+                    <p className = 'description-third__left-block-text'>The data displayed in the application is obtained from the external freely available web service <a className = 'description-third__link description-third__link--light' href='https://swapi.co'>SWAPI</a>.</p>
+                  </div>
+                  <div className = 'description-third__central-block'>
+                    <p className = 'description-third__central-block-text'>— is an American epic space opera media franchise, centered on a film series created by <a className = 'description-third__link' href='https://en.wikipedia.org/wiki/George_Lucas'>George Lucas</a>. It depicts the adventures of characters "a long time ago in a galaxy far, far away".</p>
+                    <p className = 'description-third__central-block-text description-third__central-block-text--last'>The Star Wars franchise takes place in a distant unnamed fictional galaxy at an undetermined point in the ancient past, where many species of aliens (often humanoid) co-exist. People own robotic droids, who assist them in their daily routines, and space travel is common.</p>
+                  </div>
+                  <div className = 'description-third__right-block'>
+                    <h2 className = 'description-third__title'>SWAPI</h2>
+                    <p className = 'description-third__right-block-text'>The Star Wars API is the world's first quantified and programmatically-formatted set of Star Wars data.</p>
+                    <p className = 'description-third__right-block-text'>After hours of watching films and trawling through content online, they present to us all the People, Films, Species, Starships, Vehicles and Planets from Star Wars.</p>
+                  </div>
+                </div>
               </div>
             </div>
 

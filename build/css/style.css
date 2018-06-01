@@ -65,7 +65,7 @@
     position: relative;
     background-image: url(../img/logo-sw3.jpg);
     background-color: black;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -144,9 +144,10 @@ input[type="radio"].visually-hidden {
   font-weight: 100;
   text-decoration: none;
   position: relative;
+  cursor: pointer;
 }
 .main-nav__link:after {
-  background: #fccc07;
+  background: white;
   display: block;
   content: "";
   top: -18px;
@@ -160,13 +161,16 @@ input[type="radio"].visually-hidden {
 .main-nav__link:focus:after {
   width: 100%;
 }
+.main-nav__link--active {
+  cursor: default;
+}
 .main-nav__link--active::before {
   content: "";
   width: 100%;
   height: 5px;
-  background-color: #c90505;
+  background-color: #14e8ff;
   position: absolute;
-  top: -17px;
+  top: -18px;
 }
 .main-nav__link--active::after {
   display: none;
