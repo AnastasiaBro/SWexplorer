@@ -79,6 +79,31 @@ class Apphome extends React.Component {
 
           return (
           <div>
+            <div className = 'description'>
+              <div className = 'description__container'>
+                <p className = 'description__text description__text--first'>Do you remember:</p>
+                <div className = 'description__text-container'>
+                  <div className = 'description__left-container'>
+                    <img className = 'description__image' src='./img/luke_your_father.jpg'></img>
+                    <p className = 'description__text description__text--second'>Luke, I'm your father!</p>
+                  </div>
+                  <div className = 'description__right-container'>
+                    <img className = 'description__image' src='./img/droids.jpg'></img>
+                    <p className = 'description__text description__text--third'>These aren't the droids you're looking for</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className = 'description-second__container'>
+                <p className = 'description-second__text description-second__text--first'>It is Star Wars Universe</p>
+                <img className = 'description-second__image' src='./img/fight.jpg'></img>
+              </div>
+
+              <div className = 'description-third__container'>
+                <p className = 'description-third__text description-trird__text--first'>It is Star Wars Universe</p>
+              </div>
+            </div>
+
             <div className='weather__container'>
               <div className = 'weather__block'>
                 <img className = 'weather__image' src={'./img/' + results[number].name + '.jpg'}></img>
@@ -101,13 +126,6 @@ class Apphome extends React.Component {
               </div>
             </div>
 
-            <div className = 'description'>
-              <div className = 'description__container'>
-                <p className = 'description__text'>Welcome to SWexplorer!</p>
-                <p className = 'description__text description__text--second'>This is an application with Star Wars data.</p>
-              </div>
-
-            </div>
           </div>
           )
       }
