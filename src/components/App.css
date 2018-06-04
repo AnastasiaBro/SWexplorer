@@ -1,5 +1,5 @@
 .bg-films {
-    background-image: url(/img/location2.jpg);
+    background-image: url(/SWexplorer/img/location2.jpg);
 }
 
 .App {
@@ -479,6 +479,7 @@
     justify-content: space-between;
     margin-left: 20px;
     margin-right: 20px;
+    position: relative;
 }
 
 .film__title-people {
@@ -1707,7 +1708,7 @@
 }
 
 .description-third__central-block {
-    background-image: url(/img/Jakku.jpg);
+    background-image: url(/SWexplorer/img/Jakku.jpg);
     background-size: top;
     border: 1px solid rgb(75, 75, 75);
     border-radius: 5px;
@@ -1798,3 +1799,330 @@
 .description-third__link--light:hover {
     background-color: #14e8ff;
 }
+
+/*--------------------------------------------*/
+
+.film__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    /*position: absolute;
+    right: 60px;
+    bottom: 35px;*/
+    /*margin-top: 105px;*/
+    width: 65px;
+    position: absolute;
+    right: 22px;
+    top: 160px;
+}
+
+.film__button-left, .film__button-right {
+    width: 25px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    margin-right: 7px;
+}
+
+.film__button-left:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.film__button-right:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.film__button-left:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.film__button-right:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.film__button-left:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.film__button-right:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.film__button-left:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.film__button-right:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.film__button-left:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}
+
+.film__button-right:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.film__button-left:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.film__button-right:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}
+
+.film__planet-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    /*position: absolute;
+    right: 60px;
+    bottom: 35px;*/
+    /*margin-top: 105px;*/
+    width: 65px;
+    position: absolute;
+    right: -5px;
+    top: 175px;
+}
+
+.film__planet-button-left, .film__planet-button-right {
+    width: 25px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    margin-right: 7px;
+}
+
+.film__planet-button-left:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.film__planet-button-right:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.film__planet-button-left:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+.film__planet-button-right:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+
+.film__planet-button-left:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.film__planet-button-right:hover:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.film__planet-button-left:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+}
+
+.film__planet-button-right:hover:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+}
+
+.film__planet-button-left:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}
+
+.film__planet-button-right:active:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.film__planet-button-left:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(45deg);
+    opacity: 0.7;
+}
+
+.film__planet-button-right:active:after {
+    content: "";
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 26px;
+    height: 2px;
+    background-color: #fccc07;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}
+

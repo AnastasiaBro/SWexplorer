@@ -84,6 +84,10 @@ class ActiveFilm extends React.Component {
                 <div className = 'film__window-container'>
                   <p className = 'film__title-people'>Character card</p>
                   <button className="film__close-button" onClick={this.closePeopleList}><span className = 'visually-hidden'>close</span></button>
+                  <div className = 'film__button-container'>
+                    <button className = 'film__button-left' type = 'button' onClick={this.personLeftClick}><span className = 'visually-hidden'>left</span></button>
+                    <button className = 'film__button-right' type = 'button' onClick={this.personRightClick}><span className = 'visually-hidden'>right</span></button>
+                  </div>
                 </div>
                 
                 <div id = 'first-window-line'></div>
@@ -93,6 +97,10 @@ class ActiveFilm extends React.Component {
                 <div className = 'film__window-container'>
                   <p className = 'film__title-people'>Planet card</p>
                   <button className="film__close-button" onClick={this.closePlanetsList}><span className = 'visually-hidden'>close</span></button>
+                  <div className = 'film__planet-button-container'>
+                    <button className = 'film__planet-button-left' type = 'button' onClick={this.planetLeftClick}><span className = 'visually-hidden'>left</span></button>
+                    <button className = 'film__planet-button-right' type = 'button' onClick={this.planetRightClick}><span className = 'visually-hidden'>right</span></button>
+                  </div>
                 </div>
                 
                 <div id = 'second-window-line'></div>
@@ -127,6 +135,7 @@ class ActiveFilm extends React.Component {
     }
 
     peopleClick = (e) => {
+      this.state.point = 0;
       document.querySelector('.film__first-window').classList.remove('visually-hidden');
       document.querySelector('.film__second-window').classList.add('visually-hidden');
       console.log(window.id);
@@ -142,6 +151,7 @@ class ActiveFilm extends React.Component {
     }
 
     planetsClick = (e) => {
+      this.state.planetPoint = 0;
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
       document.querySelector('.film__first-window').classList.add('visually-hidden');
       console.log(window.id);
@@ -156,8 +166,64 @@ class ActiveFilm extends React.Component {
       document.querySelector('.film__second-window').classList.add('visually-hidden');
     }
 
-    personClick = (e) => {
+    personRightClick = (e) => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
+      const arrLength = this.state.data.results[window.id].characters.length;
+      console.log('было', this.state.point);
       
+      if ((this.state.point + 1) === Number(arrLength)) {
+        this.state.point = 0;
+      } else {
+        this.state.point = this.state.point + 1;
+      }
+      console.log('стало', this.state.point);
+
+      render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+    }
+
+    personLeftClick = (e) => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
+      const arrLength = this.state.data.results[window.id].characters.length;
+      console.log('было', this.state.point);
+
+      if ((this.state.point - 1) === -1) {
+        this.state.point = Number(arrLength) - 1;
+      } else {
+        this.state.point = this.state.point -1;
+      }
+      console.log('стало', this.state.point);
+      
+      render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+    }
+
+    planetRightClick = (e) => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
+      const arrLength = this.state.data.results[window.id].planets.length;
+      console.log('было', this.state.planetPoint);
+      if ((this.state.planetPoint + 1) === Number(arrLength)) {
+        this.state.planetPoint = 0;
+      } else {
+        this.state.planetPoint = this.state.planetPoint + 1;
+        console.log('state ' + this.state.planetPoint);
+        console.log('props ' + this.props.planetPoint);
+      }
+      console.log('стало', this.state.planetPoint);
+
+      render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+    }
+
+    planetLeftClick = (e) => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
+      const arrLength = this.state.data.results[window.id].planets.length;
+      console.log('было', this.state.planetPoint);
+      if ((this.state.planetPoint - 1) === -1) {
+        this.state.planetPoint = Number(arrLength) - 1;
+      } else {
+        this.state.planetPoint = this.state.planetPoint -1;
+      }
+      console.log('стало', this.state.planetPoint);
+
+      render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
     }
     
     render() {

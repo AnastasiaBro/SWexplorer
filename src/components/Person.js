@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 
-
 class Person extends React.Component {
 	constructor(props) {
         super(props)
@@ -11,16 +10,17 @@ class Person extends React.Component {
           isLoading: false,
           //user: '',
           //characters: [],
-          point: this.props.point //это счетчик - по нему вывожу следующий элемента массива
+          //point: this.props.point //это счетчик - по нему вывожу следующий элемента массива
         }
       }
 
       componentWillreceiveProps() {
-        //this.setState({ user: this.props.user,  characters: this.props.characters, point: this.props.point});
+        this.setState({ user: this.props.user});
       }
 
       componentDidMount() {
         const xhr = new XMLHttpRequest();
+        console.log('это новый url ', this.props.user);
         xhr.open('GET', this.props.user, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -80,41 +80,12 @@ class Person extends React.Component {
                     </ul>
                     <div className = 'person__right-block'>
                       <img className = 'person__image' src={'./img/' + changeSymbol(data.name) + '.jpg'} alt=""></img>
-                      <div className = 'person__button-container'>
-                        <button className = 'person__button-left' type = 'button' onClick={this.personLeftClick}><span className = 'visually-hidden'>left</span></button>
-                        <button className = 'person__button-right' type = 'button' onClick={this.personRightClick}><span className = 'visually-hidden'>right</span></button>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
               )
         }
-    }
-
-    personRightClick = (e) => {
-      ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      const arrLength = this.props.characters.length;
-      
-      if ((this.state.point + 1) === Number(arrLength)) {
-        this.state.point = 0;
-      } else {
-        this.state.point = this.state.point + 1;
-      }
-
-      render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
-    }
-
-    personLeftClick = (e) => {
-      ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      const arrLength = this.props.characters.length;
-
-      if ((this.state.point - 1) === -1) {
-        this.state.point = Number(arrLength) - 1;
-      } else {
-        this.state.point = this.state.point -1;
-      }
-      
-      render(<Person user={this.props.characters[this.state.point]} characters={this.props.characters} point={this.state.point} />, document.getElementById('first-window-line'));
     }
     
     render() {
