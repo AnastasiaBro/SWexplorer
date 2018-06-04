@@ -47,12 +47,7 @@ class Person extends React.Component {
           function changeSymbol(str) {
             if (str !== undefined) {
                 const newstr = str.replace(/é/i, 'e');
-                if (newstr === 'Padme Amidala') {
-                  const newstroke = newstr.substring(0,4);
-                  return newstroke;
-                } else {
-                  return newstr;
-                }
+                return newstr;
             }
           }
             
