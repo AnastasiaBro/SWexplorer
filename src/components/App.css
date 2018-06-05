@@ -1,5 +1,6 @@
 .bg-films {
-    background-image: url(/SWexplorer/img/location2.jpg);
+    background-image: url(/img/location2.jpg);
+    background-repeat: no-repeat;
 }
 
 .App {
@@ -41,6 +42,7 @@
     justify-content: space-between;
     margin: auto;
     text-align: center;
+    position: relative;
 }
 
 .film__list {
@@ -1708,7 +1710,7 @@
 }
 
 .description-third__central-block {
-    background-image: url(/SWexplorer/img/Jakku.jpg);
+    background-image: url(/img/Jakku.jpg);
     background-size: top;
     border: 1px solid rgb(75, 75, 75);
     border-radius: 5px;
@@ -2124,5 +2126,85 @@
     background-color: #fccc07;
     transform: rotate(-45deg);
     opacity: 0.7;
+}
+
+.search {
+    position: relative;
+}
+
+.main-nav__search {
+    position: absolute;
+    top: -210px;
+    right: -20px;
+    z-index: 20;
+}
+
+.container1 {
+    background: #000;
+}
+
+.bg-color {
+    opacity: 1;
+}
+
+.container__light {
+    position: absolute;
+    top: -191px;
+    right: 25%; 
+}
+  
+.saber { 
+    position: relative;
+    transition: all 500ms ease-in-out;
+}
+
+.blade {
+    height: 20px;
+    width: 0px;
+    position: absolute;
+    left: 100px;
+    top: 1px;
+ 
+    background: skyblue;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 20px skyblue;   
+}
+  
+.hilt {
+    height: 20px;
+    width: 100px;
+    border: 1px solid #333;
+    background: repeating-linear-gradient(
+        to top,
+        #333,
+        #333 2px,
+        darken(#333, 30%) 2px,
+        darken(#333, 30%) 4px
+);
+    border-left: 4px solid lighten(#333, 10%);
+    border-right: 4px solid lighten(#333, 10%);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.hilt:hover {
+    cursor: pointer;
+}
+
+.button {
+    height: 8px;
+    width: 20px;
+    border: 2px solid #333;
+    background: skyblue;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+}
+.on {
+    width: 300px;
+
+    height: 20px;
+    transition: all 300ms ease-in-out;
 }
 

@@ -12,5 +12,5 @@ document.querySelectorAll('.main-nav__link')[0].classList.add('main-nav__link--a
 document.querySelectorAll('.main-nav__item')[1].classList.remove('main-nav__item--active');
 document.querySelectorAll('.main-nav__link')[1].classList.remove('main-nav__link--active');
 
-render(<Apphome/>, document.getElementById('root'));
+render(<Apphome/>, document.getElementById('root-home'));
 render(<Footer/>, document.getElementById('footer'));

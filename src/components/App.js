@@ -5,6 +5,9 @@ import './App.css';
 import {render} from 'react-dom';
 //import Search from './Search.js'
 window.id = 0; //изначально первый элемент с данными
+window.item = 0;
+
+const indexes = {'A New': 0, 'Attac': 1, 'The P': 2, 'Reven': 3, 'Retur': 4, 'The E': 5, 'The F': 6}
 
 
 class App extends React.Component {
@@ -61,12 +64,6 @@ class App extends React.Component {
             const propsValues = {
               items: titles
             };
-                          
-            class Item extends React.Component {
-                render() {
-                    return <li>{this.props.name}</li>;
-                }
-            }
                     
             class SearchPlugin extends React.Component{
                         
@@ -76,25 +73,64 @@ class App extends React.Component {
                 }
                         
                 onTextChanged(e){
-                    var text = e.target.value.trim();   // удаляем пробелы
-                    this.props.filter(text); // передаем введенный текст в родительский компонент
+                    if(e.key == 'Enter') { 
+                        var text = e.target.value.trim();   // удаляем пробелы
+                        this.props.filter(text); // передаем введенный текст в родительский компонент
+                        const filmItem = document.querySelectorAll('.film__item');
+                        if (document.querySelector('.film__item--active')) {
+                          filmItem[window.item].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+                        }
+                        window.id = 0;
+                        window.item = 0;
+                        if (document.querySelector('.film__appear')) {
+                          document.querySelector('.film__appear').classList.add('visually-hidden');
+                        }
+                        if (document.querySelector('.film__first-window')) {
+                          document.querySelector('.film__first-window').classList.add('visually-hidden');
+                        }
+                
+                        if (document.querySelector('.film__second-window')) {
+                          document.querySelector('.film__second-window').classList.add('visually-hidden');
+                        }
+                    }
+                }
+
+                onSearchClick(e) {
+                    
                 }
                         
                 render() {
-                    return <input placeholder="Поиск" onChange={this.onTextChanged} />;
+                    return(
+                    <div className="search">
+                        <label className="main-nav__search">
+                            <input placeholder="Search film" className = 'main-nav__input' onKeyPress={this.onTextChanged} onClick={this.onSearchClick}/>
+                        </label>
+                        <div className="container__light">
+                            <div className="saber">
+                                <div className="blade"></div>
+                                <div className="hilt">
+                                <div className="button" onClick={this.onButtonClick} ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    )}
+
+                onButtonClick() {
+                    document.querySelector('.blade').classList.toggle('on');
                 }
             }
                               
             class ItemsList extends React.Component {
                 constructor(props){
                     super(props);
-                    this.state = { items: this.props.data.items};
+                    this.state = { items: titles};
                                       
                     this.filterList = this.filterList.bind(this);
                 }
                         
                 filterList(text){
-                    var filteredList = this.props.data.items.filter(function(item){
+                    var filteredList = titles.filter(function(item){
                         return item.toLowerCase().search(text.toLowerCase())!== -1;
                     }); 
                     this.setState({items: filteredList});
@@ -102,40 +138,89 @@ class App extends React.Component {
                           
                 render() {
                     return(
-                        <div>
+                            <div>
                             <SearchPlugin filter={this.filterList} />
-                            <ul>
-                                {
-                                    this.state.items.map(function(item){
-                                        return <Item key={item} name={item} />
-                                    })
-                                }
-                            </ul>
-                        </div>);
+                                <ul className = 'film__list'>
+                                    {
+                                        this.state.items.map((item, index) =>
+                                        
+                                            <li className = 'film__item' key={index} onClick={this.handleClick}>
+                                                <img className = 'film__image' src={'./img/' + item.toString() + '.jpg'} alt="film"></img>
+                                                <p className = 'film__item-text film__item-text--first'>{item}</p>
+                                                <h6 className = 'visually-hidden'>{indexes[item.substring(0, 5)]}</h6>
+                                                <h6 className = 'visually-hidden'>{index}</h6>
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>);
                 }
+
+                handleClick = (e) => {
+                    render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
+                    //document.querySelector('.film__logo-first').classList.remove('film__logo-central');
+              
+                    document.querySelector('.film__logo-text').classList.add('hidding');
+              
+                    const windowFilmInfo = document.querySelector('.film__appear');
+                    const filmItem = document.querySelectorAll('.film__item');
+              
+                    if (document.getElementById('first-window-line')) {
+                      ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
+                    }
+              
+                    if (document.getElementById('second-window-line')) {
+                      ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
+                    }
+              
+                    if (document.querySelector('.film__first-window')) {
+                      document.querySelector('.film__first-window').classList.add('visually-hidden');
+                    }
+              
+                    if (document.querySelector('.film__second-window')) {
+                      document.querySelector('.film__second-window').classList.add('visually-hidden');
+                    }
+              
+                    windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
+                    filmItem[window.item].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+              
+                    if (e.target.parentNode.className === 'film__item') {
+                        window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
+                        window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
+                        this.setState({id: window.id});
+                        windowFilmInfo.classList.remove('visually-hidden');  //показываем данные выбранного элемента
+                        filmItem[window.item].classList.add('film__item--active'); //обводка
+                        
+                    } 
+                    else if (e.target.className === 'film__item') {
+                        window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
+                        window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
+                        this.setState({id: window.id});
+                        windowFilmInfo.classList.remove('visually-hidden');
+                        filmItem[window.item].classList.add('film__item--active');
+                    }
+                  }
             }
 
-            ReactDOM.render(
-              <ItemsList data={propsValues} />,
-              document.getElementById("app")
-            )
+            
             
             /*--------------------------*/
 
-            const listResults = results.map((results, index) =>
+            const listResults = titles.map((titles, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
-                    <img className = 'film__image' src={'./img/' + results.title.toString() + '.jpg'} alt="film"></img>
-                    <p className = 'film__item-text film__item-text--first'>{results.title}</p>
+                    <img className = 'film__image' src={'./img/' + titles.toString() + '.jpg'} alt="film"></img>
+                    <p className = 'film__item-text film__item-text--first'>{titles}</p>
                     <h6 className = 'visually-hidden'>{index}</h6>
                 </li>
             );
 
             return (
-            <div className='film'>
+            <div className='film' id="film">
                 <h1 className = 'film__text'>Films</h1>
                 <p className = 'film__text'>Count: {data.count}</p>
                 <div className = 'film__container'>
-                    <ul className = 'film__list'>{listResults}</ul>
+                    <ItemsList data={propsValues} />
+                
                 </div>
                 <div className = 'film__logo' id = 'logo'>
                     <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
@@ -149,54 +234,7 @@ class App extends React.Component {
       }
     }
 
-    handleClick = (e) => {
-      render(<ActiveFilm data={this.props.data} />, document.getElementById('logo-active'));
-      //document.querySelector('.film__logo-first').classList.remove('film__logo-central');
-
-      document.querySelector('.film__logo-text').classList.add('hidding');
-
-      //function logoAppear() {
-      
-      //}
-      
-      //setTimeout(logoAppear, 100);
-
-      const windowFilmInfo = document.querySelector('.film__appear');
-      const filmItem = document.querySelectorAll('.film__item');
-
-      if (document.getElementById('first-window-line')) {
-        ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      }
-
-      if (document.getElementById('second-window-line')) {
-        ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
-      }
-
-      if (document.querySelector('.film__first-window')) {
-        document.querySelector('.film__first-window').classList.add('visually-hidden');
-      }
-
-      if (document.querySelector('.film__second-window')) {
-        document.querySelector('.film__second-window').classList.add('visually-hidden');
-      }
-
-      windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
-      filmItem[window.id].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
-
-      if (e.target.parentNode.className === 'film__item') {
-          window.id = e.target.parentNode.querySelector('h6').innerText; //номер элемента
-          this.setState({id: window.id});
-          windowFilmInfo.classList.remove('visually-hidden');  //показываем данные выбранного элемента
-          filmItem[window.id].classList.add('film__item--active'); //обводка
-          
-      } 
-      else if (e.target.className === 'film__item') {
-          window.id = e.target.querySelector('h6').innerText;
-          this.setState({id: window.id});
-          windowFilmInfo.classList.remove('visually-hidden');
-          filmItem[window.id].classList.add('film__item--active');
-      }
-    }
+    
 
     render() {
       return (
