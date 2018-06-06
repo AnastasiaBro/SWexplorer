@@ -102,9 +102,8 @@ class App extends React.Component {
                 render() {
                     return(
                     <div className="search">
-                        <label className="main-nav__search">
-                            <input placeholder="Search film" className = 'main-nav__input' onKeyPress={this.onTextChanged} />
-                        </label>
+                        <input placeholder="Search film" className = 'main-nav__input' id="input-first" onKeyPress={this.onTextChanged} />
+                        <label className="main-nav__search" htmlFor="input-first"></label>
                         <div className="container__light">
                             <div className="saber">
                                 <div className="blade"></div>

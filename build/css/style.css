@@ -194,6 +194,14 @@ input[type="radio"].visually-hidden {
   font-size: 20px;
   line-height: 25px;
   outline: none;
+  transition: all 500ms ease-in-out;
+  position: relative;
+  z-index: 20;
+}
+.main-nav__input:hover {
+  color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
+  transition: all 500ms ease-in-out;
 }
 .main-nav__input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
