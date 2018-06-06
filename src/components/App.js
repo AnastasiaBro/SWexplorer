@@ -103,7 +103,7 @@ class App extends React.Component {
                     return(
                     <div className="search">
                         <label className="main-nav__search">
-                            <input placeholder="Search film" className = 'main-nav__input' onKeyPress={this.onTextChanged} onClick={this.onSearchClick}/>
+                            <input placeholder="Search film" className = 'main-nav__input' onKeyPress={this.onTextChanged} />
                         </label>
                         <div className="container__light">
                             <div className="saber">
@@ -115,10 +115,6 @@ class App extends React.Component {
                         </div>
                     </div>
                     )}
-
-                onButtonClick() {
-                    document.querySelector('.blade').classList.toggle('on');
-                }
             }
                               
             class ItemsList extends React.Component {

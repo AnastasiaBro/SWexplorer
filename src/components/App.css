@@ -2135,8 +2135,55 @@
 .main-nav__search {
     position: absolute;
     top: -210px;
-    right: -20px;
+    right: 10px;
     z-index: 20;
+}
+
+.main-nav__search:before {
+    content: '';
+    height: 20px;
+    width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 9px;
+  
+    background: skyblue;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 20px skyblue;
+    transition: all 300ms ease-in-out;
+}
+
+.main-nav__search:hover:before {
+    content: '';
+    height: 20px;
+    width: 300px;
+    position: absolute;
+    left: 0px;
+    top: 9px;
+  
+    background: skyblue;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 20px skyblue;
+    transition: all 300ms ease-in-out;
+    z-index: 10;
+}
+
+.main-nav__search:focus:before {
+    content: '';
+    height: 20px;
+    width: 300px;
+    position: absolute;
+    left: 0px;
+    top: 9px;
+  
+    background: skyblue;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 20px skyblue;
+    transition: all 300ms ease-in-out;
+    z-index: 10;
 }
 
 .container1 {
@@ -2149,8 +2196,8 @@
 
 .container__light {
     position: absolute;
-    top: -191px;
-    right: 25%; 
+    top: -192px;
+    right: 300px;
 }
   
 .saber { 
@@ -2162,13 +2209,14 @@
     height: 20px;
     width: 0px;
     position: absolute;
-    left: 100px;
+    left: 108px;
     top: 1px;
  
     background: skyblue;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 0 0 20px skyblue;   
+    box-shadow: 0 0 20px skyblue;
+    transition: all 300ms ease-in-out;
 }
   
 .hilt {
@@ -2177,18 +2225,18 @@
     border: 1px solid #333;
     background: repeating-linear-gradient(
         to top,
-        #333,
-        #333 2px,
-        darken(#333, 30%) 2px,
-        darken(#333, 30%) 4px
-);
-    border-left: 4px solid lighten(#333, 10%);
-    border-right: 4px solid lighten(#333, 10%);
+        rgb(51, 51, 51),
+        #222 2px,
+        rgb(70, 70, 70) 2px,
+        #333 4px
+        );
+    border-left: 4px solid rgb(122, 122, 122);
+    border-right: 4px solid rgb(122, 122, 122);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 .hilt:hover {
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .button {
@@ -2201,10 +2249,10 @@
     left: 50%;
     transform: translate( -50%, -50% );
 }
-.on {
+/*.on {
     width: 300px;
 
     height: 20px;
     transition: all 300ms ease-in-out;
-}
+}*/
 
