@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
+import Search from './Search.js'
 import './App.css';
 
 function getRandomInt(min, max) {
@@ -28,6 +29,7 @@ class Apphome extends React.Component {
     this.state = {
       data: [],
       isLoading: false,
+      text: ''
     }
   }
   componentDidMount() {
@@ -48,13 +50,14 @@ class Apphome extends React.Component {
         this.setState({
           data: JSON.parse(xhr.responseText),
           isLoading: false,
+          text: ''
         })
       }
     }
   }
 
   renderWeather() {
-    const { data, isLoading } = this.state
+    const { data, isLoading, text } = this.state
     if (isLoading) {
       return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
     } else {
@@ -76,6 +79,31 @@ class Apphome extends React.Component {
                   <h6 className = 'visually-hidden'>{index}</h6>
               </li>
           );
+
+          /*class MainSearchPlugin extends React.Component{
+             
+            constructor(props){
+                super(props);
+                this.onFieldChanged = this.onFieldChanged.bind(this);
+            }
+                     
+            onFieldChanged(e){
+                const text = e.target.value.trim();   // удаляем пробелы
+                //console.log(this.props.newName);
+                this.setState({newName: e.target.value.trim()}); // передаем введенный текст в родительский компонент
+                console.log(text);
+            }
+                     
+            render() {
+                return (
+                 <div>
+                    <label>
+                      <input placeholder="Enter a name" id="input-main-search" onChange={this.onFieldChanged} />
+                    </label>
+                  </div>
+                );
+            }
+          }*/
 
           return (
           <div>
@@ -141,11 +169,31 @@ class Apphome extends React.Component {
                 <p className = 'cite__film'>{FILMS[citeRandom]}</p>
               </div>
             </div>
+            
+            
+            
+            <label>
+              <input placeholder="Enter a name" id="input-main-search" onChange={this.onFieldChanged} />
+            </label>
+
+            
 
           </div>
           )
       }
+      
     }
+  }
+
+  onFieldChanged(e) {
+    ReactDOM.unmountComponentAtNode(document.getElementById('search'));
+    //this.forceUpdate();
+    const text = e.target.value.trim();   // удаляем пробелы
+    //this.state.newName = text; // передаем введенный текст в родительский компонент
+    //return text;
+    console.log(text);
+    render(<Search name={e.target.value.trim()} />, document.getElementById('search'));
+    //<Search name={this.state.newName} />
   }
 
   render() {

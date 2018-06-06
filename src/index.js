@@ -1,8 +1,9 @@
 import React from 'react'
 import {render} from 'react-dom'
-import Header from './components/Header'
+//import Header from './components/Header'
 import App from './components/App'
 import Apphome from './components/Apphome'
+//import Search from './components/Search'
 import Footer from './components/Footer'
 import ReactDOM from 'react-dom';
 
@@ -14,4 +15,5 @@ document.querySelectorAll('.main-nav__link')[1].classList.remove('main-nav__link
 
 //render(<Header/>, document.getElementById('header'));
 render(<Apphome/>, document.getElementById('root'));
+//render(<Search/>, document.getElementById('search'));
 render(<Footer/>, document.getElementById('footer'));
