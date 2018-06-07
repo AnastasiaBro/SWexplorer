@@ -14,6 +14,8 @@ const ICONS = ['./img/rain-icon.png', './img/snow-icon.png', './img/fog-icon.png
 const URLS = ['https://swapi.co/api/planets','https://swapi.co/api/planets/?page=2'];
 const DESCRIPTION = ['rain', 'snow', 'wind', 'sun', 'rain', 'snow', 'wind', 'sun'];
 
+const GROUPS = {'people': 'Luke Skywalker', 'planets': 'Alderaan', 'vehicles': 'Sand Crawler', 'starships': 'Death Star', 'species': 'Toydarian'};
+
 const CITES = ['You must unlearn, what you have learned.', 
 'You will know the good from the bad when you are calm.', 
 'In this matters, trust your insight we do. May the Force be with you.', 
@@ -29,7 +31,8 @@ class Apphome extends React.Component {
     this.state = {
       data: [],
       isLoading: false,
-      text: ''
+      text: '',
+      group: 'people'
     }
   }
   componentDidMount() {
@@ -50,14 +53,13 @@ class Apphome extends React.Component {
         this.setState({
           data: JSON.parse(xhr.responseText),
           isLoading: false,
-          text: ''
         })
       }
     }
   }
 
   renderWeather() {
-    const { data, isLoading, text } = this.state
+    const { data, isLoading, text, group } = this.state
     if (isLoading) {
       return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
     } else {
@@ -71,6 +73,9 @@ class Apphome extends React.Component {
           for (var i = 0; i < this.state.data.results.length; i++) {
               results[i] = this.state.data.results[i];
           }
+
+          console.log(this.state.group);
+          console.log(this.state.text);
 
           const listResults = results.map((results, index) =>
               <li className = 'film__item' key={index}>
@@ -160,6 +165,21 @@ class Apphome extends React.Component {
                 </div>
               </div>
 
+              <div className='search__block'>
+                <h3 className='search__title'>Search area</h3>
+                <p className='search__text'>What kind of information do you want to find?</p>
+                <div className='search__groups'>
+                  <p className='search__group search__group--active' onClick={this.onGroupClick.bind(this)}>People</p>
+                  <p className='search__group' onClick={this.onGroupClick.bind(this)}>Planets</p>
+                  <p className='search__group' onClick={this.onGroupClick}>Vehicles</p>
+                  <p className='search__group' onClick={this.onGroupClick}>Starships</p>
+                  <p className='search__group' onClick={this.onGroupClick}>Species</p>
+                </div>
+                <label className='search__label'>
+                  <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />
+                </label>
+              </div>
+
               <div className = 'cite__block'>
                 <img className = 'cite__bg' src='./img/Tatooine.jpg'></img>
                 <div className = 'cite__right-block'>
@@ -172,9 +192,7 @@ class Apphome extends React.Component {
             
             
             
-            <label>
-              <input placeholder="Enter a name" id="input-main-search" onChange={this.onFieldChanged} />
-            </label>
+            
 
             
 
@@ -185,15 +203,23 @@ class Apphome extends React.Component {
     }
   }
 
-  onFieldChanged(e) {
+  onFieldChanged = (e) => {
     ReactDOM.unmountComponentAtNode(document.getElementById('search'));
-    //this.forceUpdate();
-    const text = e.target.value.trim();   // удаляем пробелы
-    //this.state.newName = text; // передаем введенный текст в родительский компонент
-    //return text;
-    console.log(text);
-    render(<Search name={e.target.value.trim()} />, document.getElementById('search'));
-    //<Search name={this.state.newName} />
+    //const text = e.target.value.trim();   // удаляем пробелы
+    //console.log(text);
+    console.log(e.target);
+    //this.setState({text: e.target.value.trim()}, console.log('text', this.state.text)); 
+    render(<Search name={e.target.value.trim()} variant={this.state.group} />, document.getElementById('search'));
+  }
+
+  onGroupClick = (e) => {
+    document.querySelector('.search__group--active').classList.remove('search__group--active');
+    e.target.classList.add('search__group--active');
+    this.setState({group: e.target.innerHTML.toLowerCase()}, console.log('group', this.state.group));
+    document.querySelector('.search__input').value = '';
+    document.querySelector('.search__input').placeholder = GROUPS[e.target.innerHTML.toLowerCase()];
+    //this.onFieldChanged(<input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />);
+    ReactDOM.unmountComponentAtNode(document.getElementById('search'));
   }
 
   render() {

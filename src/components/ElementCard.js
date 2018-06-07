@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
-import ElementCard from './ElementCard.js'
+//import ElementCard from './ElementCard.js'
 
-class Search extends React.Component {
+class ElementCard extends React.Component {
 	constructor(props) {
         super(props)
         this.state = {
@@ -20,6 +20,7 @@ class Search extends React.Component {
       componentDidMount() {
         const xhr = new XMLHttpRequest();
         console.log(this.props.name);
+        console.log(this.props.variant);
         xhr.open('GET', 'https://swapi.co/api/' + this.props.variant + '/?search=' + this.props.name, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -39,49 +40,27 @@ class Search extends React.Component {
           }
         }
       }
-	renderOneElement(){
+	renderElement(){
         const { data } = this.state
         if (data.results !== undefined) {
-            //const names = [];  //данные
-            //const urls = [];
-            const results = [];
-
-            for (var i = 0; i < this.state.data.results.length; i++) {
-                //names[i] = this.state.data.results[i].name;
-                //urls[i] = this.state.data.results[i].url;
-                results[i] = this.state.data.results[i];
-            }
-            //console.log(names);
-
-            const peopleList = results.map((item, index) =>
-                <li className = 'element__name element__link' key={index} onClick={this.onElementClick}>{item.name}</li>
-            );
-
+            console.log(data.results[0].name);
             return (
                 
-                  <div className = 'element__container'>
-                    <ul className = 'element__list'>{peopleList}</ul>
+                  <div className = 'card__container'>
+                    <p className = 'card__name'>{data.results[0].name}</p>
                   </div>
                 
               )
         }
     }
-
-    onElementClick = (e) => {
-        ReactDOM.unmountComponentAtNode(document.getElementById('element'));
-        const value = e.target.innerHTML;
-        document.querySelector('.search__input').value = value;
-        ReactDOM.unmountComponentAtNode(document.getElementById('search'));
-        render(<ElementCard name={e.target.innerHTML} variant={this.props.variant} />, document.getElementById('element'));
-    }
     
     render() {
         return (
           <div className = 'element'>
-              {this.renderOneElement()}
+              {this.renderElement()}
           </div>
         )
       }
 }
 
-export default Search;
+export default ElementCard;
