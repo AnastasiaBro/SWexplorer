@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import ElementCard from './ElementCard.js'
+import './App.css'
 
 class Search extends React.Component {
 	constructor(props) {

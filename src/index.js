@@ -4,6 +4,7 @@ import {render} from 'react-dom'
 import App from './components/App'
 import Apphome from './components/Apphome'
 //import SearchField from './components/SearchField'
+import ElementCard from './components/ElementCard'
 import Footer from './components/Footer'
 import ReactDOM from 'react-dom';
 
@@ -16,4 +17,5 @@ document.querySelectorAll('.main-nav__link')[1].classList.remove('main-nav__link
 //render(<Header/>, document.getElementById('header'));
 render(<Apphome/>, document.getElementById('root'));
 //render(<SearchField/>, document.getElementById('search-field'));
+render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
 render(<Footer/>, document.getElementById('footer'));
