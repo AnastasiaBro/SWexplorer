@@ -14,7 +14,7 @@ const ICONS = ['./img/rain-icon.png', './img/snow-icon.png', './img/fog-icon.png
 const URLS = ['https://swapi.co/api/planets','https://swapi.co/api/planets/?page=2'];
 const DESCRIPTION = ['rain', 'snow', 'wind', 'sun', 'rain', 'snow', 'wind', 'sun'];
 
-const GROUPS = {'people': 'Luke Skywalker', 'planets': 'Alderaan', 'vehicles': 'Sand Crawler', 'starships': 'Death Star', 'species': 'Toydarian'};
+const GROUPS = {'people': 'Luke Skywalker', 'planets': 'Alderaan', 'vehicles': 'Sand Crawler', 'starships': 'Death Star', 'species': 'Toydarian', 'films': 'A New Hope'};
 
 const CITES = ['You must unlearn, what you have learned.', 
 'You will know the good from the bad when you are calm.', 
@@ -174,6 +174,7 @@ class Apphome extends React.Component {
                   <p className='search__group' onClick={this.onGroupClick}>Vehicles</p>
                   <p className='search__group' onClick={this.onGroupClick}>Starships</p>
                   <p className='search__group' onClick={this.onGroupClick}>Species</p>
+                  <p className='search__group' onClick={this.onGroupClick}>Films</p>
                 </div>
                 <label className='search__label'>
                   <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />

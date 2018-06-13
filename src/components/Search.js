@@ -53,18 +53,32 @@ class Search extends React.Component {
                 results[i] = this.state.data.results[i];
             }
             //console.log(names);
+            
+            if (this.state.data.results[0].title) {
+              const filmList = results.map((item, index) =>
+                <li className = 'element__name element__link' key={index} onClick={this.onElementClick}>{item.title}</li>
+              );
 
-            const peopleList = results.map((item, index) =>
-                <li className = 'element__name element__link' key={index} onClick={this.onElementClick}>{item.name}</li>
-            );
-
-            return (
+              return (
                 
                   <div className = 'element__container'>
-                    <ul className = 'element__list'>{peopleList}</ul>
+                    <ul className = 'element__list'>{filmList}</ul>
                   </div>
                 
               )
+            } else {
+              const peopleList = results.map((item, index) =>
+                  <li className = 'element__name element__link' key={index} onClick={this.onElementClick}>{item.name}</li>
+              );
+
+              return (
+                  
+                    <div className = 'element__container'>
+                      <ul className = 'element__list'>{peopleList}</ul>
+                    </div>
+                  
+              )
+            }
         }
     }
 

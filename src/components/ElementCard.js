@@ -164,7 +164,7 @@ class ElementCard extends React.Component {
                     </div>
                   
                 )
-          }
+          } else
 
           if (this.props.variant === 'planets') {
 
@@ -260,7 +260,7 @@ class ElementCard extends React.Component {
                 )
 
 
-          }
+          } else
 
           if (this.props.variant === 'vehicles') {
 
@@ -364,7 +364,7 @@ class ElementCard extends React.Component {
               )
 
 
-        }
+        } else
 
 
         if (this.props.variant === 'starships') {
@@ -477,7 +477,7 @@ class ElementCard extends React.Component {
             )
 
 
-         }
+         } else
 
 
          if (this.props.variant === 'species') {
@@ -578,7 +578,115 @@ class ElementCard extends React.Component {
             )
 
 
-        }
+        } else
+
+
+        if (this.props.variant === 'films') {
+
+          const characters = [];
+          const vehicles = [];
+          const starships = [];
+          const species = [];
+          const planets = [];
+
+          for (var i = 0; i < this.state.data.results[0].characters.length; i++) {
+            characters[i] = this.state.data.results[0].characters[i];
+          }
+          for (var i = 0; i < this.state.data.results[0].vehicles.length; i++) {
+            vehicles[i] = this.state.data.results[0].vehicles[i];
+          }
+          for (var i = 0; i < this.state.data.results[0].starships.length; i++) {
+            starships[i] = this.state.data.results[0].starships[i];
+          }
+          for (var i = 0; i < this.state.data.results[0].species.length; i++) {
+            species[i] = this.state.data.results[0].species[i];
+          }
+          for (var i = 0; i < this.state.data.results[0].planets.length; i++) {
+            planets[i] = this.state.data.results[0].planets[i];
+          }
+
+
+          const charactersList = characters.map((person, index) =>
+            <InnerElement key={index} url={person}/>
+          );
+          const vehiclesList = vehicles.map((vehicle, index) =>
+            <InnerElement key={index} url={vehicle}/>
+          );
+          const starshipsList = starships.map((starship, index) =>
+            <InnerElement key={index} url={starship}/>
+          );
+          const speciesList = species.map((species, index) =>
+            <InnerElement key={index} url={species}/>
+          );
+          const planetsList = planets.map((planet, index) =>
+            <InnerElement key={index} url={planet}/>
+          );
+
+          return (
+              
+                <div className = 'card__container'>
+                  
+                  <div className = 'card__blocks'>
+                    <div className = 'card__left-block'>
+
+                      <div className = 'card__top-block'>
+                        <div className = 'card__row'>
+                          <p className = 'card__text'>Director:</p>
+                          <p className = 'card__text-small'>{data.results[0].director}</p>
+                        </div>
+                        <div className = 'card__row'>
+                          <p className = 'card__text'>Producer:</p>
+                          <p className = 'card__text-small'>{data.results[0].producer}</p>
+                        </div>
+                        <div className = 'card__row'>
+                          <p className = 'card__text'>Release date:</p>
+                          <p className = 'card__text-small'>{data.results[0].release_date.substr(0, 4)}</p>
+                        </div>
+                      </div>
+
+                      <div className = 'card__bottom-block'>
+                        <div className = 'card__row'>
+                          <p className = 'card__text-small'>Characters:</p>
+                          <div>{charactersList}</div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div className = 'card__center-block'>
+                      <div className = 'card__image-container'>
+                        <img className = 'card__image' src={'./img/' + data.results[0].title + '.jpg'} />
+                        <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].title}<span className = 'card__span'> ]</span></p>
+                      </div>
+                    </div>
+                  
+                    <div className = 'card__right-block'>
+                      <div className = 'card__top-block'>
+                        <div className = 'card__row'>
+                          <p className = 'card__text-small'>Planets:</p>
+                          <div>{planetsList}</div>
+                        </div>
+                        <div className = 'card__row'>
+                          <p className = 'card__text-small'>Starships:</p>
+                          <div>{starshipsList}</div>
+                        </div>
+                      </div>
+                      <div className = 'card__bottom-block'>
+                        <div className = 'card__row'>
+                          <p className = 'card__text-small'>Vehicles:</p>
+                          <div>{vehiclesList}</div>
+                        </div>
+                        <div className = 'card__row'>
+                          <p className = 'card__text-small'>Species:</p>
+                          <div>{speciesList}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+            )
+          }
 
 
       }
