@@ -15,32 +15,32 @@
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("../fonts/ProximaNova-Bold.woff2") format("woff2"), url("../fonts/ProximaNova-Bold.woff") format("woff");
+  src: url("../fonts/ProximaNova-Bold.woff") format("woff");
   font-weight: 700;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("../fonts/ProximaNova-Regular.woff2") format("woff2"), url("../fonts/ProximaNova-Regular.woff") format("woff");
+  src: url("../fonts/ProximaNova-Regular.woff") format("woff");
   font-weight: 400;
 }
 @font-face {
   font-family: "Proxima Nova";
-  src: url("../fonts/ProximaNova-Thin.woff2") format("woff2"), url("../fonts/ProximaNova-Thin.woff") format("woff");
+  src: url("../fonts/ProximaNova-Thin.woff") format("woff");
   font-weight: 100;
 }
 @font-face {
   font-family: "Droid Sans";
-  src: url("../fonts/DroidSans-Bold.woff2") format("woff2"), url("../fonts/DroidSans-Bold.woff") format("woff");
+  src: url("../fonts/DroidSans-Bold.woff") format("woff");
   font-weight: 700;
 }
 @font-face {
   font-family: "Droid Sans";
-  src: url("../fonts/DroidSans.woff2") format("woff2"), url("../fonts/DroidSans.woff") format("woff");
+  src: url("../fonts/DroidSans.woff") format("woff");
   font-weight: 400;
 }
 @font-face {
   font-family: "Droid Sans";
-  src: url("../fonts/DroidSansMono.woff2") format("woff2"), url("../fonts/DroidSansMono.woff") format("woff");
+  src: url("../fonts/DroidSansMono.woff") format("woff");
   font-weight: 100;
 }
 .body-style {
