@@ -1,0 +1,48 @@
+URL: 'api/comments'
+
+HTTP 200 OK
+Content-Type: application/json
+[
+
+    {
+        "name": "Dumbledore",
+        "comment": "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."
+    },
+    {
+        "name": "Somebody",
+        "comment": "Success does not consist in never making mistakes but in never making the same one a second time."
+    },
+    {
+        "name": "Luke Skywalker",
+        "comment": "I’ll never turn to the dark side. You’ve failed, your highness. I am a Jedi, like my father before me."
+    },
+    {
+        "name": "Han Solo",
+        "comment": "Chewie, we’re home."
+    },
+    {
+        "name": "Qui-Gon Jinn",
+        "comment": "Your focus determines your reality."
+    },
+    {
+        "name": "Obi-Wan Kenobi",
+        "comment": "In my experience there is no such thing as luck."
+    },
+    {
+        "name": "Gold Five",
+        "comment": "Stay on target."
+    },
+    {
+        "name": "Gandalf", 
+        "comment": "Hi, Frodo!"
+    }, 
+    {
+        "name": "Dumbledore", 
+        "comment": "It does not do to dwell on dreams and forget to live."
+    }
+]
+
+Attributes:
+
+name string -- The name of this person.
+comment string -- The comment of this person.

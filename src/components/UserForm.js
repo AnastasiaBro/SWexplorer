@@ -25,6 +25,12 @@ class UserForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         alert("Name: " + this.state.name + " | " + "Comment: " + this.state.comment);
+        const xhr = new XMLHttpRequest();
+        const URL = 'api/comments';
+        xhr.open('POST', URL, true);
+        xhr.send({ name: this.state.name, comment: this.state.comment });
+        this.setState({name: ''});
+        this.setState({comment: ''});
     }
 
     render() {
@@ -32,15 +38,15 @@ class UserForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
             <div>
                 <label className='form__label'>
-                    <input className='form__input form__input-name' placeholder="Darth Vader" type="text" value={this.state.name} onChange={this.onChangeName}/>
+                    <input className='form__input form__input-name' placeholder="Darth Vader" type="text" value={this.state.name} onChange={this.onChangeName} required/>
                 </label>
             </div>
             <div>
                 <label className='form__label'>
-                    <textarea className='form__input form__input-comment' placeholder="Luke, I'm your father!" type="text" value={this.state.comment} onChange={this.onChangeComment}/>
+                    <textarea className='form__input form__input-comment' placeholder="Luke, I'm your father!" type="text" value={this.state.comment} onChange={this.onChangeComment} required/>
                 </label>
             </div>
-            <input className='form__button' type="submit" value="Submit" />
+            <button className='form__button' type="submit">Submit</button>
         </form>
     );
     }

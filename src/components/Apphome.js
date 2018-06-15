@@ -8,6 +8,12 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+var checkLanguage = function (text) {
+  if (/[a-z]/i.test(text)) {
+    return text;
+  }
+}
+
 const WEATHER = ['./img/rain.gif', './img/snow.gif', './img/fog.gif', './img/sunny.gif', './img/rain.gif', './img/snow.gif', './img/fog.gif', './img/sunny.gif'];
 const TEMP = ['+13°C', '-10°C', '+7°C', '+30°C', '+24°C', '-23°C', '+15°C', '+17°C'];
 const ICONS = ['./img/rain-icon.png', './img/snow-icon.png', './img/fog-icon.png', './img/sun-icon.png', './img/rain-icon.png', './img/snow-icon.png', './img/fog-icon.png', './img/sun-icon.png'];
@@ -177,7 +183,7 @@ class Apphome extends React.Component {
                   <p className='search__group' onClick={this.onGroupClick}>Films</p>
                 </div>
                 <label className='search__label'>
-                  <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />
+                  <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} pattern="[A-Za-z]" />
                 </label>
               </div>
 
@@ -209,8 +215,8 @@ class Apphome extends React.Component {
     //const text = e.target.value.trim();   // удаляем пробелы
     //console.log(text);
     console.log(e.target);
-    //this.setState({text: e.target.value.trim()}, console.log('text', this.state.text)); 
-    render(<Search name={e.target.value.trim()} variant={this.state.group} />, document.getElementById('search'));
+    //this.setState({text: e.target.value.trim()}, console.log('text', this.state.text));
+    render(<Search name={checkLanguage(e.target.value.trim())} variant={this.state.group} />, document.getElementById('search'));
   }
 
   onGroupClick = (e) => {

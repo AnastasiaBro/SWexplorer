@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import UserForm from './UserForm.js';
+import GetComments from './GetComments.js';
 import './App.css';
 
 class Review extends React.Component {
@@ -9,7 +10,7 @@ class Review extends React.Component {
         return (
           <div className='review__container'>
               <div className='review__left-block'>
-                <div className='review__block'>
+                <div className='review__block review__text-title'>
                     <p className='review__text'><span className='review__title'>Comment area</span></p>
                 </div>
                 <div className='review__block'>
@@ -26,6 +27,8 @@ class Review extends React.Component {
                     <p className='review__text'><span className='review__name'>Anonymous</span></p>
                     <p className='review__text'><span className='review__comment'>May the Force be with you.</span></p>
                 </div>
+
+                <GetComments/>
               </div>         
           </div>
         )

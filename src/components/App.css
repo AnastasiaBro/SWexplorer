@@ -2680,6 +2680,10 @@
     margin-bottom: 5px;
 }
 
+.review__text-title {
+    background-color: black;
+}
+
 .review__name {
     font-size: 14px;
     color: #fccc07;
@@ -2688,6 +2692,7 @@
     border: 1px solid rgb(70, 70, 70);
     border-radius: 10px;
     display: inline-block;
+    background-color: black;
 }
 
 .review__comment {
@@ -2698,10 +2703,11 @@
     border: 1px solid rgb(70, 70, 70);
     border-radius: 10px;
     display: inline-block;
+    background-color: black;
 }
 
 .form__input {
-    background-color: transparent;
+    background-color: black;
     color: white;
     border: 1px solid rgb(70, 70, 70);
     border-radius: 10px;
@@ -2740,6 +2746,7 @@
     width: 200px;
     transition: all 0.3s;
     outline: none;
+    background-color: black;
 }
 
 .form__button:hover {
