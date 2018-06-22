@@ -5,6 +5,7 @@ import UserForm from './UserForm.js';
 import GetComments from './GetComments.js';
 import './App.css';
 
+
 class Review extends React.Component {
     render() {
         return (
@@ -13,25 +14,22 @@ class Review extends React.Component {
                 <div className='review__block review__text-title'>
                     <p className='review__text'><span className='review__title'>Comment area</span></p>
                 </div>
-                <div className='review__block'>
+                <div>
                     <UserForm />
                 </div>
               </div>
-              <div className='review__right-block'>
-                <div className='review__block'>
-                    <p className='review__text'><span className='review__name'>Obi-Wan</span></p>
-                    <p className='review__text'><span className='review__comment'>These aren't the droids you're looking for.</span></p>
-                </div>
+              <div className='review__right-block' id="reviews-comments">
 
-                <div className='review__block'>
-                    <p className='review__text'><span className='review__name'>Anonymous</span></p>
-                    <p className='review__text'><span className='review__comment'>May the Force be with you.</span></p>
-                </div>
-
-                <GetComments/>
-              </div>         
+                <GetComments link={0} />
+                <div className = 'review__container-page' id='review__container-page'></div>
+                <button className="review__button" type="button" onClick={this.onReviewButtonClick}>Show next comments</button>
+              </div>
           </div>
         )
+      }
+
+      onReviewButtonClick () {
+        //render(<GetComments link={1} />, document.getElementById('review__container-page'));
       }
 }
 

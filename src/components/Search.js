@@ -54,7 +54,7 @@ class Search extends React.Component {
             }
             //console.log(names);
             
-            if (this.state.data.results[0].title) {
+            if (this.props.variant === 'films') {
               const filmList = results.map((item, index) =>
                 <li className = 'element__name element__link' key={index} onClick={this.onElementClick}>{item.title}</li>
               );

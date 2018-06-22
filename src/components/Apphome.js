@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
-import Search from './Search.js'
+import Search from './Search.js';
+import ElementCard from './ElementCard.js';
+import Review from './Review.js';
+//import Header from './Header.js';
 import './App.css';
+
+//document.querySelector('.body-style').classList.remove('bg-films');
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -13,6 +18,10 @@ var checkLanguage = function (text) {
     return text;
   }
 }
+
+const number = getRandomInt(0, 9);
+const variant = getRandomInt(0, 7);
+const citeRandom = getRandomInt(0, 5);
 
 const WEATHER = ['./img/rain.gif', './img/snow.gif', './img/fog.gif', './img/sunny.gif', './img/rain.gif', './img/snow.gif', './img/fog.gif', './img/sunny.gif'];
 const TEMP = ['+13°C', '-10°C', '+7°C', '+30°C', '+24°C', '-23°C', '+15°C', '+17°C'];
@@ -71,9 +80,7 @@ class Apphome extends React.Component {
     } else {
       if (data.results !== undefined) { //проверка, что data.results загружен
           const results = [];  //данные
-          const number = getRandomInt(0, 9);
-          const variant = getRandomInt(0, 7);
-          const citeRandom = getRandomInt(0, 5);
+          
           console.log(number);
 
           for (var i = 0; i < this.state.data.results.length; i++) {
@@ -115,6 +122,11 @@ class Apphome extends React.Component {
                 );
             }
           }*/
+
+          document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
+          document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
+          document.querySelectorAll('.main-nav__item')[0].classList.add('main-nav__item--active');
+          document.querySelectorAll('.main-nav__link')[0].classList.add('main-nav__link--active');
 
           return (
           <div>
@@ -197,9 +209,9 @@ class Apphome extends React.Component {
               </div>
             </div>
             
-            
-            
-            
+            <div id="search"></div>
+            <div id="element"><ElementCard name={'Luke Skywalker'} variant={'people'} /></div>
+            <div id="reviews"><Review/></div>
 
             
 
@@ -209,6 +221,7 @@ class Apphome extends React.Component {
       
     }
   }
+  
 
   onFieldChanged = (e) => {
     ReactDOM.unmountComponentAtNode(document.getElementById('search'));
@@ -239,5 +252,10 @@ class Apphome extends React.Component {
     )
   }
 }
+
+/*if (document.querySelector('#element') && document.querySelector('#reviews')) {
+render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
+render(<Review/>, document.getElementById('reviews'));
+}*/
 
 export default Apphome

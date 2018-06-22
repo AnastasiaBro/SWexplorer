@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import ActiveFilm from './ActiveFilm.js';
 import './App.css';
 import {render} from 'react-dom';
+//import Header from './Header.js';
 //import Search from './Search.js'
 window.id = 0; //изначально первый элемент с данными
 window.item = 0;
+//document.querySelector('.body-style').classList.add('bg-films');
+//document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
+//document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
+//document.querySelectorAll('.main-nav__item')[1].classList.add('main-nav__item--active');
+//document.querySelectorAll('.main-nav__link')[1].classList.add('main-nav__link--active');
 
 const indexes = {'A New': 0, 'Attac': 1, 'The P': 2, 'Reven': 3, 'Retur': 4, 'The E': 5, 'The F': 6}
 
@@ -200,6 +206,11 @@ class App extends React.Component {
             
             
             /*--------------------------*/
+            document.querySelector('.body-style').classList.add('bg-films');
+            document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
+            document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
+            document.querySelectorAll('.main-nav__item')[1].classList.add('main-nav__item--active');
+            document.querySelectorAll('.main-nav__link')[1].classList.add('main-nav__link--active');
 
             const listResults = titles.map((titles, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
