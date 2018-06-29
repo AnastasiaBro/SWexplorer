@@ -72,12 +72,12 @@ class InnerElement extends React.Component {
 
 	  renderName(){
         const { data } = this.state
-          console.log(this.props.url);
+          //console.log(this.props.url);
           if (this.props.url === null) {
             return (<p className = 'card__text'><span className = 'card__link'></span></p>);
           }
           if (this.props.url.includes('films')) {
-              console.log(this.props.url);
+              //console.log(this.props.url);
               return (<p className = 'card__text'><span className = 'card__link' onClick={this.onNameClick}>{data.title}</span></p>)
           } else {
               return (<p className = 'card__text'><span className = 'card__link' onClick={this.onNameClick}>{data.name}</span></p>)

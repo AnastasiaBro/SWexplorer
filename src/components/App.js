@@ -207,10 +207,12 @@ class App extends React.Component {
             
             /*--------------------------*/
             document.querySelector('.body-style').classList.add('bg-films');
-            document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
-            document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
-            document.querySelectorAll('.main-nav__item')[1].classList.add('main-nav__item--active');
-            document.querySelectorAll('.main-nav__link')[1].classList.add('main-nav__link--active');
+            if (document.querySelector('.main-nav__item--active')) {
+                document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
+                document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
+                document.querySelectorAll('.main-nav__item')[1].classList.add('main-nav__item--active');
+                document.querySelectorAll('.main-nav__link')[1].classList.add('main-nav__link--active');
+            }
 
             const listResults = titles.map((titles, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>

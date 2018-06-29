@@ -35,6 +35,7 @@ class UserForm extends React.Component {
 
         this.setState({user: ''});
         this.setState({comment: ''});
+        window.location.reload(true);
     }
 
     render() {

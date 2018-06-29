@@ -81,14 +81,14 @@ class Apphome extends React.Component {
       if (data.results !== undefined) { //проверка, что data.results загружен
           const results = [];  //данные
           
-          console.log(number);
+          //console.log(number);
 
           for (var i = 0; i < this.state.data.results.length; i++) {
               results[i] = this.state.data.results[i];
           }
 
-          console.log(this.state.group);
-          console.log(this.state.text);
+          //console.log(this.state.group);
+          //console.log(this.state.text);
 
           const listResults = results.map((results, index) =>
               <li className = 'film__item' key={index}>
@@ -122,11 +122,12 @@ class Apphome extends React.Component {
                 );
             }
           }*/
-
-          document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
-          document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
-          document.querySelectorAll('.main-nav__item')[0].classList.add('main-nav__item--active');
-          document.querySelectorAll('.main-nav__link')[0].classList.add('main-nav__link--active');
+          if (document.querySelector('.main-nav__item--active')) {
+            document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
+            document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
+            document.querySelectorAll('.main-nav__item')[0].classList.add('main-nav__item--active');
+            document.querySelectorAll('.main-nav__link')[0].classList.add('main-nav__link--active');
+          }
 
           return (
           <div>
