@@ -4,7 +4,6 @@ import {render} from 'react-dom';
 import Search from './Search.js';
 import ElementCard from './ElementCard.js';
 import Review from './Review.js';
-import { Link } from 'react-router-dom';
 //import Header from './Header.js';
 import './App.css';
 
@@ -130,17 +129,28 @@ class Apphome extends React.Component {
             document.querySelectorAll('.main-nav__link')[0].classList.add('main-nav__link--active');
           }
 
-          let userLogin = JSON.parse(localStorage.getItem('user'));
-          //window.onload = function() {
-          if (userLogin === null) {
-
           return (
           <div>
             <div className = 'description'>
-              <div className="home-page__container home-page__container--apphome">
-                  <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
-                  <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
+              <div className = 'description__container'>
+                <p className = 'description__text description__text--first'>Do you remember:</p>
+                <div className = 'description__text-container'>
+                  <div className = 'description__left-container'>
+                    <img className = 'description__image' src='./img/luke_your_father.jpg'></img>
+                    <p className = 'description__text description__text--second'>Luke, I'm your father!</p>
+                  </div>
+                  <div className = 'description__right-container'>
+                    <img className = 'description__image' src='./img/droids.jpg'></img>
+                    <p className = 'description__text description__text--third'>These aren't the droids you're looking for</p>
+                  </div>
+                </div>
               </div>
+
+              <div className = 'description-second__container'>
+                <p className = 'description-second__text description-second__text--first'>It is Star Wars Universe</p>
+                <img className = 'description-second__image' src='./img/fight.jpg'></img>
+              </div>
+
               <div className = 'description-third__container'>
                 <h1 className = 'description-third__text description-third__text--first'>Star Wars</h1>
                 <div className = 'description-third__blocks'>
@@ -208,82 +218,6 @@ class Apphome extends React.Component {
 
           </div>
           )
-        } else if (userLogin !== null) {
-          return (
-            <div>
-              <div className = 'description'>
-                <div className="home-page__container home-page__container--apphome">
-                    <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
-                    <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
-                </div>
-                <div className = 'description-third__container'>
-                  <h1 className = 'description-third__text description-third__text--first'>Star Wars</h1>
-                  <div className = 'description-third__blocks'>
-                    <div className = 'description-third__left-block'>
-                      <h2 className = 'description-third__title'>SWexplorer</h2>
-                      <p className = 'description-third__left-block-text'>This application named Star Wars explorer is a set of web pages and scripts for visual display of the received data.</p>
-                      <p className = 'description-third__left-block-text'>The data displayed in the application is obtained from the external freely available web service <a className = 'description-third__link description-third__link--light' href='https://swapi.co'>SWAPI</a>.</p>
-                    </div>
-                    <div className = 'description-third__central-block'>
-                      <p className = 'description-third__central-block-text'>— is an American epic space opera media franchise, centered on a film series created by <a className = 'description-third__link' href='https://en.wikipedia.org/wiki/George_Lucas'>George Lucas</a>. It depicts the adventures of characters "a long time ago in a galaxy far, far away".</p>
-                      <p className = 'description-third__central-block-text description-third__central-block-text--last'>The Star Wars franchise takes place in a distant unnamed fictional galaxy at an undetermined point in the ancient past, where many species of aliens (often humanoid) co-exist. People own robotic droids, who assist them in their daily routines, and space travel is common.</p>
-                    </div>
-                    <div className = 'description-third__right-block'>
-                      <h2 className = 'description-third__title'>SWAPI</h2>
-                      <p className = 'description-third__right-block-text'>The Star Wars API is the world's first quantified and programmatically-formatted set of Star Wars data.</p>
-                      <p className = 'description-third__right-block-text'>After hours of watching films and trawling through content online, they present to us all the People, Films, Species, Starships, Vehicles and Planets from Star Wars.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-  
-              <div className='weather__container'>
-                <div className = 'weather__block'>
-                  <img className = 'weather__image' src={'./img/' + results[number].name + '.jpg'}></img>
-                  <img className = 'weather__gif' src={WEATHER[variant]}></img>
-                  <div className = 'weather__bottom-line'>
-                    <p className = 'weather__temp'>{TEMP[variant]}</p>
-                    <img className = 'weather__png' src={ICONS[variant]}></img>
-                    <span className = 'weather__desc'>{DESCRIPTION[variant]}</span>
-                    <span className = 'weather__name'>{results[number].name}</span>
-                  </div>
-                </div>
-  
-                <div className='search__block'>
-                  <h3 className='search__title'>Search area</h3>
-                  <p className='search__text'>What kind of information do you want to find?</p>
-                  <div className='search__groups'>
-                    <p className='search__group search__group--active' onClick={this.onGroupClick.bind(this)}>People</p>
-                    <p className='search__group' onClick={this.onGroupClick.bind(this)}>Planets</p>
-                    <p className='search__group' onClick={this.onGroupClick}>Vehicles</p>
-                    <p className='search__group' onClick={this.onGroupClick}>Starships</p>
-                    <p className='search__group' onClick={this.onGroupClick}>Species</p>
-                    <p className='search__group' onClick={this.onGroupClick}>Films</p>
-                  </div>
-                  <label className='search__label'>
-                    <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} pattern="[A-Za-z]" />
-                  </label>
-                </div>
-  
-                <div className = 'cite__block'>
-                  <img className = 'cite__bg' src='./img/Tatooine.jpg'></img>
-                  <div className = 'cite__right-block'>
-                    <img className = 'cite__image' src='./img/Yoda-cite.png'></img>
-                  </div>
-                  <p className = 'cite__text'>{CITES[citeRandom]}</p>
-                  <p className = 'cite__film'>{FILMS[citeRandom]}</p>
-                </div>
-              </div>
-              
-              <div id="search"></div>
-              <div id="element"><ElementCard name={'Luke Skywalker'} variant={'people'} /></div>
-              <div id="reviews"><Review/></div>
-  
-              
-  
-            </div>
-            )
-        }
       }
       
     }
@@ -307,10 +241,6 @@ class Apphome extends React.Component {
     document.querySelector('.search__input').placeholder = GROUPS[e.target.innerHTML.toLowerCase()];
     //this.onFieldChanged(<input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />);
     ReactDOM.unmountComponentAtNode(document.getElementById('search'));
-  }
-
-  onLoginClick = (e) => {
-    window.location.reload(true);
   }
 
   render() {

@@ -1,13 +1,12 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
-//import { connect } from 'react-redux';
-//import Header from './Header';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Header from './Header';
 
 import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 
-//import { userActions } from './_actions';
+import { userActions } from './_actions';
 
 const directors = [{"name": "George Lucas", "date": "May 14, 1944", "birthplace": "Modesto, California, U.S.", "biography": ""}, {"name": "Richard Marquand", "date": "Sept. 22, 1937", "birthplace": "Llanishen, Cardiff, Wales", "biography": ""}, {"name": "Irvin Kershner", "date": "Apr. 29, 1923", "birthplace": "Philadelphia, Pennsylvania, U.S.", "biography": ""}, {"name": "J. J. Abrams", "date": "June 27, 1966", "birthplace": "New York City, New York, U.S.", "biography": ""}];
 
@@ -115,10 +114,6 @@ class Directors extends React.Component {
       return (
           <div>
               <div className="home-page">
-                <div className="home-page__container">
-                    <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
-                    <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
-                </div>
                       
                   <div className="page-container">
 
@@ -199,10 +194,6 @@ class Directors extends React.Component {
           return (
             <div>
                 <div className="home-page">
-                    <div className="home-page__container">
-                        <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
-                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
-                    </div>
                         
                     <div className="page-container">
   
@@ -345,10 +336,6 @@ class Directors extends React.Component {
         let userLogin = JSON.parse(localStorage.getItem('user'));
         document.querySelector('.directors-add').classList.add('visually-hidden');
         document.querySelector('.directors__add-button').classList.remove('directors__add-button--active');
-    }
-
-    onLoginClick = (e) => {
-        window.location.reload(true);
     }
 }
 

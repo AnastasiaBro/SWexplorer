@@ -14,21 +14,11 @@ class LoginPage extends React.Component {
         this.state = {
             username: '',
             password: '',
-            submitted: false,
-            token: ''
+            submitted: false
         };
-
-        
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        //this.onButtonClick = this.onButtonClick.bind(this);
-    }
-
-    getInitialState() {
-        return {
-            token: ""
-        };
     }
 
     handleChange(e) {
@@ -49,27 +39,18 @@ class LoginPage extends React.Component {
 
     render() {
         const { loggingIn } = this.props;
-        const { username, password, submitted, token } = this.state;
+        const { username, password, submitted } = this.state;
 
         const header = document.querySelector('#header');
-        //header.querySelector('.home-page__title').classList.add('visually-hidden');
-        //header.querySelector('.home-page__logout').innerHTML = "Login";
-        //header.querySelector('.home-page__logout').href = "/logout";
-
-        //if (userLogin === null) {
-            //localStorage.setItem("token", "null");
-        //}
+        header.querySelector('.home-page__title').classList.add('visually-hidden');
+        header.querySelector('.home-page__logout').innerHTML = "Login";
+        header.querySelector('.home-page__logout').href = "/logout";
 
         window.onload = function () {
             if (document.querySelector('.main-nav__item--active')) {
                 document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
                 document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
             }
-        }
-
-        let userLogin = JSON.parse(localStorage.getItem('user'));
-        if (!userLogin) {
-            localStorage.setItem("token", "null");
         }
 
         return (

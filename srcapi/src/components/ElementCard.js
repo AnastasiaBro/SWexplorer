@@ -20,8 +20,8 @@ class ElementCard extends React.Component {
 
       componentDidMount() {
         const xhr = new XMLHttpRequest();
-        //console.log(this.props.name);
-        //console.log(this.props.variant);
+        console.log(this.props.name);
+        console.log(this.props.variant);
         xhr.open('GET', 'https://swapi.co/api/' + this.props.variant + '/?search=' + this.props.name, true);
         xhr.send();
         this.setState({ isLoading: true })

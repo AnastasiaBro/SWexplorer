@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ActiveFilm from './ActiveFilm.js';
+import { Link } from 'react-router-dom';
 import './App.css';
 import {render} from 'react-dom';
 //import Header from './Header.js';
@@ -222,8 +223,16 @@ class App extends React.Component {
                 </li>
             );
 
+            let userLogin = JSON.parse(localStorage.getItem('user'));
+            //window.onload = function() {
+            if (userLogin === null) {
+
             return (
             <div className='film' id="film">
+                    <div className="home-page__container home-page__container--app">
+                        <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
+                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
+                    </div>
                 <h1 className = 'film__text'>Films</h1>
                 <p className = 'film__text'>Count: {data.count}</p>
                 <div className = 'film__container'>
@@ -238,11 +247,34 @@ class App extends React.Component {
 
                 </div>
             </div>)
+            } else if (userLogin !== null) {
+            return (
+            <div className='film' id="film">
+                <div className="home-page__container home-page__container--app">
+                    <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
+                    <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
+                </div>
+                <h1 className = 'film__text'>Films</h1>
+                <p className = 'film__text'>Count: {data.count}</p>
+                <div className = 'film__container'>
+                    <ItemsList data={propsValues} />
+                
+                </div>
+                <div className = 'film__logo' id = 'logo'>
+                    <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
+                    <h2 className = 'film__logo-text'>Click one film to start...</h2>
+                    <div id="logo-active"></div>                    
+
+                </div>
+            </div>)
+            }
         }
       }
     }
 
-    
+    onLoginClick = (e) => {
+        window.location.reload(true);
+    }
 
     render() {
       return (

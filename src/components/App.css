@@ -30,6 +30,7 @@
 .film {
     width: 1150px;
     margin: auto;
+    position: relative;
 }
 
 .film__text {
@@ -2761,6 +2762,27 @@
     color: white;
     border: 1px solid rgb(70, 70, 70);
     position: relative;
+    transition: all 0.3s;
+}
+
+.review__delete-button:before {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: white;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.review__delete-button:after {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: white;
+    transform: rotate(-45deg);
+    position: absolute;
 }
 
 /*.form__delete-button:before {
@@ -2778,6 +2800,27 @@
     background-color: #fccc078e;
     border: 1px solid #fccc078e;
     color: black;
+    transition: all 0.3s;
+}
+
+.review__delete-button:hover:before {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: black;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.review__delete-button:hover:after {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: black;
+    transform: rotate(-45deg);
+    position: absolute;
 }
 
 .review__delete-button:active {
@@ -2785,6 +2828,27 @@
     border: 1px solid #fccc078e;
     color: black;
     opacity: 0.7;
+    transition: all 0s;
+}
+
+.review__delete-button:active:before {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: black;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.review__delete-button:active:after {
+    content: "";
+    left: 4px;
+    width: 20px;
+    height: 1px;
+    background-color: black;
+    transform: rotate(-45deg);
+    position: absolute;
 }
 
 .form__input {
@@ -3023,8 +3087,16 @@
     display: flex;
     justify-content: flex-end;
     position: absolute;
-    top: 10px;
+    top: -43px;
     right: -5px;
+}
+
+.home-page__container--app {
+    top: -64px;
+}
+
+.home-page__container--apphome {
+    top: -83px;
 }
 
 .home-page__title {
@@ -3317,6 +3389,7 @@
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: all 0.3s;
 }
 
 .directors__button:hover {
@@ -3329,6 +3402,7 @@
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: all 0.3s;
 }
 
 .directors__button:active {
@@ -3342,6 +3416,7 @@
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: all 0s;
 }
 
 .directors-add__save {
@@ -3356,6 +3431,7 @@
     outline: none;
     position: absolute;
     top: -80px;
+    transition: all 0.3s;
 }
 
 .directors-add__save:hover {
@@ -3368,6 +3444,7 @@
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: all 0.3s;
 }
 
 .directors-add__save:active {
@@ -3381,6 +3458,7 @@
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: all 0s;
 }
 
 .directors__add-button--active {
@@ -3461,8 +3539,11 @@
 }
 
 .map {
-    margin-top: 100px;
-    margin-bottom: 170px;
+    padding-top: 100px;
+    padding-bottom: 170px;
+    width: 1150px;
+    margin: auto;
+    position: relative;
 }
 
 .map__container {
@@ -3505,4 +3586,8 @@
 
 .active {
     color: yellow;
+}
+
+.hidden-text {
+    display: none;
 }

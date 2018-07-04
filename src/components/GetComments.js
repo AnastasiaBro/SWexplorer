@@ -20,49 +20,51 @@ class GetComments extends React.Component {
         link: 0
       }
     }
-    //componentDidMount() {
-      /*const xhr = new XMLHttpRequest();
-      xhr.open('GET', URL, true);
-      xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.withCredentials = true;
-      xhr.send();
+    componentDidMount() {
+      const xhr = new XMLHttpRequest();
+      
+      //xhr.open('GET', URL, true);
+      //xhr.setRequestHeader('Access-Control-Allow-Origin', '*://*/*');
+      //xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+      //xhr.setRequestHeader('Content-Type', 'application/json');
+      //xhr.withCredentials = true;
+      //xhr.send();
       this.setState({ isLoading: true })
   
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState !== 4) {
-          return false
-        }
+      //xhr.onreadystatechange = () => {
+        //if (xhr.readyState !== 4) {
+          //return false
+        //}
   
-        if (xhr.status !== 200) {
-          console.log(xhr.status + ': ' + xhr.statusText)
-        } else {
-          this.setState({
-            data: JSON.parse(xhr.responseText),
-            isLoading: false,
-          })
-        }
-      }
-    }*/
+        //if (xhr.status !== 200) {
+          //console.log(xhr.status + ': ' + xhr.statusText)
+        //} else {
+          //this.setState({
+            //data: JSON.parse(xhr.responseText),
+            //isLoading: false,
+          //})
+        //}
+      //}
+    }
 
     renderComments() {
         const { data } = this.state
-        console.log(data);
+        //console.log(data);
         
-            const comments = [{user: "Luke Skywalker", createDate: "16 Jun 2018 12:25:07", comment: "I’ll never turn to the dark side. You’ve failed, your highness. I am a Jedi, like my father before me."}, {user: "Qui-Gon Jinn", createDate: "20 Jun 2018 15:07:43", comment: "Your focus determines your reality."}];
+        const comments = [{user: "Luke Skywalker", createDate: "16 Jun 2018 12:25:07", comment: "I’ll never turn to the dark side. You’ve failed, your highness. I am a Jedi, like my father before me."}, {user: "Qui-Gon Jinn", createDate: "20 Jun 2018 15:07:43", comment: "Your focus determines your reality."}];
             const buttons = [];
             
-            for (var i = this.state.data.length - 1; i >= 0; i--) {
-                comments[this.state.data.length - i] = this.state.data[i];
+            for (var i = 0; i < this.state.data.length; i++) {
+                comments[i] = this.state.data[i];
                 if (this.state.data[i]._links) {
-                  buttons[i] = <button className='review__delete-button' type="button" onClick={this.onDeleteButtonClick}>x<span className="review__span visually-hidden">{this.state.data[i]._links.delete.href}</span><span className="index visually-hidden">{i}</span></button>;
+                  buttons[i] = <button className='review__delete-button' type="button" onClick={this.onDeleteButtonClick}><span className="review__span visually-hidden">{this.state.data[i]._links.delete.href}</span><span className="index visually-hidden">{i}</span></button>;
                 } else {
-                  buttons[i] = <button className='review__delete-button visually-hidden' type="button" onClick={this.onDeleteButtonClick}>x<span className="review__span visually-hidden"></span><span className="index visually-hidden">{i}</span></button>;
+                  buttons[i] = <button className='review__delete-button visually-hidden' type="button" onClick={this.onDeleteButtonClick}><span className="review__span visually-hidden"></span><span className="index visually-hidden">{i}</span></button>;
                 }
-                console.log(buttons);
+                //console.log(buttons);
             }
 
-            console.log(comments);
+            //console.log(comments);
 
             const listComments = comments.map((comment, index) =>
                     <div className='review__block review__block--get' key={index}>
@@ -87,19 +89,6 @@ class GetComments extends React.Component {
                 </div>
             )
         
-    }
-
-    onDeleteButtonClick = (e) => {
-      //const xhr = new XMLHttpRequest();
-      //const URL = e.target.querySelector('.review__span').innerHTML;
-      //const index  = Number(e.target.querySelector('.index').innerHTML);
-      //console.log(URL);
-      //document.querySelectorAll('.review__block--get')[index].classList.add('visually-hidden');
-      //xhr.open('DELETE', URL, true);
-      //xhr.withCredentials = true;
-      //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      //xhr.setRequestHeader('Access-Control-Allow-Origin', '*://*/*');
-      //xhr.send();
     }
 
     render() {

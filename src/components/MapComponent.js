@@ -34,42 +34,100 @@ class MapComponent extends React.Component {
             }
         }
       //let userLogin = JSON.parse(localStorage.getItem('user'));
-
-      return (
-          <div className="map">
-              <div className="map__container">
-                <h3 className="map__title">Pages:</h3>
-                <div className="map__block">
-                    <div className="map__block-page">
-                        <p className="map__page">Home</p>
-                        <ul className="map__list">
-                            <li className="map__item">Information about Star Wars, SWexplorer, SWAPI</li>
-                            <li className="map__item">Search area</li>
-                            <li className="map__item">Comments area</li>
-                        </ul>
+      let userLogin = JSON.parse(localStorage.getItem('user'));
+        //window.onload = function() {
+        if (userLogin === null) {
+            return (
+                <div className="map">
+                    <div className="home-page__container">
+                        <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
+                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
                     </div>
-
-                    <div className="map__block-page">
-                        <p className="map__page">Films</p>
-                        <ul className="map__list">
-                            <li className="map__item">Information about 7 films</li>
-                            <li className="map__item">Search film</li>
-                        </ul>
-                    </div>
-
-                    <div className="map__block-page">
-                        <p className="map__page">Directors</p>
-                        <ul className="map__list">
-                            <li className="map__item">Information about directors</li>
-                            <li className="map__item">To add, delete or edit information <a className="home-page__logout map__button" href='/logout'>Login</a></li>
-                        </ul>
+                    <div className="map__container">
+                      <h3 className="map__title">Pages:</h3>
+                      <div className="map__block">
+                          <div className="map__block-page">
+                              <p className="map__page">Home</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about Star Wars, SWexplorer, SWAPI</li>
+                                  <li className="map__item">Search area</li>
+                                  <li className="map__item">Comments area</li>
+                              </ul>
+                          </div>
+      
+                          <div className="map__block-page">
+                              <p className="map__page">Films</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about 7 films</li>
+                                  <li className="map__item">Search film</li>
+                              </ul>
+                          </div>
+      
+                          <div className="map__block-page">
+                              <p className="map__page">Directors</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about directors</li>
+                                  <li className="map__item">To add, delete or edit information <Link className="home-page__logout map__button" onClick={this.onLoginClick} to='/logout'>Login</Link></li>
+                              </ul>
+                          </div>
+                      </div>
+                        
                     </div>
                 </div>
-                  
-              </div>
-          </div>
-          
-        );
+                
+              );
+        
+        } 
+
+      
+
+        else if (userLogin !== null) {
+            return (
+                <div className="map">
+                    <div className="home-page__container">
+                        <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
+                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
+                    </div>
+                    <div className="map__container">
+                      <h3 className="map__title">Pages:</h3>
+                      <div className="map__block">
+                          <div className="map__block-page">
+                              <p className="map__page">Home</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about Star Wars, SWexplorer, SWAPI</li>
+                                  <li className="map__item">Search area</li>
+                                  <li className="map__item">Comments area</li>
+                              </ul>
+                          </div>
+      
+                          <div className="map__block-page">
+                              <p className="map__page">Films</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about 7 films</li>
+                                  <li className="map__item">Search film</li>
+                              </ul>
+                          </div>
+      
+                          <div className="map__block-page">
+                              <p className="map__page">Directors</p>
+                              <ul className="map__list">
+                                  <li className="map__item">Information about directors</li>
+                                  <li className="map__item">To add, delete or edit information <Link className="home-page__logout map__button" onClick={this.onLoginClick} to='/logout'>Login</Link></li>
+                              </ul>
+                          </div>
+                      </div>
+                        
+                    </div>
+                </div>
+                
+              );
+        //}
+    }
+
+    }
+
+    onLoginClick = (e) => {
+        window.location.reload(true);
     }
 
     render() {
