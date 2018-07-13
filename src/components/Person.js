@@ -79,7 +79,7 @@ class Person extends React.Component {
                       </li>
                     </ul>
                     <div className = 'person__right-block'>
-                      <img className = 'person__image' src={'./img/' + changeSymbol(data.name) + '.jpg'} alt=""></img>
+                      <img className = 'person__image' src={'http://localhost:7070/' + changeSymbol(data.name) + '.jpg'} alt=""></img>
                       
                     </div>
                   </div>

@@ -83,7 +83,7 @@ class Planet extends React.Component {
                       </li>
                     </ul>
                     <div className = 'planet__right-block'>
-                      <img className = 'planet__image' src={'./img/' + data.name + '.jpg'} alt=""></img>
+                      <img className = 'planet__image' src={'http://localhost:7070/' + data.name + '.jpg'} alt=""></img>
                     </div>
                   </div>
                 </div>

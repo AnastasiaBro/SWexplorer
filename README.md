@@ -1,1 +1,1 @@
-You can find the result here: https://anastasiabro.github.io/SWexplorer.
+You can find the result here: https://anastasiabro.github.io/SWexplorer/#/SWexplorer/.

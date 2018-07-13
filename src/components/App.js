@@ -147,7 +147,7 @@ class App extends React.Component {
                                         this.state.items.map((item, index) =>
                                         
                                             <li className = 'film__item' key={index} onClick={this.handleClick}>
-                                                <img className = 'film__image' src={'./img/' + item.toString() + '.jpg'} alt="film"></img>
+                                                <img className = 'film__image' src={'http://localhost:7070/' + item.toString() + '.jpg'} alt="film"></img>
                                                 <p className = 'film__item-text film__item-text--first'>{item}</p>
                                                 <h6 className = 'visually-hidden'>{indexes[item.substring(0, 5)]}</h6>
                                                 <h6 className = 'visually-hidden'>{index}</h6>
@@ -217,7 +217,7 @@ class App extends React.Component {
 
             const listResults = titles.map((titles, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
-                    <img className = 'film__image' src={'./img/' + titles.toString() + '.jpg'} alt="film"></img>
+                    <img className = 'film__image' src={'http://localhost:7070/' + titles.toString() + '.jpg'} alt="film"></img>
                     <p className = 'film__item-text film__item-text--first'>{titles}</p>
                     <h6 className = 'visually-hidden'>{index}</h6>
                 </li>
@@ -240,7 +240,7 @@ class App extends React.Component {
                 
                 </div>
                 <div className = 'film__logo' id = 'logo'>
-                    <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
+                    <img className = 'film__logo-image' src='http://localhost:7070/logo-sw1.jpg' alt='logo'></img>
                     <h2 className = 'film__logo-text'>Click one film to start...</h2>
                     <div id="logo-active">
                     </div>                    
@@ -261,7 +261,7 @@ class App extends React.Component {
                 
                 </div>
                 <div className = 'film__logo' id = 'logo'>
-                    <img className = 'film__logo-image' src='./img/logo-sw1.jpg' alt='logo'></img>
+                    <img className = 'film__logo-image' src='http://localhost:7070/logo-sw1.jpg' alt='logo'></img>
                     <h2 className = 'film__logo-text'>Click one film to start...</h2>
                     <div id="logo-active"></div>                    
 
@@ -273,6 +273,8 @@ class App extends React.Component {
     }
 
     onLoginClick = (e) => {
+        localStorage.setItem("token", "null");
+        document.cookie = "token=; path=/; expires=;";
         window.location.reload(true);
     }
 

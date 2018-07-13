@@ -63,7 +63,7 @@
     margin: 0 auto;
     min-width: 960px;
     position: relative;
-    background-image: url(../img/logo-sw3.jpg);
+    background-image: url(http://localhost:7070/logo-sw3.jpg);
     background-color: black;
     background-repeat: repeat;
     background-size: cover;
@@ -73,7 +73,7 @@
   }
 }
 .body-style--main {
-  background-image: url(../img/naboo4.jpg);
+  background-image: url(http://localhost:7070/naboo4.jpg);
 }
 .visually-hidden:not(:focus):not(:active),
 input[type="checkbox"].visually-hidden,

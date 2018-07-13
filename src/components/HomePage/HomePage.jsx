@@ -72,7 +72,7 @@ class HomePage extends React.Component {
         
         const usersList = directors.map((director, index) =>
             <li className = 'directors__item' key={index} onClick={this.onItemClick}>
-                <img className = 'directors__image' src={'./img/' + director.name + '.jpg'} alt="director"></img>
+                <img className = 'directors__image' src={'http://localhost:7070/' + director.name + '.jpg'} alt="director"></img>
                 <p className = 'directors__item-text'>{director.name}</p>
                 <h6 className = 'directors__index visually-hidden'>{index}</h6>
             </li>

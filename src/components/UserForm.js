@@ -6,7 +6,7 @@ import './App.css';
 class UserForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {user: "", comment: ""};
+        this.state = {user: "", comment: "", update: "this.callthebase()", name: 'http://192.168.148.30:8554/api/v2/comments'};
 
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeComment = this.onChangeComment.bind(this);
@@ -24,18 +24,32 @@ class UserForm extends React.Component {
    
     handleSubmit(e) {
         e.preventDefault();
+        
         //alert("Name: " + this.state.user + " | " + "Comment: " + this.state.comment);
         //var formData = new FormData(document.querySelector('.forms'));
-        //const xhr = new XMLHttpRequest();
-        
-        //const body = 'user=' + encodeURIComponent(this.state.user) +'&comment=' + encodeURIComponent(this.state.comment);
-        //xhr.open('POST', URL, true);
-        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        //xhr.send(body);
+        const xhr = new XMLHttpRequest();
+        const postURL = 'http://192.168.148.30:8554/api/v2/comments';
+        const body = JSON.stringify({
+            user: this.state.user,
+            comment: this.state.comment
+          });
+        xhr.open('POST', postURL, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(body);
+        console.log('запощено!');
+        this.props.updateData(this.state.name);
+        console.log('----------------------------');
 
         this.setState({user: ''});
         this.setState({comment: ''});
-        window.location.reload(true);
+        //window.location.reload(true);
+        
+        //localStorage.setItem('update', '0' + 1);
+        //this.setState({update: localStorage.getItem('update')});
+        //this.props.updateData(this.state.update);
+        //this.props.handler(handler);
+        
+        
     }
 
     render() {

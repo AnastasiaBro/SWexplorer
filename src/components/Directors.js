@@ -81,7 +81,7 @@ class Directors extends React.Component {
       if (directors) {
       const usersList = directors.map((director, index) =>
           <li className = 'directors__item' key={index} onClick={this.onItemClick}>
-              <img className = 'directors__image' src={'./img/' + director.name + '.jpg'} alt="director"></img>
+              <img className = 'directors__image' src={'http://localhost:7070/' + director.name + '.jpg'} alt="director"></img>
               <p className = 'directors__item-text'>{director.name}</p>
               <h6 className = 'directors__index visually-hidden'>{index}</h6>
           </li>
@@ -348,6 +348,8 @@ class Directors extends React.Component {
     }
 
     onLoginClick = (e) => {
+        localStorage.setItem("token", "null");
+        document.cookie = "token=; path=/; expires=;";
         window.location.reload(true);
     }
 }

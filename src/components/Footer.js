@@ -15,23 +15,23 @@ class Footer extends React.Component {
 
               <div className='page-footer__center-block'>
                 <div className='page-footer__image-container'>
-                  <img className='page-footer__image' src='./img/senate_logo.png'></img>
+                  <img className='page-footer__image' src='http://localhost:7070/senate_logo.png'></img>
                   <p className='page-footer__logo-name'>Galactic Senate</p>
                 </div>
                 <div className='page-footer__image-container'>
-                  <img className='page-footer__image' src='./img/sith_logo.png'></img>
+                  <img className='page-footer__image' src='http://localhost:7070/sith_logo.png'></img>
                   <p className='page-footer__logo-name'>Sith Empire</p>
                 </div>
                 <div className='page-footer__image-container'>
-                  <img className='page-footer__image' src='./img/jedi_logo.png'></img>
+                  <img className='page-footer__image' src='http://localhost:7070/jedi_logo.png'></img>
                   <p className='page-footer__logo-name'>Jedi Order</p>
                 </div>
                 <div className='page-footer__image-container'>
-                  <img className='page-footer__image' src='./img/imperia_logo.png'></img>
+                  <img className='page-footer__image' src='http://localhost:7070/imperia_logo.png'></img>
                   <p className='page-footer__logo-name'>Galactic Empire</p>
                 </div>
                 <div className='page-footer__image-container'>
-                  <img className='page-footer__image' src='./img/old-rep__logo.png'></img>
+                  <img className='page-footer__image' src='http://localhost:7070/old-rep__logo.png'></img>
                   <p className='page-footer__logo-name'>Old Galactic Republic</p>
                 </div>
               </div>

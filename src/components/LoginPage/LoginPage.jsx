@@ -45,6 +45,34 @@ class LoginPage extends React.Component {
         if (username && password) {
             dispatch(userActions.login(username, password));
         }
+
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        //xhr.withCredentials = true;
+        const URL = 'http://192.168.148.30:9999/uaa/oauth/token';
+        const body = 'password=' + encodeURIComponent(this.state.password) + '&username=' + encodeURIComponent(this.state.username) + '&grant_type=password&client_secret=swexplorer&client_id=swexplorer';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+              const token = xhr.response.access_token;
+              console.log(token);
+              //this.setState({token: token});
+              //console.log(this.state.token);
+
+              localStorage.setItem("token", token);
+              document.cookie = "token=" + token + "; path=/; expires=;";
+              console.log(localStorage.setItem("token"));
+              
+              //window.token = token;
+            }
+          }.bind(this);
+        xhr.open('POST', URL, true);
+        xhr.setRequestHeader('Authorization', 'Basic c3dleHBsb3Jlcjpzd2V4cGxvcmVy');
+        //xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        console.log(body);
+        xhr.send(body);
     }
 
     render() {
@@ -70,6 +98,7 @@ class LoginPage extends React.Component {
         let userLogin = JSON.parse(localStorage.getItem('user'));
         if (!userLogin) {
             localStorage.setItem("token", "null");
+            document.cookie = "token=; path=/; expires=;";
         }
 
         return (
@@ -90,7 +119,7 @@ class LoginPage extends React.Component {
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'login__form-group' + (submitted && !username ? ' has-error' : '')}>
                         <div className="login__row">
-                            <img className="login__user-img" src="./img/user.png" />
+                            <img className="login__user-img" src="http://localhost:7070/user.png" />
                             <label htmlFor="username" className="login__label">
                             <input type="text" placeholder="Username" className="login__input" name="username" value={username} onChange={this.handleChange} />
                             </label>
@@ -101,7 +130,7 @@ class LoginPage extends React.Component {
                     </div>
                     <div className={'login__form-group' + (submitted && !password ? ' has-error' : '')}>
                         <div className="login__row">
-                            <img className="login__padlock-img" src="./img/padlock.png" />
+                            <img className="login__padlock-img" src="http://localhost:7070/padlock.png" />
                             <label htmlFor="password" className="login__label">
                             <input type="password" placeholder="Password" className="login__input" name="password" value={password} onChange={this.handleChange} />
                             </label>
@@ -117,6 +146,7 @@ class LoginPage extends React.Component {
                         }
                     </div>
                 </form>
+                
             </div>
         );
     }

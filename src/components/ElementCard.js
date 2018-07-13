@@ -137,7 +137,7 @@ class ElementCard extends React.Component {
 
                         <div className = 'card__center-block'>
                           <div className = 'card__image-container'>
-                            <img className = 'card__image' src={'./img/' + changeSymbol(data.results[0].name) + '.jpg'} />
+                            <img className = 'card__image' src={'http://localhost:7070/' + changeSymbol(data.results[0].name) + '.jpg'} />
                             <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                           </div>
                         </div>
@@ -234,7 +234,7 @@ class ElementCard extends React.Component {
 
                         <div className = 'card__center-block'>
                           <div className = 'card__image-container'>
-                            <img className = 'card__image-planet' src={'./img/' + data.results[0].name + '.jpg'} />
+                            <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
                             <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                           </div>
                         </div>
@@ -242,7 +242,7 @@ class ElementCard extends React.Component {
                         <div className = 'card__right-block'>
                           <div className = 'card__top-block'>
                             <div className = 'card__row'>
-                              <p className = 'card__text-small'>Vehicles:</p>
+                              <p className = 'card__text-small'>Residents:</p>
                               <div>{residentsList}</div>
                             </div>
                           </div>
@@ -330,7 +330,7 @@ class ElementCard extends React.Component {
 
                       <div className = 'card__center-block'>
                         <div className = 'card__image-container'>
-                          <img className = 'card__image-planet' src={'./img/' + data.results[0].name + '.jpg'} />
+                          <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
                           <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                         </div>
                       </div>
@@ -435,7 +435,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image-planet' src={'./img/' + data.results[0].name + '.jpg'} />
+                        <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>
@@ -544,7 +544,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image' src={'./img/' + data.results[0].name + '.jpg'} />
+                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>
@@ -655,7 +655,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image' src={'./img/' + data.results[0].title + '.jpg'} />
+                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].title + '.jpg'} />
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].title}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>

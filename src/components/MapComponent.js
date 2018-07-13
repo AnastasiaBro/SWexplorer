@@ -86,7 +86,7 @@ class MapComponent extends React.Component {
                 <div className="map">
                     <div className="home-page__container">
                         <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
-                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
+                        <Link className="home-page__logout" onClick={this.onLogoutClick} to='/login'>Logout</Link>
                     </div>
                     <div className="map__container">
                       <h3 className="map__title">Pages:</h3>
@@ -127,6 +127,13 @@ class MapComponent extends React.Component {
     }
 
     onLoginClick = (e) => {
+        
+        window.location.reload(true);
+    }
+
+    onLogoutClick = (e) => {
+        localStorage.setItem("token", "null");
+        document.cookie = "token=; path=/; expires=;";
         window.location.reload(true);
     }
 
