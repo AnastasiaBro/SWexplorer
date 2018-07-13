@@ -23,7 +23,7 @@ class GetComments extends React.Component {
         data: [],
         isLoading: false,
         link: 0,
-        URL: (userLogin === null || userLogin.username !== "admin") ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
+        URL: "",
         update: 0,
         updateData: '',
         name: 'Бумеранг не запущен'
@@ -52,14 +52,13 @@ class GetComments extends React.Component {
 
       if (this.state.data.page && this.state.data.page.totalElements % 5 === 0) {
         if (userLogin === null || userLogin.username !== "admin") {
-          localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
           console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
           console.log('третий стейт - обычный', this.state.URL);
           console.log('последняя страница', this.state.data._links.last.href);
         } else {
-          localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
+          
           console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
@@ -376,7 +375,7 @@ class GetComments extends React.Component {
     }
 
     onReviewRemovedClick = (e) => {
-        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments/search/removedIsTrue?page=0&size=5'}, this.callthebase.bind(this));
+        
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[0].classList.add('review__button--active');
@@ -385,7 +384,7 @@ class GetComments extends React.Component {
     }
 
     /*onReviewSavedClick = (e) => {
-        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse'}, this.callthebase);
+        
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[1].classList.add('review__button--active');
@@ -394,7 +393,7 @@ class GetComments extends React.Component {
     }*/
 
     onReviewAllClick = (e) => {
-        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5'}, this.callthebase.bind(this));
+        
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[1].classList.add('review__button--active');

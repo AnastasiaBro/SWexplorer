@@ -6,7 +6,7 @@ import './App.css';
 class UserForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {user: "", comment: "", update: "this.callthebase()", name: 'http://192.168.148.30:8554/api/v2/comments'};
+        this.state = {user: "", comment: "", update: "this.callthebase()", name: ''};
 
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeComment = this.onChangeComment.bind(this);
@@ -28,7 +28,7 @@ class UserForm extends React.Component {
         //alert("Name: " + this.state.user + " | " + "Comment: " + this.state.comment);
         //var formData = new FormData(document.querySelector('.forms'));
         const xhr = new XMLHttpRequest();
-        const postURL = 'http://192.168.148.30:8554/api/v2/comments';
+        const postURL = '';
         const body = JSON.stringify({
             user: this.state.user,
             comment: this.state.comment

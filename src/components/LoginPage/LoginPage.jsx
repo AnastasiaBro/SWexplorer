@@ -49,7 +49,7 @@ class LoginPage extends React.Component {
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         //xhr.withCredentials = true;
-        const URL = 'http://192.168.148.30:9999/uaa/oauth/token';
+        const URL = '';
         const body = 'password=' + encodeURIComponent(this.state.password) + '&username=' + encodeURIComponent(this.state.username) + '&grant_type=password&client_secret=swexplorer&client_id=swexplorer';
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
