@@ -13,6 +13,47 @@ function getDate(date) {
     return formattedDate;
 }
 
+function getToken(newURL) {
+  const xhr = new XMLHttpRequest();
+  xhr.responseType = 'json';
+  const URL = 'http://192.168.148.30:9999/uaa/oauth/token';
+  const body = '&grant_type=refresh_token&client_secret=swexplorer&client_id=swexplorer&refresh_token=' + document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  
+  xhr.open('POST', URL, true);
+
+  
+  xhr.setRequestHeader('Authorization', 'Basic c3dleHBsb3Jlcjpzd2V4cGxvcmVy');
+  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  console.log(body);
+  xhr.send(body);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      const token = xhr.response.access_token;
+      const fresh = xhr.response.refresh_token;
+      console.log('Новый токен получен ' + token);
+      console.log('Новый фреш получен ' + fresh);
+
+      document.cookie = "token=" + token + "; path=/; expires=;";
+      document.cookie = "fresh=" + fresh + "; path=/; expires=;";
+      
+
+      const xhr1 = new XMLHttpRequest();
+      //const URL = e.target.querySelector('.review__span').innerHTML;
+      
+      console.log('URL for delete ', newURL);
+
+      xhr1.open('DELETE', newURL, true);
+
+      console.log('new token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      console.log('new fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      xhr1.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+
+      xhr1.send();
+    }
+  }
+}
+
 let userLogin = JSON.parse(localStorage.getItem('user'));
 
 class GetComments extends React.Component {
@@ -23,7 +64,7 @@ class GetComments extends React.Component {
         data: [],
         isLoading: false,
         link: 0,
-        URL: "",
+        URL: ((document.cookie === "" || document.cookie === "token=") || localStorage.getItem('user') === null) ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
         update: 0,
         updateData: '',
         name: 'Бумеранг не запущен'
@@ -52,13 +93,14 @@ class GetComments extends React.Component {
 
       if (this.state.data.page && this.state.data.page.totalElements % 5 === 0) {
         if (userLogin === null || userLogin.username !== "admin") {
+          localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
           console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
           console.log('третий стейт - обычный', this.state.URL);
           console.log('последняя страница', this.state.data._links.last.href);
         } else {
-          
+          localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
           console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
@@ -119,6 +161,7 @@ class GetComments extends React.Component {
       }
       
     }
+    
 
     renderComments() {
         
@@ -327,35 +370,41 @@ class GetComments extends React.Component {
             }
     }
 
+    
+
     onDeleteButtonClick = (e) => {
-        const xhr = new XMLHttpRequest();
-        //xhr.withCredentials = true;
-        const URL = e.target.querySelector('.review__span').innerHTML;
-        let userLogin = JSON.parse(localStorage.getItem('user'));
-        const index  = Number(e.target.querySelector('.index').innerHTML);
-        //if (userLogin !== null && userLogin.username === 'admin') {
-          //e.target.parentNode.classList.add('border');
-        //}
+      const URL = e.target.querySelector('.review__span').innerHTML;
+      let userLogin = JSON.parse(localStorage.getItem('user'));
 
-        console.log('URL for delete ', URL);
+      const xhr = new XMLHttpRequest();
+      const index  = Number(e.target.querySelector('.index').innerHTML);
+      console.log("-------------------------------------"); 
+      console.log('URL for delete ', URL);
+      xhr.open('DELETE', URL, true);
 
-        xhr.open('DELETE', URL, true);
+      console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
 
-        console.log('token =', 'Bearer ' + document.cookie.substring(6));
+      xhr.send();
 
-        xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.substring(6));
-        //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-        //xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          console.log(xhr.status);
+          if (xhr.status == 401 && userLogin.username === "admin") {
+            console.log("no auth");
+            getToken(URL);
+                
+          }
+        }
+      }
 
-        xhr.send();
-        //this.updateData();
-        //this.callthebase();
-
-        const timeId = setInterval(this.callthebase, 1000);
+      const timeId = setInterval(this.callthebase, 1000);
+  
+      setTimeout(function() {
+        clearInterval(timeId);
+      }, 1100);
       
-        setTimeout(function() {
-          clearInterval(timeId);
-        }, 1100);
     }
 
     onReviewPrevClick = (e) => {
@@ -375,7 +424,7 @@ class GetComments extends React.Component {
     }
 
     onReviewRemovedClick = (e) => {
-        
+        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments/search/removedIsTrue?page=0&size=5'}, this.callthebase.bind(this));
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[0].classList.add('review__button--active');
@@ -384,7 +433,7 @@ class GetComments extends React.Component {
     }
 
     /*onReviewSavedClick = (e) => {
-        
+        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse'}, this.callthebase);
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[1].classList.add('review__button--active');
@@ -393,7 +442,7 @@ class GetComments extends React.Component {
     }*/
 
     onReviewAllClick = (e) => {
-        
+        this.setState({URL: 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5'}, this.callthebase.bind(this));
         if (document.querySelector('.review__button--active')) {
           document.querySelector('.review__button--active').classList.remove('review__button--active');
           document.querySelectorAll('.review__button-admin')[1].classList.add('review__button--active');
@@ -441,5 +490,9 @@ class GetComments extends React.Component {
       }
     }
   };
+
+  window.onunload = function () {
+    //userLogin = null;
+  }
 
 export default GetComments;

@@ -49,23 +49,22 @@ class LoginPage extends React.Component {
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         //xhr.withCredentials = true;
-        const URL = '';
+        const URL = 'http://192.168.148.30:9999/uaa/oauth/token';
         const body = 'password=' + encodeURIComponent(this.state.password) + '&username=' + encodeURIComponent(this.state.username) + '&grant_type=password&client_secret=swexplorer&client_id=swexplorer';
+        
+        xhr.open('POST', URL, true);
+
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
               const token = xhr.response.access_token;
+              const fresh = xhr.response.refresh_token;
               console.log(token);
-              //this.setState({token: token});
-              //console.log(this.state.token);
+              console.log(fresh);
 
-              localStorage.setItem("token", token);
               document.cookie = "token=" + token + "; path=/; expires=;";
-              console.log(localStorage.setItem("token"));
-              
-              //window.token = token;
+              document.cookie = "fresh=" + fresh + "; path=/; expires=;";
             }
           }.bind(this);
-        xhr.open('POST', URL, true);
         xhr.setRequestHeader('Authorization', 'Basic c3dleHBsb3Jlcjpzd2V4cGxvcmVy');
         //xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
         xhr.setRequestHeader('Accept', 'application/json');

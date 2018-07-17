@@ -67,7 +67,7 @@ class MapComponent extends React.Component {
                               <p className="map__page">Directors</p>
                               <ul className="map__list">
                                   <li className="map__item">Information about directors</li>
-                                  <li className="map__item">To add, delete or edit information <Link className="home-page__logout map__button" onClick={this.onLoginClick} to='/logout'>Login</Link></li>
+                                  <li className="map__item">To add, delete or edit information <Link className="home-page__logout map__button" onClick={this.onLoginClick} to='/login'>Login</Link></li>
                               </ul>
                           </div>
                       </div>

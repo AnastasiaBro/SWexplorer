@@ -9,7 +9,7 @@ import {render} from 'react-dom';
 
 //import { userActions } from './_actions';
 
-const directors = [{"name": "George Lucas", "date": "May 14, 1944", "birthplace": "Modesto, California, U.S.", "biography": ""}, {"name": "Richard Marquand", "date": "Sept. 22, 1937", "birthplace": "Llanishen, Cardiff, Wales", "biography": ""}, {"name": "Irvin Kershner", "date": "Apr. 29, 1923", "birthplace": "Philadelphia, Pennsylvania, U.S.", "biography": ""}, {"name": "J. J. Abrams", "date": "June 27, 1966", "birthplace": "New York City, New York, U.S.", "biography": ""}];
+//const directors = [{"name": "George Lucas", "date": "May 14, 1944", "birthplace": "Modesto, California, U.S.", "biography": ""}, {"name": "Richard Marquand", "date": "Sept. 22, 1937", "birthplace": "Llanishen, Cardiff, Wales", "biography": ""}, {"name": "Irvin Kershner", "date": "Apr. 29, 1923", "birthplace": "Philadelphia, Pennsylvania, U.S.", "biography": ""}, {"name": "J. J. Abrams", "date": "June 27, 1966", "birthplace": "New York City, New York, U.S.", "biography": ""}];
 
 
 class Directors extends React.Component {
@@ -24,7 +24,8 @@ class Directors extends React.Component {
             addBorn: "",
             addPlace: "",
             addBiography: "",
-            addName: ""
+            addName: "",
+            data: []
         };
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeBorn = this.onChangeBorn.bind(this);
@@ -36,6 +37,30 @@ class Directors extends React.Component {
         this.onChangeAddPlace = this.onChangeAddPlace.bind(this);
         this.onChangeAddBiography = this.onChangeAddBiography.bind(this);
     }
+
+    componentDidMount() {
+        const xhr = new XMLHttpRequest();
+        const URL = 'http://192.168.148.30:8554/api/v2/directors';
+        xhr.open('GET', URL, true);
+        xhr.send();
+        this.setState({ isLoading: true })
+    
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== 4) {
+            return false
+          }
+    
+          if (xhr.status !== 200) {
+            console.log(xhr.status + ': ' + xhr.statusText)
+          } else {
+            this.setState({
+              data: JSON.parse(xhr.responseText),
+              isLoading: false,
+            })
+          }
+        }
+      }
+
     onChangeName(e) {
         var val = e.target.value;
         this.setState({name: val});
@@ -78,7 +103,11 @@ class Directors extends React.Component {
 
     renderDirectors () {
       const { user, users } = this.props;
-      if (directors) {
+      const { data } = this.state;
+      if (data._embedded !== undefined) {
+
+      const directors = this.state.data._embedded.directors;
+      
       const usersList = directors.map((director, index) =>
           <li className = 'directors__item' key={index} onClick={this.onItemClick}>
               <img className = 'directors__image' src={'http://localhost:7070/' + director.name + '.jpg'} alt="director"></img>
@@ -143,12 +172,8 @@ class Directors extends React.Component {
                                       <input className="directors-data__item-input" type="text" value={this.state.name} onChange={this.onChangeName} name="name" id="name"/>
                                   </div>
                                   <div className="directors-data__row">
-                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="born">Born:</label>
+                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="born">Birthday:</label>
                                       <input className="directors-data__item-input" type="text" value={this.state.born} onChange={this.onChangeBorn} name="born" id="born"/>
-                                  </div>
-                                  <div className="directors-data__row">
-                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="birthplace">Birthplace:</label>
-                                      <input className="directors-data__item-input" type="text" value={this.state.place} onChange={this.onChangePlace} name="birthplace" id="birthplace"/>
                                   </div>
                                   <div className="directors-data__row">
                                       <label className="directors-data__item-text directors-data__item-label" htmlFor="biography">Biography:</label>
@@ -171,12 +196,8 @@ class Directors extends React.Component {
                                       <input className="directors-data__item-input" type="text" placeholder="Name" value={this.state.addName} onChange={this.onChangeAddName} name="addName" id="addName"/>
                                   </div>
                                   <div className="directors-data__row">
-                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="addBorn">Born:</label>
+                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="addBorn">Birthday:</label>
                                       <input className="directors-data__item-input" type="text" placeholder="16 Apr. 1980" value={this.state.addBorn} onChange={this.onChangeAddBorn} name="addBorn" id="addBorn"/>
-                                  </div>
-                                  <div className="directors-data__row">
-                                      <label className="directors-data__item-text directors-data__item-label" htmlFor="addPlace">Birthplace:</label>
-                                      <input className="directors-data__item-input" type="text" placeholder="Oslo, Norway" value={this.state.addPlace} onChange={this.onChangeAddPlace} name="addPlace" id="addPlace"/>
                                   </div>
                                   <div className="directors-data__row">
                                       <label className="directors-data__item-text directors-data__item-label" htmlFor="addBiography">Biography:</label>
@@ -253,8 +274,9 @@ class Directors extends React.Component {
             </div>
             
           );
-
         }
+
+        
       }
     }
 
@@ -290,10 +312,10 @@ class Directors extends React.Component {
             console.log(number);
             this.setState({ index: number });
             console.log(this.state.index);
-            this.setState({ name: directors[number].name});
-            this.setState({ born: directors[number].date});
-            this.setState({ place: directors[number].birthplace});
-            this.setState({ biography: directors[number].biography});
+            this.setState({ name: this.state.data._embedded.directors[number].name});
+            this.setState({ born: this.state.data._embedded.directors[number].birthday});
+            //this.setState({ place: this.state.data._embedded.directors[number].birthplace});
+            this.setState({ biography: this.state.data._embedded.directors[number].biography});
             //document.querySelector('.directors__delete-button').classList.remove('visually-hidden');
         } else {
             const eventTag = e.target.parentNode;
@@ -302,10 +324,10 @@ class Directors extends React.Component {
             console.log(number);
             this.setState({ index: number });
             console.log(this.state.index);
-            this.setState({ name: directors[number].name});
-            this.setState({ born: directors[number].date});
-            this.setState({ place: directors[number].birthplace});
-            this.setState({ biography: directors[number].biography});
+            this.setState({ name: this.state.data._embedded.directors[number].name});
+            this.setState({ born: this.state.data._embedded.directors[number].birthday});
+            //this.setState({ place: this.state.data._embedded.directors[number].birthplace});
+            this.setState({ biography: this.state.data._embedded.directors[number].biography});
             //document.querySelector('.directors__delete-button').classList.remove('visually-hidden');
         }
         let userLogin = JSON.parse(localStorage.getItem('user'));

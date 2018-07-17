@@ -131,15 +131,18 @@ class Apphome extends React.Component {
           }
 
           let userLogin = JSON.parse(localStorage.getItem('user'));
+          console.log(userLogin);
           //window.onload = function() {
-          if (userLogin === null) {
-
+          if (document.cookie == "" || document.cookie == "token=") {
+            localStorage.setItem('user', null);
+            let userLogin = JSON.parse(localStorage.getItem('user'));
+          console.log(userLogin);
           return (
           <div>
             <div className = 'description'>
               <div className="home-page__container home-page__container--apphome">
                   <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
-                  <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
+                  <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Login</Link>
               </div>
               <div className = 'description-third__container'>
                 <h1 className = 'description-third__text description-third__text--first'>Star Wars</h1>

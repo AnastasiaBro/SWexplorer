@@ -61,7 +61,7 @@ class HomePage extends React.Component {
     render() {
         
         const { user, users } = this.props;
-        window.welcomeName = user.firstName;
+        //window.welcomeName = user.firstName;
         document.location.replace('/');
 
         const header = document.querySelector('#header');
