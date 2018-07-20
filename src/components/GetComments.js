@@ -13,7 +13,7 @@ function getDate(date) {
     return formattedDate;
 }
 
-function getToken(newURL) {
+function getToken(newURL, kind) {
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
   const URL = 'http://192.168.148.30:9999/uaa/oauth/token';
@@ -43,7 +43,7 @@ function getToken(newURL) {
       
       console.log('URL for delete ', newURL);
 
-      xhr1.open('DELETE', newURL, true);
+      xhr1.open(kind, newURL, true);
 
       console.log('new token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
       console.log('new fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
@@ -64,7 +64,7 @@ class GetComments extends React.Component {
         data: [],
         isLoading: false,
         link: 0,
-        URL: ((document.cookie === "" || document.cookie === "token=") || localStorage.getItem('user') === null) ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
+        URL: ((document.cookie === "" || document.cookie === "token=" || document.cookie === "token=undefined; fresh=undefined") || localStorage.getItem('user') === null) ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
         update: 0,
         updateData: '',
         name: 'Бумеранг не запущен'
@@ -393,7 +393,7 @@ class GetComments extends React.Component {
           console.log(xhr.status);
           if (xhr.status == 401 && userLogin.username === "admin") {
             console.log("no auth");
-            getToken(URL);
+            getToken(URL, 'DELETE');
                 
           }
         }
@@ -494,5 +494,7 @@ class GetComments extends React.Component {
   window.onunload = function () {
     //userLogin = null;
   }
+
+  window.getToken = getToken;
 
 export default GetComments;

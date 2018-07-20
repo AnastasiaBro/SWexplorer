@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
         xhr.open('POST', URL, true);
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
               const token = xhr.response.access_token;
               const fresh = xhr.response.refresh_token;
               console.log(token);
