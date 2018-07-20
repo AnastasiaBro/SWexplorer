@@ -38,7 +38,8 @@ class Directors extends React.Component {
             data4: [],
             filmsList: '',
             freeFilms: '',
-            allFilms: []
+            allFilms: [],
+            map: {}
         };
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeBorn = this.onChangeBorn.bind(this);
@@ -131,7 +132,7 @@ class Directors extends React.Component {
       const usersList = directors.map((director, index) =>
           <li className = 'directors__item' key={index} onClick={this.onItemClick}>
               <img className = 'directors__image' src={getPhoto('http://localhost:7070/' + director.name + '.jpg', director.name)} alt="director"></img>
-              <p className = 'directors__item-text'>{director.name}</p>
+              <p className = 'directors__item-text directors__name'>{director.name}</p>
               <h6 className = 'directors__index visually-hidden'>{index}</h6>
               <h6 className = 'directors__href visually-hidden'>{director._links.self.href}</h6>
               <h6 className = 'directors__films visually-hidden'>{director._links.films.href}</h6>
@@ -202,7 +203,7 @@ class Directors extends React.Component {
                                       <textarea className="directors-data__item-input directors-data__item-textarea" type="text" value={this.state.biography} onChange={this.onChangeBiography} name="biography" id="biography"/>
                                   </div>
                                   <button className="directors__button directors__delete-button visually-hidden" onClick={this.onDeleteClick}>Delete</button>
-                                  <button className="directors__button directors-data__button" onClick={this.onSaveClick}>Save changes</button>
+                                  <button className="directors__button directors-data__button" onClick={this.onSaveClick}>Save information</button>
                               </div>
 
                           </div>
@@ -242,7 +243,7 @@ class Directors extends React.Component {
                               </div>
                               <ul className = "directors-films__list">{this.state.freeFilms}</ul>
                               <p className="directors__text directors__count directors--absolute">chosen films by all directors: {this.state.allFilms.length}</p>
-                              <button className="directors__button directors-data__button" onClick={this.onUpdateClick}>Update films</button>
+                              <button className="directors__button directors-data__button directors-films__save-button" onClick={this.onUpdateClick}>Save chosen films</button>
                             
                           </div>
 
@@ -384,7 +385,7 @@ class Directors extends React.Component {
                         <li className = 'directors-films__item' key={index}>
                             <label className = 'directors-films__item-text' htmlFor={index} onClick={this.onFilmClick}>
                                 <input className = 'directors-films__input' id={index} type="checkbox" name="first" defaultChecked></input>
-                                <span className = 'directors-films__span'><InnerFilm key={index} url={film._links.film.href.substring(40)}/></span>
+                                <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
                                 <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
                             </label>
                         </li>
@@ -397,7 +398,7 @@ class Directors extends React.Component {
                         <li className = 'directors-films__item' key={index}>
                             <label className = 'directors-films__item-text' htmlFor={index}>
                                 <input className = 'directors-films__input' id={index} type="checkbox" name="first" checked readOnly></input>
-                                <span className = 'directors-films__span'><InnerFilm key={index} url={film._links.film.href.substring(40)}/></span>
+                                <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
                                 <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
                             </label>
                         </li>
@@ -461,7 +462,7 @@ class Directors extends React.Component {
         }
 
         const xhr4 = new XMLHttpRequest();
-        const URL4 = 'http://swapi.co/api/films'; //все индексы придут здесь
+        const URL4 = 'http://swapi.co/api/films'; //все индексы придут здесь - один запрос
         xhr4.open('GET', URL4, true);
         xhr4.send();
     
@@ -479,13 +480,25 @@ class Directors extends React.Component {
                 })
                 const allTitles = [];
                 const indexes = [];
+                const titlesIndexes = [];
+
+                const map = new Object();
                 if (this.state.data4) {
                     for (let i = 0; i < this.state.data4.results.length; i++) {
                         allTitles.push(this.state.data4.results[i].title);
+                        let key = this.state.data4.results[i].title;
                         indexes.push(i + 1);
+                        titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
+
+                        map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
                     }
                     console.log(allTitles);
                     console.log(indexes);
+                    //console.log(titlesIndexes);
+                    //console.log(map);
+                    this.setState({map: map});
+                    //localStorage.setItem("map", map);
+                    console.log(this.state.map);
 
                     for (let j = 0; j < this.state.allFilms.length; j++) {
                         indexes.splice((this.state.allFilms[j]) - 1, 1);
@@ -502,7 +515,7 @@ class Directors extends React.Component {
                         <li className = 'directors-films__item' key={index + 100}>
                             <label className = 'directors-films__item-text' htmlFor={index + 100} onClick={this.onFreeFilmClick}>
                                 <input className = 'directors-films__input' id={index + 100} type="checkbox" name="first"></input>
-                                <span className = 'directors-films__span'><InnerFilm key={index + 100} url={film}/></span>
+                                <span className = 'directors-films__span'>{this.state.map[film]}</span>
                                 <h6 className = 'directors-films__index visually-hidden'>{indexes[index]}</h6>
                             </label>
                         </li>
@@ -574,6 +587,8 @@ class Directors extends React.Component {
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         const URL = document.querySelectorAll('.directors__href')[this.state.index].innerHTML;
+        const name = this.state.name;
+        console.log('Имя', name);
         console.log(URL);
         let userLogin = JSON.parse(localStorage.getItem('user'));
         
@@ -601,26 +616,53 @@ class Directors extends React.Component {
                 this.setState({ name: '' });
                 this.setState({ born: '' });
                 this.setState({ biography: '' });
+                //document.querySelector('.directors__item--active').classList.remove('directors__item--active');
+                const timeId = setInterval(this.callthebase, 400);
+                setTimeout(function() {
+                    clearInterval(timeId);
+                    
+                }, 900);
 
-                
+                const timing = setInterval(setTimeout(function() {
+                    let directorNumber;
+                    const count = document.querySelectorAll('.directors__item').length;
+                    
+                    const names = document.querySelectorAll('.directors__name');
+                    console.log(names);
+                    console.log('кол-во режиссеров', count);
+                    for (let i = 0; i < names.length; i++) {
+                        if (names[i].innerHTML === name) {
+                            directorNumber = i;
+                            console.log(directorNumber);
+                        }
+                    }
+                    (document.querySelectorAll('.directors__item')[directorNumber]).click();
+                    
+                }, 900));
+                setTimeout(function() {
+                    clearInterval(timing);
+                    
+                }, 1000);
               }
             }
         }.bind(this)
         
-        const timeId = setInterval(this.callthebase, 800);
-  
+        /*const timeId = setInterval(this.callthebase, 500);
         setTimeout(function() {
             clearInterval(timeId);
-        }, 900);
+            
+        }, 600);
 
-        document.querySelector('.directors-data').classList.add('visually-hidden');
-        document.querySelector('.directors__item--active').classList.remove('directors__item--active');
-        if (userLogin !== null) {
-            document.querySelector('.directors__delete-button').classList.add('visually-hidden');
-        }
-        if (document.querySelector('.directors-films')) {
-            document.querySelector('.directors-films').classList.add('visually-hidden');
-        }
+        const time = setInterval(setTimeout(this.getRelAndChosenFilms(sessionStorage.getItem("number")), 600), 1000);
+        setTimeout(function() {
+            clearInterval(time);
+            //this.onItemClick;
+        }, 2100);*/
+
+        
+
+        
+        
     }
 
     onDeleteClick = (e) => {

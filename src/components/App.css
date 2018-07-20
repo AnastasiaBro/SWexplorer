@@ -3358,7 +3358,7 @@
     width: 330px;
     position: relative;
     margin-top: 140px;
-    margin-bottom: 120px;
+    margin-bottom: 180px;
     margin-right: 50px;
 }
 
@@ -3584,7 +3584,7 @@
 
 .directors__button-container {
     position: absolute;
-    top: -80px;
+    bottom: -130px;
     width: 335px;
     align-items: center;
     display: flex;
@@ -3644,7 +3644,7 @@
     cursor: pointer;
     outline: none;
     position: absolute;
-    top: -80px;
+    bottom: -80px;
     transition: all 0.3s;
 }
 
@@ -3682,7 +3682,9 @@
 
 .directors-data__button {
     position: absolute;
-    top: -80px;
+    bottom: -80px;
+    
+    right: 0;
 }
 
 .directors-data__item-label {
@@ -3726,8 +3728,8 @@
     animation-duration: 0.6s;
     animation-name: appear;
     position: absolute;
-    top: -80px;
-    left: -132px;
+    bottom: -80px;
+    left: 0px;
 }
 
 .main-nav__login {
@@ -3908,4 +3910,8 @@
 .directors--absolute {
     position: absolute;
     bottom: 0px;
+}
+
+.directors-films__save-button {
+    left: 60px;
 }
