@@ -65,18 +65,19 @@ class HomePage extends React.Component {
         document.location.replace('/');
 
         const header = document.querySelector('#header');
-        header.querySelector('.home-page__title').classList.remove('visually-hidden');
-        header.querySelector('.home-page__text--blue').innerHTML = user.firstName + "!";
-        header.querySelector('.home-page__logout').innerHTML = "Logout";
-        header.querySelector('.home-page__logout').href = "/login";
+        document.location.replace('/');
+        //header.querySelector('.home-page__title').classList.remove('visually-hidden');
+        //header.querySelector('.home-page__text--blue').innerHTML = user.firstName + "!";
+        //header.querySelector('.home-page__logout').innerHTML = "Logout";
+        //header.querySelector('.home-page__logout').href = "/login";
         
-        const usersList = directors.map((director, index) =>
+        /*const usersList = directors.map((director, index) =>
             <li className = 'directors__item' key={index} onClick={this.onItemClick}>
                 <img className = 'directors__image' src={'http://localhost:7070/' + director.name + '.jpg'} alt="director"></img>
                 <p className = 'directors__item-text'>{director.name}</p>
                 <h6 className = 'directors__index visually-hidden'>{index}</h6>
             </li>
-        );
+        );*/
 
         return (
             <div>
@@ -156,6 +157,10 @@ function mapStateToProps(state) {
         users
     };
 }
+
+//window.onload = function() {
+    
+//}
 
 
 const connectedHomePage = connect(mapStateToProps)(HomePage);

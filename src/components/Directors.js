@@ -384,7 +384,7 @@ class Directors extends React.Component {
                     const filmsList = films.map((film, index) =>
                         <li className = 'directors-films__item' key={index}>
                             <label className = 'directors-films__item-text' htmlFor={index} onClick={this.onFilmClick}>
-                                <input className = 'directors-films__input' id={index} type="checkbox" name="first" defaultChecked></input>
+                                <input className = 'directors-films__input directors-films__input-chosen input-chosen--chosen' id={index} type="checkbox" name="first" defaultChecked></input>
                                 <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
                                 <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
                             </label>
@@ -514,7 +514,7 @@ class Directors extends React.Component {
                         const freeFilms = indexes.map((film, index) =>
                         <li className = 'directors-films__item' key={index + 100}>
                             <label className = 'directors-films__item-text' htmlFor={index + 100} onClick={this.onFreeFilmClick}>
-                                <input className = 'directors-films__input' id={index + 100} type="checkbox" name="first"></input>
+                                <input className = 'directors-films__input directors-films__input-free' id={index + 100} type="checkbox" name="first"></input>
                                 <span className = 'directors-films__span'>{this.state.map[film]}</span>
                                 <h6 className = 'directors-films__index visually-hidden'>{indexes[index]}</h6>
                             </label>
@@ -583,6 +583,10 @@ class Directors extends React.Component {
     }
 
     onSaveClick = (e) => {
+            
+        
+        
+
         e.preventDefault();
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
@@ -659,11 +663,11 @@ class Directors extends React.Component {
             //this.onItemClick;
         }, 2100);*/
 
-        
+    }
 
         
         
-    }
+    
 
     onDeleteClick = (e) => {
         e.preventDefault();
@@ -812,7 +816,30 @@ class Directors extends React.Component {
     }
 
     onFilmClick = (e) => {
+        e.preventDefault();
+        //const filmsChosen = document.querySelectorAll('.directors-films__input-chosen');
         let eventTarget;
+        if (e.target.classList == 'directors-films__input' || e.target.classList == 'directors-films__span' || e.target.classList == 'directors-films__item-text' || e.target == 'directors-films__inner-span') {
+            eventTarget = e.target.parentNode;
+            
+        } else if (e.target.classList == 'directors-films__item') {
+            eventTarget = e.target;
+            
+        } else if (e.target.classList == 'directors-films__inner-span') {
+            eventTarget = e.target.parentNode.parentNode.parentNode;
+            
+        }
+        console.log('Событие клик на выбранные фильмы ', eventTarget);
+        if (eventTarget.querySelector('.input-chosen--chosen')) {
+            eventTarget.querySelector('.directors-films__input-chosen').classList.remove('input-chosen--chosen');
+            eventTarget.querySelector('.directors-films__input-chosen').checked = false;
+        } else {
+            eventTarget.querySelector('.directors-films__input-chosen').classList.add('input-chosen--chosen');
+            eventTarget.querySelector('.directors-films__input-chosen').checked = true;
+        }
+
+    }
+        /*let eventTarget;
         console.log(e.target);
         
         if (e.target.classList == 'directors-films__input' || e.target.classList == 'directors-films__span' || e.target.classList == 'directors-films__item-text' || e.target == 'directors-films__inner-span') {
@@ -888,24 +915,122 @@ class Directors extends React.Component {
 
         
         
-    }
+    }*/
 
     onUpdateClick = (e) => {
-        const timeId = setInterval(this.callthebase, 500);
-        setTimeout(function() {
-            clearInterval(timeId);
-        }, 600);
+        function postRequests(callback) {
 
-        const time = setInterval(setTimeout(this.getRelAndChosenFilms(sessionStorage.getItem("number")), 1000), 1000);
-        setTimeout(function() {
-            clearInterval(time);
-            //this.onItemClick;
-        }, 2100);
+            const allItems = document.querySelectorAll('.directors-films__input');
+            console.log('все чекбоксы ', allItems);
+
+            for (var i = 0; i < allItems.length; i++) {
+                if (allItems[i].classList.contains('directors-films__input-chosen') && !allItems[i].classList.contains('input-chosen--chosen')) {
+                    let URL = 'http://192.168.148.30:8554/api/v2/films/' + allItems[i].nextSibling.nextSibling.innerHTML;
+                    console.log(URL);
+
+                    let userLogin = JSON.parse(localStorage.getItem('user'));
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', URL, true);
+
+                    console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+
+                    xhr.send();
+
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            console.log(xhr.status);
+                            if (xhr.status == 401 && userLogin.username === "admin") {
+                                console.log("no auth");
+                                window.getToken(URL, 'DELETE');
+                                    
+                            } else {
+                                //allItems[i].classList.add('checked');
+                            }
+                        }
+                    }
+                } else if (allItems[i].classList.contains('directors-films__input-free') && allItems[i].classList.contains('input-free--chosen')) {
+                    const URL = 'http://192.168.148.30:8554/api/v2/films/';
+                    console.log(URL);
+                    let userLogin = JSON.parse(localStorage.getItem('user'));
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', URL, true);
+
+                    console.log('dirId ', (document.querySelector('.directors__item--active').querySelector('.directors__href').innerHTML).substring(44));
+
+                    const body = JSON.stringify({
+                        id: allItems[i].nextSibling.nextSibling.innerHTML,
+                        directorId: (document.querySelector('.directors__item--active').querySelector('.directors__href').innerHTML).substring(44)
+                    });
+
+                    console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+
+                    xhr.send(body);
+
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            console.log(xhr.status);
+                            if (xhr.status == 401 && userLogin.username === "admin") {
+                                console.log("no auth");
+                                window.getToken(URL, 'POST');
+                            } else {
+                                //eventTarget.querySelector('.directors-films__input').classList.add('checked');
+                            }
+                        }
+                    }
+                }
+            }
+
+            //const timeId = setInterval(this.callthebase, 800);
+            //setTimeout(function() {
+            //    clearInterval(timeId);
+            //}, 900);
+
+            callback();
+        }
+        function callbackUpdate() {
+            //const time = setInterval(setTimeout(), 1000);
+            setTimeout(function() {
+                document.querySelector('.directors__item--active').click();
+            }, 1000);
+        }
+
+        postRequests(callbackUpdate);
+        //const freeItemsChosen = document.querySelectorAll('.directors-films__input-chosen--chosen');
     }
 
     onFreeFilmClick = (e) => {
-        //e.preventDefault();
+        e.preventDefault();
+        
         let eventTarget;
+        if (e.target.classList == 'directors-films__input' || e.target.classList == 'directors-films__span' || e.target.classList == 'directors-films__item-text' || e.target == 'directors-films__inner-span') {
+            eventTarget = e.target.parentNode;
+            
+        } else if (e.target.classList == 'directors-films__item') {
+            eventTarget = e.target;
+            
+        } else if (e.target.classList == 'directors-films__inner-span') {
+            eventTarget = e.target.parentNode.parentNode.parentNode;
+            
+        }
+        console.log('Событие клик на выбранные фильмы ', eventTarget);
+        if (eventTarget.querySelector('.input-free--chosen')) {
+            eventTarget.querySelector('.directors-films__input-free').classList.remove('input-free--chosen');
+            eventTarget.querySelector('.directors-films__input-free').checked = false;
+        } else {
+            eventTarget.querySelector('.directors-films__input-free').classList.add('input-free--chosen');
+            eventTarget.querySelector('.directors-films__input-free').checked = true;
+        }
+
+    }
+        //e.preventDefault();
+        /*let eventTarget;
         console.log(e.target);
         if (e.target.classList == 'directors-films__input' || e.target.classList == 'directors-films__span' || e.target.classList == 'directors-films__item-text' || e.target == 'directors-films__inner-span') {
             eventTarget = e.target.parentNode;
@@ -971,7 +1096,7 @@ class Directors extends React.Component {
                 }
             }
         }
-    }
+    }*/
 
 }
 

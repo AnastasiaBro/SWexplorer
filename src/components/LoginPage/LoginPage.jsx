@@ -97,7 +97,7 @@ class LoginPage extends React.Component {
         let userLogin = JSON.parse(localStorage.getItem('user'));
         if (!userLogin) {
             localStorage.setItem("token", "null");
-            document.cookie = "token=; path=/; expires=;";
+            document.cookie = "";
         }
 
         return (
