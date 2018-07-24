@@ -80,7 +80,7 @@ class App extends React.Component {
                 }
                         
                 onTextChanged(e){
-                    if(e.key == 'Enter') { 
+                    if(e.key === 'Enter') { 
                         var text = e.target.value.trim();   // удаляем пробелы
                         this.props.filter(text); // передаем введенный текст в родительский компонент
                         const filmItem = document.querySelectorAll('.film__item');
@@ -215,13 +215,13 @@ class App extends React.Component {
                 document.querySelectorAll('.main-nav__link')[1].classList.add('main-nav__link--active');
             }
 
-            const listResults = titles.map((titles, index) =>
+            /*const listResults = titles.map((titles, index) =>
                 <li className = 'film__item' key={index} onClick={this.handleClick}>
                     <img className = 'film__image' src={'http://localhost:7070/' + titles.toString() + '.jpg'} alt="film"></img>
                     <p className = 'film__item-text film__item-text--first'>{titles}</p>
                     <h6 className = 'visually-hidden'>{index}</h6>
                 </li>
-            );
+            );*/
 
             let userLogin = JSON.parse(localStorage.getItem('user'));
             //window.onload = function() {

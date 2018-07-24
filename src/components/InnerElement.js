@@ -15,22 +15,22 @@ function stroke(str) {
   const newStroke = str.substring(21, 23);
     switch(newStroke) {
       case 'pe':  return 'people';
-        break;
+        //break;
 
       case 'pl':  return 'planets';
-        break;
+        //break;
 
       case 'st':  return 'starships';
-        break;
+        //break;
 
       case 've':  return 'vehicles';
-        break;
+        //break;
 
       case 'sp':  return 'species';
-        break;
+        //break;
 
-      case 'fi':  return 'films';
-        break;
+      default:  return 'films';
+        //break;
     } 
 }
 

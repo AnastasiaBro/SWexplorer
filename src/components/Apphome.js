@@ -75,7 +75,7 @@ class Apphome extends React.Component {
   }
 
   renderWeather() {
-    const { data, isLoading, text, group } = this.state
+    const { data, isLoading } = this.state
     if (isLoading) {
       return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
     } else {
@@ -91,13 +91,13 @@ class Apphome extends React.Component {
           //console.log(this.state.group);
           //console.log(this.state.text);
 
-          const listResults = results.map((results, index) =>
+          /*const listResults = results.map((results, index) =>
               <li className = 'film__item' key={index}>
                   <img className = 'film__image' src={'http://localhost:7070/' + results.title + '.jpg'} alt="film"></img>
                   <p className = 'film__item-text film__item-text--first'>{results.title}</p>
                   <h6 className = 'visually-hidden'>{index}</h6>
               </li>
-          );
+          );*/
 
           /*class MainSearchPlugin extends React.Component{
              
@@ -133,7 +133,7 @@ class Apphome extends React.Component {
           let userLogin = JSON.parse(localStorage.getItem('user'));
           console.log(userLogin);
           //window.onload = function() {
-          if (document.cookie == "" || document.cookie == "token=") {
+          if (document.cookie === "" || document.cookie === "token=") {
             localStorage.setItem('user', null);
             let userLogin = JSON.parse(localStorage.getItem('user'));
           console.log(userLogin);
@@ -167,11 +167,11 @@ class Apphome extends React.Component {
 
             <div className='weather__container'>
               <div className = 'weather__block'>
-                <img className = 'weather__image' src={'http://localhost:7070/' + results[number].name + '.jpg'}></img>
-                <img className = 'weather__gif' src={WEATHER[variant]}></img>
+                <img className = 'weather__image' src={'http://localhost:7070/' + results[number].name + '.jpg'} alt='weather'></img>
+                <img className = 'weather__gif' src={WEATHER[variant]} alt='weather-gif'></img>
                 <div className = 'weather__bottom-line'>
                   <p className = 'weather__temp'>{TEMP[variant]}</p>
-                  <img className = 'weather__png' src={ICONS[variant]}></img>
+                  <img className = 'weather__png' src={ICONS[variant]} alt='icon'></img>
                   <span className = 'weather__desc'>{DESCRIPTION[variant]}</span>
                   <span className = 'weather__name'>{results[number].name}</span>
                 </div>
@@ -194,9 +194,9 @@ class Apphome extends React.Component {
               </div>
 
               <div className = 'cite__block'>
-                <img className = 'cite__bg' src='http://localhost:7070/Tatooine.jpg'></img>
+                <img className = 'cite__bg' src='http://localhost:7070/Tatooine.jpg' alt='tatooine'></img>
                 <div className = 'cite__right-block'>
-                  <img className = 'cite__image' src='http://localhost:7070/Yoda-cite.png'></img>
+                  <img className = 'cite__image' src='http://localhost:7070/Yoda-cite.png' alt='yoda'></img>
                 </div>
                 <p className = 'cite__text'>{CITES[citeRandom]}</p>
                 <p className = 'cite__film'>{FILMS[citeRandom]}</p>
@@ -242,11 +242,11 @@ class Apphome extends React.Component {
   
               <div className='weather__container'>
                 <div className = 'weather__block'>
-                  <img className = 'weather__image' src={'http://localhost:7070/' + results[number].name + '.jpg'}></img>
-                  <img className = 'weather__gif' src={WEATHER[variant]}></img>
+                  <img className = 'weather__image' src={'http://localhost:7070/' + results[number].name + '.jpg'} alt='weather'></img>
+                  <img className = 'weather__gif' src={WEATHER[variant]} alt='weather-gif'></img>
                   <div className = 'weather__bottom-line'>
                     <p className = 'weather__temp'>{TEMP[variant]}</p>
-                    <img className = 'weather__png' src={ICONS[variant]}></img>
+                    <img className = 'weather__png' src={ICONS[variant]} alt='icon'></img>
                     <span className = 'weather__desc'>{DESCRIPTION[variant]}</span>
                     <span className = 'weather__name'>{results[number].name}</span>
                   </div>
@@ -269,9 +269,9 @@ class Apphome extends React.Component {
                 </div>
   
                 <div className = 'cite__block'>
-                  <img className = 'cite__bg' src='http://localhost:7070/Tatooine.jpg'></img>
+                  <img className = 'cite__bg' src='http://localhost:7070/Tatooine.jpg' alt='tatooine'></img>
                   <div className = 'cite__right-block'>
-                    <img className = 'cite__image' src='http://localhost:7070/Yoda-cite.png'></img>
+                    <img className = 'cite__image' src='http://localhost:7070/Yoda-cite.png' alt='yoda'></img>
                   </div>
                   <p className = 'cite__text'>{CITES[citeRandom]}</p>
                   <p className = 'cite__film'>{FILMS[citeRandom]}</p>

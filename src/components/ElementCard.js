@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 import InnerElement from './InnerElement.js'
 import './App.css'
 
@@ -54,14 +54,14 @@ class ElementCard extends React.Component {
               for (var i = 0; i < this.state.data.results[0].films.length; i++) {
                 films[i] = this.state.data.results[0].films[i];
               }
-              for (var i = 0; i < this.state.data.results[0].vehicles.length; i++) {
-                vehicles[i] = this.state.data.results[0].vehicles[i];
+              for (var j = 0; j < this.state.data.results[0].vehicles.length; j++) {
+                vehicles[j] = this.state.data.results[0].vehicles[j];
               }
-              for (var i = 0; i < this.state.data.results[0].starships.length; i++) {
-                starships[i] = this.state.data.results[0].starships[i];
+              for (var k = 0; k < this.state.data.results[0].starships.length; k++) {
+                starships[k] = this.state.data.results[0].starships[k];
               }
-              for (var i = 0; i < this.state.data.results[0].species.length; i++) {
-                species[i] = this.state.data.results[0].species[i];
+              for (var m = 0; m < this.state.data.results[0].species.length; m++) {
+                species[m] = this.state.data.results[0].species[m];
               }
 
               function changeSymbol(str) {
@@ -137,7 +137,7 @@ class ElementCard extends React.Component {
 
                         <div className = 'card__center-block'>
                           <div className = 'card__image-container'>
-                            <img className = 'card__image' src={'http://localhost:7070/' + changeSymbol(data.results[0].name) + '.jpg'} />
+                            <img className = 'card__image' src={'http://localhost:7070/' + changeSymbol(data.results[0].name) + '.jpg'} alt='element' />
                             <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                           </div>
                         </div>
@@ -171,11 +171,11 @@ class ElementCard extends React.Component {
               const residents = [];
               const films = [];
 
-              for (var i = 0; i < this.state.data.results[0].films.length; i++) {
-                films[i] = this.state.data.results[0].films[i];
+              for (var l = 0; l < this.state.data.results[0].films.length; l++) {
+                films[l] = this.state.data.results[0].films[l];
               }
-              for (var i = 0; i < this.state.data.results[0].residents.length; i++) {
-                residents[i] = this.state.data.results[0].residents[i];
+              for (var n = 0; n < this.state.data.results[0].residents.length; n++) {
+                residents[n] = this.state.data.results[0].residents[n];
               }
 
               const filmsList = films.map((film, index) =>
@@ -234,7 +234,7 @@ class ElementCard extends React.Component {
 
                         <div className = 'card__center-block'>
                           <div className = 'card__image-container'>
-                            <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
+                            <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} alt='element' />
                             <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                           </div>
                         </div>
@@ -267,11 +267,11 @@ class ElementCard extends React.Component {
             const pilots = [];
             const films = [];
 
-            for (var i = 0; i < this.state.data.results[0].films.length; i++) {
-              films[i] = this.state.data.results[0].films[i];
+            for (var y = 0; y < this.state.data.results[0].films.length; y++) {
+              films[y] = this.state.data.results[0].films[y];
             }
-            for (var i = 0; i < this.state.data.results[0].pilots.length; i++) {
-              pilots[i] = this.state.data.results[0].pilots[i];
+            for (var z = 0; z < this.state.data.results[0].pilots.length; z++) {
+              pilots[z] = this.state.data.results[0].pilots[z];
             }
 
             const filmsList = films.map((film, index) =>
@@ -330,7 +330,7 @@ class ElementCard extends React.Component {
 
                       <div className = 'card__center-block'>
                         <div className = 'card__image-container'>
-                          <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
+                          <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} alt='element'/>
                           <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                         </div>
                       </div>
@@ -372,11 +372,11 @@ class ElementCard extends React.Component {
           const pilots = [];
           const films = [];
 
-          for (var i = 0; i < this.state.data.results[0].films.length; i++) {
-            films[i] = this.state.data.results[0].films[i];
+          for (var g = 0; g < this.state.data.results[0].films.length; g++) {
+            films[g] = this.state.data.results[0].films[g];
           }
-          for (var i = 0; i < this.state.data.results[0].pilots.length; i++) {
-            pilots[i] = this.state.data.results[0].pilots[i];
+          for (var d = 0; d < this.state.data.results[0].pilots.length; d++) {
+            pilots[d] = this.state.data.results[0].pilots[d];
           }
 
           const filmsList = films.map((film, index) =>
@@ -435,7 +435,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
+                        <img className = 'card__image-planet' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} alt='element'/>
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>
@@ -485,11 +485,11 @@ class ElementCard extends React.Component {
           const people = [];
           const films = [];
 
-          for (var i = 0; i < this.state.data.results[0].people.length; i++) {
-            people[i] = this.state.data.results[0].people[i];
+          for (var s = 0; s < this.state.data.results[0].people.length; s++) {
+            people[s] = this.state.data.results[0].people[s];
           }
-          for (var i = 0; i < this.state.data.results[0].films.length; i++) {
-            films[i] = this.state.data.results[0].films[i];
+          for (var a = 0; a < this.state.data.results[0].films.length; a++) {
+            films[a] = this.state.data.results[0].films[a];
           }
 
           const filmsList = films.map((film, index) =>
@@ -544,7 +544,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} />
+                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].name + '.jpg'} alt='element'/>
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].name}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>
@@ -589,20 +589,20 @@ class ElementCard extends React.Component {
           const species = [];
           const planets = [];
 
-          for (var i = 0; i < this.state.data.results[0].characters.length; i++) {
-            characters[i] = this.state.data.results[0].characters[i];
+          for (var v = 0; v < this.state.data.results[0].characters.length; v++) {
+            characters[v] = this.state.data.results[0].characters[v];
           }
-          for (var i = 0; i < this.state.data.results[0].vehicles.length; i++) {
-            vehicles[i] = this.state.data.results[0].vehicles[i];
+          for (var f = 0; f < this.state.data.results[0].vehicles.length; f++) {
+            vehicles[f] = this.state.data.results[0].vehicles[f];
           }
-          for (var i = 0; i < this.state.data.results[0].starships.length; i++) {
-            starships[i] = this.state.data.results[0].starships[i];
+          for (var h = 0; h < this.state.data.results[0].starships.length; h++) {
+            starships[h] = this.state.data.results[0].starships[h];
           }
-          for (var i = 0; i < this.state.data.results[0].species.length; i++) {
-            species[i] = this.state.data.results[0].species[i];
+          for (var r = 0; r < this.state.data.results[0].species.length; r++) {
+            species[r] = this.state.data.results[0].species[r];
           }
-          for (var i = 0; i < this.state.data.results[0].planets.length; i++) {
-            planets[i] = this.state.data.results[0].planets[i];
+          for (var t = 0; t < this.state.data.results[0].planets.length; t++) {
+            planets[t] = this.state.data.results[0].planets[t];
           }
 
 
@@ -655,7 +655,7 @@ class ElementCard extends React.Component {
 
                     <div className = 'card__center-block'>
                       <div className = 'card__image-container'>
-                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].title + '.jpg'} />
+                        <img className = 'card__image' src={'http://localhost:7070/' + data.results[0].title + '.jpg'} alt='element'/>
                         <p className = 'card__name'><span className = 'card__span'>[ </span>{data.results[0].title}<span className = 'card__span'> ]</span></p>
                       </div>
                     </div>

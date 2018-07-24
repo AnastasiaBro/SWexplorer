@@ -1,11 +1,11 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
-import InnerFilm from './InnerFilm';
+//import InnerFilm from './InnerFilm';
 import { Link } from 'react-router-dom';
 
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 
 //import { userActions } from './_actions';
 
@@ -39,7 +39,8 @@ class Directors extends React.Component {
             filmsList: '',
             freeFilms: '',
             allFilms: [],
-            map: {}
+            map: {},
+            indexes: []
         };
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeBorn = this.onChangeBorn.bind(this);
@@ -78,6 +79,50 @@ class Directors extends React.Component {
 
     componentDidMount() {
         this.callthebase();
+
+        const xhr4 = new XMLHttpRequest();
+        const URL4 = 'http://swapi.co/api/films'; //все индексы придут здесь - один запрос
+        xhr4.open('GET', URL4, true);
+        xhr4.send();
+    
+        xhr4.onreadystatechange = () => {
+            if (xhr4.readyState !== 4) {
+                return false
+            }
+    
+            if (xhr4.status !== 200) {
+                console.log(xhr4.status + ': ' + xhr4.statusText)
+            } else {
+                this.setState({
+                data4: JSON.parse(xhr4.responseText),
+                isLoading4: false,
+                })
+                const allTitles = [];
+                const indexes = [];
+                const titlesIndexes = [];
+
+                const map = {};
+                if (this.state.data4) {
+                    for (let i = 0; i < this.state.data4.results.length; i++) {
+                        allTitles.push(this.state.data4.results[i].title);
+                        //let key = this.state.data4.results[i].title;
+                        indexes.push(i + 1);
+                        titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
+
+                        map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
+                    }
+                    console.log(allTitles);
+                    console.log(indexes);
+                    //console.log(titlesIndexes);
+                    //console.log(map);
+                    this.setState({map: map});
+                    //localStorage.setItem("map", map);
+                    console.log(this.state.map);
+                    this.setState({indexes: indexes});
+                    console.log(this.state.indexes);
+                }
+            }
+        }
         
     }
 
@@ -122,7 +167,7 @@ class Directors extends React.Component {
     }
 
     renderDirectors () {
-      const { user, users } = this.props;
+      //const { user, users } = this.props;
       const { data } = this.state;
       if (data._embedded !== undefined) {
 
@@ -415,7 +460,7 @@ class Directors extends React.Component {
                         rel.push(films[i]._links.film.href.substring(40));
                     }
                     localStorage.setItem('relFilms', rel);
-                    console.log(localStorage.getItem('relFilms'));
+                    console.log('номер фильма выбранного режиссера ', localStorage.getItem('relFilms'));
                 //}
                 
             }
@@ -445,78 +490,43 @@ class Directors extends React.Component {
                     for (let i = 0; i < this.state.data3._embedded.films.length; i++) {
                         allFilms.push(Number(this.state.data3._embedded.films[i]._links.self.href.substring(40)));
                     }
-                    console.log(allFilms);
+                    //console.log(allFilms);
                     localStorage.setItem("allFilms", allFilms);
 
                     function compareNumeric(a, b) {
                         if (a > b) return -1;
                         if (a < b) return 1;
-                      }
-                      
-                      allFilms.sort(compareNumeric);
-                      console.log('все связанные фильмы', allFilms);
-                      this.setState({allFilms: allFilms});
-                      
-                }
-            }
-        }
-
-        const xhr4 = new XMLHttpRequest();
-        const URL4 = 'http://swapi.co/api/films'; //все индексы придут здесь - один запрос
-        xhr4.open('GET', URL4, true);
-        xhr4.send();
-    
-        xhr4.onreadystatechange = () => {
-            if (xhr4.readyState !== 4) {
-                return false
-            }
-    
-            if (xhr4.status !== 200) {
-                console.log(xhr4.status + ': ' + xhr4.statusText)
-            } else {
-                this.setState({
-                data4: JSON.parse(xhr4.responseText),
-                isLoading4: false,
-                })
-                const allTitles = [];
-                const indexes = [];
-                const titlesIndexes = [];
-
-                const map = new Object();
-                if (this.state.data4) {
-                    for (let i = 0; i < this.state.data4.results.length; i++) {
-                        allTitles.push(this.state.data4.results[i].title);
-                        let key = this.state.data4.results[i].title;
-                        indexes.push(i + 1);
-                        titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
-
-                        map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
-                    }
-                    console.log(allTitles);
-                    console.log(indexes);
-                    //console.log(titlesIndexes);
-                    //console.log(map);
-                    this.setState({map: map});
-                    //localStorage.setItem("map", map);
-                    console.log(this.state.map);
-
-                    for (let j = 0; j < this.state.allFilms.length; j++) {
-                        indexes.splice((this.state.allFilms[j]) - 1, 1);
-                        console.log(indexes);
                     }
                     
-                    console.log('все нужные индексы', indexes);
+                    allFilms.sort(compareNumeric);
+                    console.log('все связанные фильмы', allFilms);
+                    this.setState({allFilms: allFilms});
+
+
+                    let arrIndex = this.state.indexes.slice();
+                    //console.log('все индексы копия ', arrIndex);
+                    //console.log('все индексы ', this.state.indexes);
+                    for (let j = 0; j < this.state.allFilms.length; j++) {
+                        //console.log('все индексы ', this.state.indexes);
+                        
+                        //console.log('все индексы копия ', arrIndex);
+                        arrIndex.splice((this.state.allFilms[j]) - 1, 1);
+                        //console.log('все индексы ', this.state.indexes);
+                        //console.log(arrIndex);
+                    }
+                    
+                    console.log('все нужные индексы', arrIndex);
 
                     let userLogin = JSON.parse(localStorage.getItem('user'));
 
                     if (userLogin !== null && userLogin.username === "admin") {
 
-                        const freeFilms = indexes.map((film, index) =>
+                        const freeFilms = arrIndex.map((film, index) =>
                         <li className = 'directors-films__item' key={index + 100}>
                             <label className = 'directors-films__item-text' htmlFor={index + 100} onClick={this.onFreeFilmClick}>
                                 <input className = 'directors-films__input directors-films__input-free' id={index + 100} type="checkbox" name="first"></input>
                                 <span className = 'directors-films__span'>{this.state.map[film]}</span>
-                                <h6 className = 'directors-films__index visually-hidden'>{indexes[index]}</h6>
+                                <h6 className = 'directors-films__index visually-hidden'>{arrIndex[index]}</h6>
                             </label>
                         </li>
                         );
@@ -525,10 +535,18 @@ class Directors extends React.Component {
                         const freeFilms = '';
                         this.setState({freeFilms: freeFilms});
                     }
-                    
+                      
                 }
             }
         }
+
+        
+
+                
+                    
+                
+            
+        
     }
 
     onItemClick = (e) => {
@@ -577,7 +595,7 @@ class Directors extends React.Component {
             document.querySelector('.directors__add-button').classList.remove('directors__add-button--active');
         }
         sessionStorage.setItem("number", number);
-        const lalala = sessionStorage.getItem("number", number);
+        //const lalala = sessionStorage.getItem("number", number);
 
         this.getRelAndChosenFilms(sessionStorage.getItem("number"));
     }
@@ -604,15 +622,15 @@ class Directors extends React.Component {
             biography: this.state.biography
         });
         
-        xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\s*([^;]*).*$)|^.*$/, "$1"));
         xhr.setRequestHeader('Content-Type', 'application/json');
         console.log(body);
         xhr.send(body);
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
               console.log(xhr.status);
-              if (xhr.status == 401 && userLogin.username === "admin") {
+              if (xhr.status === 401 && userLogin.username === "admin") {
                 console.log("no auth");
                 window.getToken(URL, 'PUT');
                     
@@ -677,27 +695,33 @@ class Directors extends React.Component {
         const array = localStorage.getItem('relFilms').split(',');
         console.log(array);
 
+        function afterDel () {
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    if (xhr.status === 401 && userLogin.username === "admin") {
+                        console.log("no auth");
+                        window.getToken(URL, 'DELETE');
+                            
+                    } else {
+                        
+                    }
+                }
+            }
+        }
+
         if (array[0] !== '') {
             for (let j = 0; j < array.length; j++) {
                 const xhr = new XMLHttpRequest();
                 let URL = 'http://192.168.148.30:8554/api/v2/films/' + array[j];
                 xhr.open('DELETE', URL, true);
-                xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\s*([^;]*).*$)|^.*$/, "$1"));
 
                 xhr.send();
 
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4) {
-                        console.log(xhr.status);
-                        if (xhr.status == 401 && userLogin.username === "admin") {
-                            console.log("no auth");
-                            window.getToken(URL, 'DELETE');
-                                
-                        } else {
-                            
-                        }
-                    }
-                }
+                
+                afterDel();
+                
             }
         }
 
@@ -721,9 +745,9 @@ class Directors extends React.Component {
         xhr.send();
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 console.log(xhr.status);
-                if (xhr.status == 401 && userLogin.username === "admin") {
+                if (xhr.status === 401 && userLogin.username === "admin") {
                     console.log("no auth");
                     window.getToken(URL, 'DELETE');
                         
@@ -769,9 +793,9 @@ class Directors extends React.Component {
         xhr.send(body);
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
               console.log(xhr.status);
-              if (xhr.status == 401 && userLogin.username === "admin") {
+              if (xhr.status === 401 && userLogin.username === "admin") {
                 console.log("no auth");
                 window.getToken(URL, 'POST');
                     
@@ -804,7 +828,7 @@ class Directors extends React.Component {
     }
 
     onCloseAddTableClick = (e) => {
-        let userLogin = JSON.parse(localStorage.getItem('user'));
+        //let userLogin = JSON.parse(localStorage.getItem('user'));
         document.querySelector('.directors-add').classList.add('visually-hidden');
         document.querySelector('.directors__add-button').classList.remove('directors__add-button--active');
     }
@@ -940,9 +964,9 @@ class Directors extends React.Component {
                     xhr.send();
 
                     xhr.onreadystatechange = function() {
-                        if (xhr.readyState == 4) {
+                        if (xhr.readyState === 4) {
                             console.log(xhr.status);
-                            if (xhr.status == 401 && userLogin.username === "admin") {
+                            if (xhr.status === 401 && userLogin.username === "admin") {
                                 console.log("no auth");
                                 window.getToken(URL, 'DELETE');
                                     
@@ -974,9 +998,9 @@ class Directors extends React.Component {
                     xhr.send(body);
 
                     xhr.onreadystatechange = function() {
-                        if (xhr.readyState == 4) {
+                        if (xhr.readyState === 4) {
                             console.log(xhr.status);
-                            if (xhr.status == 401 && userLogin.username === "admin") {
+                            if (xhr.status === 401 && userLogin.username === "admin") {
                                 console.log("no auth");
                                 window.getToken(URL, 'POST');
                             } else {

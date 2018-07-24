@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Header from './Header';
+//import { connect } from 'react-redux';
+//import Header from './Header';
 
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 
-import { userActions } from './_actions';
+//import { userActions } from './_actions';
 
 
 class MapComponent extends React.Component {

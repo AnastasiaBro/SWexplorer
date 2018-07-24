@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import './App.css';
-import {render} from 'react-dom';
+//import {render} from 'react-dom';
 import UserForm from './UserForm.js';
 
 localStorage.setItem('update', '0');
@@ -165,7 +165,7 @@ class GetComments extends React.Component {
 
     renderComments() {
         
-        const { data } = this.state
+        //const { data } = this.state
         //console.log(data);
         
             const comments = [];
@@ -310,10 +310,10 @@ class GetComments extends React.Component {
                 }
               } else {
                 
-                for (var i = 0; i < this.state.data._embedded.comments.length; i++) {
+                for (var j = 0; j < this.state.data._embedded.comments.length; j++) {
                     
-                    if (this.state.data._embedded.comments[i].removed === false) {
-                      comments[i] = this.state.data._embedded.comments[i];
+                    if (this.state.data._embedded.comments[j].removed === false) {
+                      comments[j] = this.state.data._embedded.comments[j];
                     }
                     //console.log(buttons);
                 }
@@ -377,7 +377,7 @@ class GetComments extends React.Component {
       let userLogin = JSON.parse(localStorage.getItem('user'));
 
       const xhr = new XMLHttpRequest();
-      const index  = Number(e.target.querySelector('.index').innerHTML);
+      //const index  = Number(e.target.querySelector('.index').innerHTML);
       console.log("-------------------------------------"); 
       console.log('URL for delete ', URL);
       xhr.open('DELETE', URL, true);
@@ -389,9 +389,9 @@ class GetComments extends React.Component {
       xhr.send();
 
       xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
+        if (xhr.readyState === 4) {
           console.log(xhr.status);
-          if (xhr.status == 401 && userLogin.username === "admin") {
+          if (xhr.status === 401 && userLogin.username === "admin") {
             console.log("no auth");
             getToken(URL, 'DELETE');
                 
@@ -474,7 +474,7 @@ class GetComments extends React.Component {
     window.onscroll = function() {
       const block = document.querySelector('.review__left-block');
       const rightBlock = document.querySelector('.review__right-block');
-      const search = document.querySelector('.review__search-box');
+      //const search = document.querySelector('.review__search-box');
       //console.log(block);
       //const blockSourceBottom = block.getBoundingClientRect().bottom + window.pageYOffset;
       if (rightBlock !== null) {

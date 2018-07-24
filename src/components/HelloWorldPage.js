@@ -1,20 +1,20 @@
 //import React, { Component } from 'react';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Apphome from './Apphome';
 import App from './App';
-import AppLogin from './App/AppLogin';
+//import AppLogin from './App/AppLogin';
 import Directors from './Directors';
 import MapComponent from './MapComponent';
 import Header from './Header';
-import ElementCard from './ElementCard';
-import Review from './Review';
-import Footer from './Footer'
-import ReactDOM from 'react-dom';
-import index from './index';
+//import ElementCard from './ElementCard';
+//import Review from './Review';
+//import Footer from './Footer'
+//import ReactDOM from 'react-dom';
+//import index from './index';
 import Login from './Login';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 //import { store } from './_helpers';
-import { BrowserRouter, ReactRouterDOM, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 /*const {
   HashRouter,
@@ -71,8 +71,8 @@ if (userLogin !== null) {
 
 class HelloWorldPage extends Component {
   render() {
-    let userLogin = JSON.parse(localStorage.getItem('user'));
-    const header = document.querySelector('#header');
+    //let userLogin = JSON.parse(localStorage.getItem('user'));
+    //const header = document.querySelector('#header');
     //if (userLogin === null) {
     return (
         <div id="new-login">

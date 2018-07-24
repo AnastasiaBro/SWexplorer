@@ -2,9 +2,9 @@ import React from 'react'
 import {render} from 'react-dom'
 //import Header from './components/Header'
 import App from './components/App'
-import Apphome from './components/Apphome'
+//import Apphome from './components/Apphome'
 import Footer from './components/Footer'
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 
 document.querySelector('.body-style').classList.add('bg-films');
 document.querySelectorAll('.main-nav__item')[1].classList.add('main-nav__item--active');

@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from './../Header';
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import Header from './../Header';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 
 import { userActions } from '../_actions';
 
-function logoutClick (e) {
-    //document.querySelector('.body-style').classList.remove('bg-films');
-    window.location.reload(true);
-}
+//function logoutClick (e) {
+    //window.location.reload(true);
+//}
 
 const directors = [{"name": "George Lucas", "date": "May 14, 1944", "birthplace": "Modesto, California, U.S.", "biography": ""}, {"name": "Richard Marquand", "date": "Sept. 22, 1937", "birthplace": "Llanishen, Cardiff, Wales", "biography": ""}, {"name": "Irvin Kershner", "date": "Apr. 29, 1923", "birthplace": "Philadelphia, Pennsylvania, U.S.", "biography": ""}, {"name": "J. J. Abrams", "date": "June 27, 1966", "birthplace": "New York City, New York, U.S.", "biography": ""}];
 
@@ -64,7 +63,7 @@ class HomePage extends React.Component {
         //window.welcomeName = user.firstName;
         document.location.replace('/');
 
-        const header = document.querySelector('#header');
+        //const header = document.querySelector('#header');
         document.location.replace('/');
         //header.querySelector('.home-page__title').classList.remove('visually-hidden');
         //header.querySelector('.home-page__text--blue').innerHTML = user.firstName + "!";

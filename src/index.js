@@ -1,14 +1,14 @@
 import React from 'react'
-import {render} from 'react-dom'
-import Header from './components/Header'
-import App from './components/App'
-import Apphome from './components/Apphome'
+//import {render} from 'react-dom'
+//import Header from './components/Header'
+//import App from './components/App'
+//import Apphome from './components/Apphome'
 //import SearchField from './components/SearchField'
-import ElementCard from './components/ElementCard'
-import Review from './components/Review';
+//import ElementCard from './components/ElementCard'
+//import Review from './components/Review';
 import Footer from './components/Footer'
 import ReactDOM from 'react-dom';
-import HelloWorldPage from './components/HelloWorldPage';
+//import HelloWorldPage from './components/HelloWorldPage';
 import Routes from './Routes';
 import './components/App.css';
 

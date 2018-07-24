@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 
 class Person extends React.Component {
 	constructor(props) {

@@ -1,25 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
-import App from './App';
-import Apphome from './Apphome';
-import ElementCard from './ElementCard';
-import Review from './Review';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
+//import App from './App';
+//import Apphome from './Apphome';
+//import ElementCard from './ElementCard';
+//import Review from './Review';
 import './App.css';
 import { Link } from 'react-router-dom';
 
 //import React from 'react';
 //import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+//import { Provider } from 'react-redux';
 
-import { store } from './_helpers';
-import { AppLogin } from './App/AppLogin';
-import { userActions } from './_actions';
+//import { store } from './_helpers';
+//import { AppLogin } from './App/AppLogin';
+//import { userActions } from './_actions';
 
 
 // setup fake backend
 import { configureFakeBackend } from './_helpers';
-import { LoginPage } from './LoginPage/LoginPage';
+//import { LoginPage } from './LoginPage/LoginPage';
 configureFakeBackend();
 
 /*function showLink() {
@@ -34,7 +34,7 @@ configureFakeBackend();
 class Header extends React.Component {
 
     render() {
-      const { user, users } = this.props;
+      //const { user, users } = this.props;
       
         return (
             <div className="page-header__container">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+//import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './_helpers';
@@ -7,7 +7,7 @@ import { AppLogin } from './App/AppLogin';
 
 // setup fake backend
 import { configureFakeBackend } from './_helpers';
-import { LoginPage } from './LoginPage/LoginPage';
+//import { LoginPage } from './LoginPage/LoginPage';
 configureFakeBackend();
 
 

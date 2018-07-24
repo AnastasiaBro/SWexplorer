@@ -2,10 +2,10 @@ import React from 'react';
 //import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
 //import FilmsChoose from './FilmsChoose';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
-import ReactDOM from 'react-dom';
-import {render} from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {render} from 'react-dom';
 
 class InnerFilm extends React.Component {
     constructor(props) {

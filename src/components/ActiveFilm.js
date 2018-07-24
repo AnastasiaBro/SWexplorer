@@ -41,7 +41,7 @@ class ActiveFilm extends React.Component {
         }
       }
 	renderOneFilm(){
-        const { data, userToShow, elemToShow } = this.state
+        const { data } = this.state
 
 		if (data.results !== undefined) { //проверка, что data.results загружен
             const results = [];  //данные
@@ -52,28 +52,28 @@ class ActiveFilm extends React.Component {
                 opening[i] = this.state.data.results[i].opening_crawl.split('\r\n');
             }
 
-            const userToShow = this.state.data.results[window.id].characters[0];
-            const elemToShow = this.state.data.results[window.id].planets[0];
-            const allCharacters = this.state.data.results[window.id].characters;
-            const allPlanets = this.state.data.results[window.id].planets;
+            //const userToShow = this.state.data.results[window.id].characters[0];
+            //const elemToShow = this.state.data.results[window.id].planets[0];
+            //const allCharacters = this.state.data.results[window.id].characters;
+            //const allPlanets = this.state.data.results[window.id].planets;
             //console.log(userToShow);
 
             const listOpening = opening[window.id].map((results, index) =>
                 <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>.</span></li>
             );
 
-            const listCharacters = results[window.id].characters.map((characters, index) =>
-                <li className = 'character__item character__link' key={index}><span className = 'character__span visually-hidden'>{characters.replace(/\D+/g,"")}</span>{characters.replace(/\D+/g,"")}</li>
-            );
+            //const listCharacters = results[window.id].characters.map((characters, index) =>
+                //<li className = 'character__item character__link' key={index}><span className = 'character__span visually-hidden'>{characters.replace(/\D+/g,"")}</span>{characters.replace(/\D+/g,"")}</li>
+            //);
 
-            const listPlanets = results[window.id].planets.map((planets, index) =>
-                <li className = 'character__item' key={index}><a className = 'character__link' href={planets}>{planets.replace(/\D+/g,"")}</a></li>
-            );
+            //const listPlanets = results[window.id].planets.map((planets, index) =>
+                //<li className = 'character__item' key={index}><a className = 'character__link' href={planets}>{planets.replace(/\D+/g,"")}</a></li>
+            //);
             
             //<ul className = 'film__people-list character' id = 'people' onClick={this.personClick}>{listCharacters}</ul>
 			return (
 				  <div>
-            <img className = 'film__logo-central' src='http://localhost:7070/logo-star2.png'></img>
+            <img className = 'film__logo-central' src='http://localhost:7070/logo-star2.png' alt='logo'></img>
             <div className = 'film__logo-left'>
               <ul className = 'film__opening-list'>{listOpening}</ul>
               
