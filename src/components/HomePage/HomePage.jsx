@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 //import Header from './../Header';
 //import ReactDOM from 'react-dom';
 //import {render} from 'react-dom';
+/*eslint eqeqeq:0*/
 
 import { userActions } from '../_actions';
 
@@ -59,7 +60,7 @@ class HomePage extends React.Component {
 
     render() {
         
-        const { user, users } = this.props;
+        const { users } = this.props;
         //window.welcomeName = user.firstName;
         document.location.replace('/');
 

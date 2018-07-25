@@ -135,31 +135,37 @@ class ActiveFilm extends React.Component {
     }
 
     peopleClick = (e) => {
-      this.state.point = 0;
+      //this.state.point = 0;
+      this.setState({point: 0}, rendAll);
+      //sessionStorage.setItem("point", 0);
       document.querySelector('.film__first-window').classList.remove('visually-hidden');
       document.querySelector('.film__second-window').classList.add('visually-hidden');
       console.log(window.id);
       console.log(this.state.data.results[window.id].characters);
       
       console.log(this.state.point);
-
-      render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} point={this.state.point} />, document.getElementById('first-window-line'));
+      function rendAll() {
+        render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} point={this.state.point} />, document.getElementById('first-window-line'));
+      }
     }
+
 
     closePeopleList = (e) => {
       document.querySelector('.film__first-window').classList.add('visually-hidden');
     }
 
     planetsClick = (e) => {
-      this.state.planetPoint = 0;
+      //this.state.planetPoint = 0;
+      this.setState({planetPoint: 0}, rendAllPlanets);
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
       document.querySelector('.film__first-window').classList.add('visually-hidden');
       console.log(window.id);
       console.log(this.state.data.results[window.id].planets);
 
       console.log(this.state.planetPoint);
-
-      render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
+      function rendAllPlanets() {
+        render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
+      }
     }
 
     closePlanetsList = (e) => {
@@ -172,13 +178,16 @@ class ActiveFilm extends React.Component {
       console.log('было', this.state.point);
       
       if ((this.state.point + 1) === Number(arrLength)) {
-        this.state.point = 0;
+        //this.state.point = 0;
+        this.setState({point: 0}, rend);
       } else {
-        this.state.point = this.state.point + 1;
+        //this.state.point = this.state.point + 1;
+        this.setState({point: this.state.point + 1}, rend);
       }
       console.log('стало', this.state.point);
-
-      render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+      function rend() {
+        render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+      }
     }
 
     personLeftClick = (e) => {
@@ -187,13 +196,17 @@ class ActiveFilm extends React.Component {
       console.log('было', this.state.point);
 
       if ((this.state.point - 1) === -1) {
-        this.state.point = Number(arrLength) - 1;
+        //this.state.point = Number(arrLength) - 1;
+        this.setState({point: Number(arrLength) - 1}, rend);
       } else {
-        this.state.point = this.state.point -1;
+        //this.state.point = this.state.point -1;
+        this.setState({point: this.state.point - 1}, rend);
       }
       console.log('стало', this.state.point);
       
-      render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+      function rend() {
+        render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+      }
     }
 
     planetRightClick = (e) => {
@@ -201,15 +214,18 @@ class ActiveFilm extends React.Component {
       const arrLength = this.state.data.results[window.id].planets.length;
       console.log('было', this.state.planetPoint);
       if ((this.state.planetPoint + 1) === Number(arrLength)) {
-        this.state.planetPoint = 0;
+        //this.state.planetPoint = 0;
+        this.setState({planetPoint: 0}, rendPlanet);
       } else {
-        this.state.planetPoint = this.state.planetPoint + 1;
+        //this.state.planetPoint = this.state.planetPoint + 1;
         console.log('state ' + this.state.planetPoint);
         console.log('props ' + this.props.planetPoint);
+        this.setState({planetPoint: this.state.planetPoint + 1}, rendPlanet);
       }
       console.log('стало', this.state.planetPoint);
-
-      render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+      function rendPlanet() {
+        render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+      }
     }
 
     planetLeftClick = (e) => {
@@ -217,13 +233,17 @@ class ActiveFilm extends React.Component {
       const arrLength = this.state.data.results[window.id].planets.length;
       console.log('было', this.state.planetPoint);
       if ((this.state.planetPoint - 1) === -1) {
-        this.state.planetPoint = Number(arrLength) - 1;
+        //this.state.planetPoint = Number(arrLength) - 1;
+        this.setState({planetPoint: Number(arrLength) - 1}, rendPlanet);
       } else {
-        this.state.planetPoint = this.state.planetPoint -1;
+        //this.state.planetPoint = this.state.planetPoint -1;
+        this.setState({planetPoint: this.state.planetPoint -1}, rendPlanet);
       }
       console.log('стало', this.state.planetPoint);
 
-      render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+      function rendPlanet() {
+        render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+      }
     }
     
     render() {

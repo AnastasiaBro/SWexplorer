@@ -2,6 +2,8 @@ import React from 'react';
 //import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
 //import InnerFilm from './InnerFilm';
+/*eslint no-useless-escape: 0*/
+
 import { Link } from 'react-router-dom';
 
 //import ReactDOM from 'react-dom';
@@ -97,29 +99,29 @@ class Directors extends React.Component {
                 data4: JSON.parse(xhr4.responseText),
                 isLoading4: false,
                 })
-                const allTitles = [];
+                //const allTitles = [];
                 const indexes = [];
                 const titlesIndexes = [];
 
                 const map = {};
-                if (this.state.data4) {
+                if (this.state.data4.results !== undefined) {
                     for (let i = 0; i < this.state.data4.results.length; i++) {
-                        allTitles.push(this.state.data4.results[i].title);
+                        //allTitles.push(this.state.data4.results[i].title);
                         //let key = this.state.data4.results[i].title;
                         indexes.push(i + 1);
                         titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
 
                         map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
                     }
-                    console.log(allTitles);
-                    console.log(indexes);
+                    //console.log(allTitles);
+                    //console.log(indexes);
                     //console.log(titlesIndexes);
                     //console.log(map);
                     this.setState({map: map});
                     //localStorage.setItem("map", map);
                     console.log(this.state.map);
                     this.setState({indexes: indexes});
-                    console.log(this.state.indexes);
+                    //console.log(this.state.indexes);
                 }
             }
         }
@@ -205,6 +207,7 @@ class Directors extends React.Component {
       //}
 
       //let userLogin = JSON.parse(localStorage.getItem('user'));
+      /*eslint eqeqeq:0*/
       let userLogin = JSON.parse(localStorage.getItem('user'));
 
       if (userLogin !== null && userLogin.username === "admin") {
@@ -252,11 +255,13 @@ class Directors extends React.Component {
                               </div>
 
                           </div>
-
-                          <form onSubmit={this.onSaveAddClick} className="directors-add visually-hidden">
+        
+                          <div className="directors-add visually-hidden">
+                          <button className="directors-add__close" onClick={this.onCloseAddTableClick}><span className="visually-hidden">Close</span></button>
+                          <form onSubmit={this.onSaveAddClick} >
                               <div className="directors-data__row directors-data__row--wide">
                                   <p className="directors-data__text">Add a new director:</p>
-                                  <button className="directors-add__close" onClick={this.onCloseAddTableClick}><span className="visually-hidden">Close</span></button>
+                                  
                               </div>
                               <div className="directors-data__list">
                                   <div className="directors-data__row">
@@ -274,6 +279,7 @@ class Directors extends React.Component {
                               </div>
                               <button className="directors-add__save" type="submit">Save changes</button>
                           </form>
+                          </div>
 
                           <div className="directors-films visually-hidden">
                               <div className="directors-data__row directors-data__row--wide">
@@ -287,7 +293,7 @@ class Directors extends React.Component {
                                   <p className="directors-data__text">Choose films:</p>
                               </div>
                               <ul className = "directors-films__list">{this.state.freeFilms}</ul>
-                              <p className="directors__text directors__count directors--absolute">chosen films by all directors: {this.state.allFilms.length}</p>
+                              <p className="directors__text directors__count directors--absolute">chosen films by all directors: <span className="blue">{this.state.allFilms.length}</span></p>
                               <button className="directors__button directors-data__button directors-films__save-button" onClick={this.onUpdateClick}>Save chosen films</button>
                             
                           </div>
@@ -466,7 +472,7 @@ class Directors extends React.Component {
             }
         }
 
-
+        
         
         const xhr3 = new XMLHttpRequest();
         const URL3 = 'http://192.168.148.30:8554/api/v2/films'; //отсюда придут связанные фильмы
@@ -540,8 +546,14 @@ class Directors extends React.Component {
             }
         }
 
-        
-
+        //if (this.state.map === {}) {
+            //document.querySelector('.directors__item--active').click();
+        //}
+        if (document.querySelectorAll('.directors-films__span')[0] && (document.querySelectorAll('.directors-films__span')[0].innerHTML == "")) {
+            //setTimeout(function() {
+                document.querySelector('.directors__item--active').click();
+            //}, 1000);
+        }
                 
                     
                 
@@ -550,28 +562,33 @@ class Directors extends React.Component {
     }
 
     onItemClick = (e) => {
+        //if (this.state.map !== {}) {
+        
         console.log('-------------------------------------------');
         console.log(e);
+        e.preventDefault();
         let eventTag = "";
         
-            sessionStorage.setItem("tar", e.target);
-            this.setState({filmsList: []});
-            this.setState({data2: []});
-            console.log('Старые ссылки на фильмы', this.state.data2._embedded);
-            document.querySelector('.directors-data').classList.remove('visually-hidden');
-            if (document.querySelector('.directors-films')) {
-                document.querySelector('.directors-films').classList.remove('visually-hidden');
-            }
-            if (document.querySelector('.directors__item--active')) {
-                document.querySelector('.directors__item--active').classList.remove('directors__item--active');
-            }
-            
-            
-            if (e.target.classList == "directors__item") {
-                eventTag = e.target;
-            } else {
-                eventTag = e.target.parentNode;
-            }
+        sessionStorage.setItem("tar", e.target);
+        this.setState({filmsList: []});
+        this.setState({data2: []});
+        console.log('Старые ссылки на фильмы', this.state.data2._embedded);
+        document.querySelector('.directors-data').classList.remove('visually-hidden');
+        if (document.querySelector('.directors-films')) {
+            document.querySelector('.directors-films').classList.remove('visually-hidden');
+        }
+        if (document.querySelector('.directors__item--active')) {
+            document.querySelector('.directors__item--active').classList.remove('directors__item--active');
+        }
+        
+        
+        if (e.target.classList == 'directors__item') {
+            eventTag = e.target;
+            console.log('Событие ', eventTag);
+        } else {
+            eventTag = e.target.parentNode;
+            console.log('Событие ', eventTag);
+        }
         
 
         eventTag.classList.add('directors__item--active');
@@ -598,6 +615,7 @@ class Directors extends React.Component {
         //const lalala = sessionStorage.getItem("number", number);
 
         this.getRelAndChosenFilms(sessionStorage.getItem("number"));
+    //}
     }
 
     onSaveClick = (e) => {
@@ -622,7 +640,7 @@ class Directors extends React.Component {
             biography: this.state.biography
         });
         
-        xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\s*([^;]*).*$)|^.*$/, "$1"));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
         xhr.setRequestHeader('Content-Type', 'application/json');
         console.log(body);
         xhr.send(body);
@@ -685,7 +703,7 @@ class Directors extends React.Component {
 
         
         
-    
+    /*eslint no-loop-func: 0*/
 
     onDeleteClick = (e) => {
         e.preventDefault();
@@ -695,32 +713,28 @@ class Directors extends React.Component {
         const array = localStorage.getItem('relFilms').split(',');
         console.log(array);
 
-        function afterDel () {
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    if (xhr.status === 401 && userLogin.username === "admin") {
-                        console.log("no auth");
-                        window.getToken(URL, 'DELETE');
-                            
-                    } else {
-                        
-                    }
-                }
-            }
-        }
-
         if (array[0] !== '') {
             for (let j = 0; j < array.length; j++) {
                 const xhr = new XMLHttpRequest();
                 let URL = 'http://192.168.148.30:8554/api/v2/films/' + array[j];
                 xhr.open('DELETE', URL, true);
-                xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\s*([^;]*).*$)|^.*$/, "$1"));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
 
                 xhr.send();
 
                 
-                afterDel();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        console.log(xhr.status);
+                        if (xhr.status === 401 && userLogin.username === "admin") {
+                            console.log("no auth");
+                            window.getToken(URL, 'DELETE');
+                                
+                        } else {
+                            
+                        }
+                    }
+                }
                 
             }
         }
@@ -822,7 +836,7 @@ class Directors extends React.Component {
             document.querySelector('.directors-films').classList.add('visually-hidden');
         }
         document.querySelector('.directors__item--active').classList.remove('directors__item--active');
-        if (userLogin.username === "admin") {
+        if (userLogin !== null && userLogin.username === "admin") {
           document.querySelector('.directors__delete-button').classList.add('visually-hidden');
         }
     }
@@ -831,6 +845,12 @@ class Directors extends React.Component {
         //let userLogin = JSON.parse(localStorage.getItem('user'));
         document.querySelector('.directors-add').classList.add('visually-hidden');
         document.querySelector('.directors__add-button').classList.remove('directors__add-button--active');
+        this.setState({ addName: '' });
+        this.setState({ addBorn: '' });
+        this.setState({ addBiography: '' });
+        for (let i = 0; i < 3; i++) {
+            document.querySelectorAll('.input-required')[i].required = false;
+        }
     }
 
     onLoginClick = (e) => {
@@ -969,7 +989,10 @@ class Directors extends React.Component {
                             if (xhr.status === 401 && userLogin.username === "admin") {
                                 console.log("no auth");
                                 window.getToken(URL, 'DELETE');
-                                    
+                                
+                                setTimeout(function() {
+                                    document.querySelector('.directors__item--active').click();
+                                }, 1000);
                             } else {
                                 //allItems[i].classList.add('checked');
                             }
@@ -1003,6 +1026,9 @@ class Directors extends React.Component {
                             if (xhr.status === 401 && userLogin.username === "admin") {
                                 console.log("no auth");
                                 window.getToken(URL, 'POST');
+                                setTimeout(function() {
+                                    document.querySelector('.directors__item--active').click();
+                                }, 1000);
                             } else {
                                 //eventTarget.querySelector('.directors-films__input').classList.add('checked');
                             }

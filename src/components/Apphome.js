@@ -131,9 +131,10 @@ class Apphome extends React.Component {
           }
 
           let userLogin = JSON.parse(localStorage.getItem('user'));
-          console.log(userLogin);
+          /*eslint no-useless-escape: 0*/
+          //console.log(userLogin);
           //window.onload = function() {
-          if (document.cookie === "" || document.cookie === "token=") {
+          if (document.cookie === "" || document.cookie === "token=" || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") {
             localStorage.setItem('user', null);
             let userLogin = JSON.parse(localStorage.getItem('user'));
           console.log(userLogin);

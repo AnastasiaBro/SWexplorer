@@ -5,6 +5,7 @@ import './App.css';
 import UserForm from './UserForm.js';
 
 localStorage.setItem('update', '0');
+/*eslint no-useless-escape: 0*/
 
 function getDate(date) {
     //var dateStr = "2014-02-26T05:39:27.885Z";
@@ -64,7 +65,7 @@ class GetComments extends React.Component {
         data: [],
         isLoading: false,
         link: 0,
-        URL: ((document.cookie === "" || document.cookie === "token=" || document.cookie === "token=undefined; fresh=undefined") || localStorage.getItem('user') === null) ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
+        URL: ((document.cookie === "" || document.cookie === "token=" || document.cookie === "token=undefined; fresh=undefined") || localStorage.getItem('user') === null || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") ? 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=0&size=5' : 'http://192.168.148.30:8554/api/v2/comments?page=0&size=5',
         update: 0,
         updateData: '',
         name: 'Бумеранг не запущен'
@@ -253,11 +254,13 @@ class GetComments extends React.Component {
                           
                           {listComments}
                           <div className="review__button-container">
+                            <button className="review__button review__button-first" type="button" onClick={this.onReviewFirstClick}><span className="visually-hidden">First</span></button>
                             <button className="review__button review__button-prev" type="button" onClick={this.onReviewPrevClick}><span className="visually-hidden">Previous</span></button>
                             <div className="review__page-container">
                               <p className="review__page">{this.state.data.page.number + 1}</p>
                             </div>
                             <button className="review__button review__button-next" type="button" onClick={this.onReviewNextClick}><span className="visually-hidden">Next</span></button>
+                            <button className="review__button review__button-last" type="button" onClick={this.onReviewLastClick}><span className="visually-hidden">Last</span></button>
                             <div className="review__page-total-container">
                               <p className="review__page-total">Total pages: <span className="review__page-total--yellow">{this.state.data.page.totalPages}</span></p>
                             </div>
@@ -294,11 +297,13 @@ class GetComments extends React.Component {
                       <div className='review__right-block' id="reviews-comments">
                           {listComments}
                           <div className="review__button-container">
+                            <button className="review__button review__button-first" type="button" onClick={this.onReviewFirstClick}><span className="visually-hidden">First</span></button>
                             <button className="review__button review__button-prev" type="button" onClick={this.onReviewPrevClick}><span className="visually-hidden">Previous</span></button>
                             <div className="review__page-container">
                               <p className="review__page">{this.state.data.page.number + 1}</p>
                             </div>
                             <button className="review__button review__button-next" type="button" onClick={this.onReviewNextClick}><span className="visually-hidden">Next</span></button>
+                            <button className="review__button review__button-last" type="button" onClick={this.onReviewLastClick}><span className="visually-hidden">Last</span></button>
                             <div className="review__page-total-container">
                               <p className="review__page-total">Total pages: <span className="review__page-total--yellow">{this.state.data.page.totalPages}</span></p>
                             </div>
@@ -353,11 +358,13 @@ class GetComments extends React.Component {
                     <div className='review__right-block' id="reviews-comments">
                           {listComments}
                           <div className="review__button-container">
+                            <button className="review__button review__button-first" type="button" onClick={this.onReviewFirstClick}><span className="visually-hidden">First</span></button>
                             <button className="review__button review__button-prev" type="button" onClick={this.onReviewPrevClick}><span className="visually-hidden">Previous</span></button>
                             <div className="review__page-container">
                               <p className="review__page">{this.state.data.page.number + 1}</p>
                             </div>
                             <button className="review__button review__button-next" type="button" onClick={this.onReviewNextClick}><span className="visually-hidden">Next</span></button>
+                            <button className="review__button review__button-last" type="button" onClick={this.onReviewLastClick}><span className="visually-hidden">Last</span></button>
                             <div className="review__page-total-container">
                               <p className="review__page-total">Total pages: <span className="review__page-total--yellow">{this.state.data.page.totalPages}</span></p>
                             </div>
@@ -418,6 +425,22 @@ class GetComments extends React.Component {
     onReviewNextClick = (e) => {
       if (this.state.data._links.next) {
         this.setState({URL: this.state.data._links.next.href}, this.callthebase.bind(this));
+        //console.log(this.state.data._links.next.href);
+        //console.log(this.state.URL);
+      }
+    }
+
+    onReviewFirstClick = (e) => {
+      if (this.state.data._links.prev) {
+        this.setState({URL: this.state.data._links.first.href}, this.callthebase.bind(this));
+        //console.log(this.state.data._links.last.href);
+        //console.log(this.state.URL);
+      }
+    }
+
+    onReviewLastClick = (e) => {
+      if (this.state.data._links.next) {
+        this.setState({URL: this.state.data._links.last.href}, this.callthebase.bind(this));
         //console.log(this.state.data._links.next.href);
         //console.log(this.state.URL);
       }

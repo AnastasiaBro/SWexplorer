@@ -2755,7 +2755,7 @@
     height: 48px;
     display: flex;
     background-color: #000;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .review__page {
@@ -2798,7 +2798,7 @@
     transition: 0.3s;
 }
 
-.review__button-prev, .review__button-next {
+.review__button-prev, .review__button-next, .review__button-first, .review__button-last {
     width: 50px;
     background-color: #000;
     border: 1px solid rgb(70, 70, 70);
@@ -2812,6 +2812,36 @@
     content: '';
     height: 20px;
     left: 20px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
+.review__button-first:before {
+    border: 1px solid white;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 15px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
+.review__button-first:after {
+    border: 1px solid white;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 25px;
     position: absolute;
     top: 14px;
     width: 20px;
@@ -2834,6 +2864,36 @@
     transition: 0.3s;
 }
 
+.review__button-last:before {
+    border: 1px solid white;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 3px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(135deg);
+    transition: 0.3s;
+}
+
+.review__button-last:after {
+    border: 1px solid white;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 13px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(135deg);
+    transition: 0.3s;
+}
+
 .review__button-prev:hover:before {
     border: 1px solid black;
     border-bottom: none;
@@ -2849,6 +2909,36 @@
     transition: 0.3s;
 }
 
+.review__button-first:hover:before {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 15px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
+.review__button-first:hover:after {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 25px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
 .review__button-next:hover:before {
     border: 1px solid black;
     border-bottom: none;
@@ -2857,6 +2947,36 @@
     content: '';
     height: 20px;
     left: 8px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(135deg);
+    transition: 0.2s;
+}
+
+.review__button-last:hover:before {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 3px;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+    transform: rotate(135deg);
+    transition: 0.2s;
+}
+
+.review__button-last:hover:after {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    box-sizing: border-box;
+    content: '';
+    height: 20px;
+    left: 13px;
     position: absolute;
     top: 14px;
     width: 20px;
@@ -3424,12 +3544,24 @@
     background-color: white;
 }
 
-.directors-data__close, .directors-add__close {
+.directors-data__close {
     width: 30px;
     height: 30px;
     background-color: transparent;
     border: none;
     position: relative;
+    margin-top: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.directors-add__close {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 0px;
     margin-top: 12px;
     outline: none;
     cursor: pointer;
@@ -3459,12 +3591,23 @@
     transition: 0.3s;
 }
 
-.directors-data__close:hover, .directors-add__close:hover {
+.directors-data__close:hover {
     width: 30px;
     height: 30px;
     background-color: #14e7ffa2;
     border: none;
     position: relative;
+    margin-top: 12px;
+    outline: none;
+}
+
+.directors-add__close:hover {
+    width: 30px;
+    height: 30px;
+    background-color: #14e7ffa2;
+    border: none;
+    position: absolute;
+    right: 0px;
     margin-top: 12px;
     outline: none;
 }
@@ -3475,6 +3618,17 @@
     background-color: #14e7ff69;
     border: none;
     position: relative;
+    margin-top: 12px;
+    outline: none;
+}
+
+.directors-add__close:active {
+    width: 30px;
+    height: 30px;
+    background-color: #14e7ff69;
+    border: none;
+    position: absolute;
+    right: 0px;
     margin-top: 12px;
     outline: none;
 }
@@ -3914,4 +4068,8 @@
 
 .directors-films__save-button {
     left: 78px;
+}
+
+.blue {
+    color: #14fff3e1;
 }
