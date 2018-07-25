@@ -6,8 +6,10 @@ import './App.css';
 import {render} from 'react-dom';
 //import Header from './Header.js';
 //import Search from './Search.js'
-window.id = 0; //изначально первый элемент с данными
-window.item = 0;
+//window.id = 0; //изначально первый элемент с данными
+sessionStorage.setItem('filmId', 0);
+sessionStorage.setItem('item', 0);
+//window.item = 0;
 //document.querySelector('.body-style').classList.add('bg-films');
 //document.querySelector('.main-nav__item--active').classList.remove('main-nav__item--active');
 //document.querySelector('.main-nav__link--active').classList.remove('main-nav__link--active');
@@ -26,6 +28,7 @@ class App extends React.Component {
       }
     }
     componentDidMount() {
+      this._isMounted = true;
       const xhr = new XMLHttpRequest();
       const URL = 'https://swapi.co/api/films';
       xhr.open('GET', URL, true);
@@ -40,12 +43,18 @@ class App extends React.Component {
         if (xhr.status !== 200) {
           console.log(xhr.status + ': ' + xhr.statusText)
         } else {
-          this.setState({
-            data: JSON.parse(xhr.responseText),
-            isLoading: false,
-          })
+          if (this._isMounted) {
+            this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+            })
+          }
         }
       }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     renderFilms() {
@@ -85,10 +94,12 @@ class App extends React.Component {
                         this.props.filter(text); // передаем введенный текст в родительский компонент
                         const filmItem = document.querySelectorAll('.film__item');
                         if (document.querySelector('.film__item--active')) {
-                          filmItem[window.item].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+                          filmItem[Number(sessionStorage.getItem('item'))].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
                         }
-                        window.id = 0;
-                        window.item = 0;
+                        //window.id = 0;
+                        sessionStorage.setItem('filmId', 0);
+                        sessionStorage.setItem('item', 0);
+                        //window.item = 0;
                         if (document.querySelector('.film__appear')) {
                           document.querySelector('.film__appear').classList.add('visually-hidden');
                         }
@@ -184,22 +195,26 @@ class App extends React.Component {
                     }
               
                     windowFilmInfo.classList.add('visually-hidden'); //прячем элемент с данными о фильме
-                    filmItem[window.item].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
+                    filmItem[Number(sessionStorage.getItem('item'))].classList.remove('film__item--active'); //обводка вокруг старого элемента убирается
               
                     if (e.target.parentNode.className === 'film__item') {
-                        window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
-                        window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
-                        this.setState({id: window.id});
+                        //window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
+                        sessionStorage.setItem('filmId', e.target.parentNode.querySelectorAll('h6')[0].innerText);
+                        //window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
+                        sessionStorage.setItem('item', e.target.parentNode.querySelectorAll('h6')[1].innerText);
+                        this.setState({id: Number(sessionStorage.getItem('filmId'))});
                         windowFilmInfo.classList.remove('visually-hidden');  //показываем данные выбранного элемента
-                        filmItem[window.item].classList.add('film__item--active'); //обводка
+                        filmItem[Number(sessionStorage.getItem('item'))].classList.add('film__item--active'); //обводка
                         
                     } 
                     else if (e.target.className === 'film__item') {
-                        window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
-                        window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
-                        this.setState({id: window.id});
+                        //window.id = e.target.parentNode.querySelectorAll('h6')[0].innerText; //номер элемента
+                        sessionStorage.setItem('filmId', e.target.parentNode.querySelectorAll('h6')[0].innerText);
+                        //window.item = e.target.parentNode.querySelectorAll('h6')[1].innerText;
+                        sessionStorage.setItem('item', e.target.parentNode.querySelectorAll('h6')[1].innerText);
+                        this.setState({id: Number(sessionStorage.getItem('filmId'))});
                         windowFilmInfo.classList.remove('visually-hidden');
-                        filmItem[window.item].classList.add('film__item--active');
+                        filmItem[Number(sessionStorage.getItem('item'))].classList.add('film__item--active');
                     }
                   }
             }

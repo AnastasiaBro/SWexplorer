@@ -19,6 +19,7 @@ class Search extends React.Component {
       }
 
       componentDidMount() {
+        this._isMounted = true;
         const xhr = new XMLHttpRequest();
         console.log(this.props.name);
         xhr.open('GET', 'https://swapi.co/api/' + this.props.variant + '/?search=' + this.props.name, true);
@@ -33,16 +34,23 @@ class Search extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
-            this.setState({
-              data: JSON.parse(xhr.responseText),
-              isLoading: false,
-            })
+            if (this._isMounted) {
+              this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+              })
+            }
           }
         }
       }
-	renderOneElement(){
+
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
+	    renderOneElement(){
         const { data } = this.state
-        if (data.results !== undefined) {
+        if (data.results !== undefined && this._isMounted) {
             //const names = [];  //данные
             //const urls = [];
             const results = [];

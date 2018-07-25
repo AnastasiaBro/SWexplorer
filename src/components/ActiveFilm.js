@@ -16,6 +16,7 @@ class ActiveFilm extends React.Component {
         }
       }
       componentDidMount() {
+        this._isMounted = true;
         const xhr = new XMLHttpRequest();
         const URL = 'https://swapi.co/api/films';
         xhr.open('GET', URL, true);
@@ -31,19 +32,26 @@ class ActiveFilm extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
-            this.setState({
-              data: JSON.parse(xhr.responseText),
-              isLoading: false,
-              point: 0,
-              planetPoint: 0
-            })
+            if (this._isMounted) {
+              this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+                point: 0,
+                planetPoint: 0
+              })
+            }
           }
         }
       }
+
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
 	renderOneFilm(){
         const { data } = this.state
 
-		if (data.results !== undefined) { //проверка, что data.results загружен
+		if (data.results !== undefined && this._isMounted) { //проверка, что data.results загружен
             const results = [];  //данные
             const opening = [];  //чтобы абзацами вывести титры
 
@@ -58,8 +66,8 @@ class ActiveFilm extends React.Component {
             //const allPlanets = this.state.data.results[window.id].planets;
             //console.log(userToShow);
 
-            const listOpening = opening[window.id].map((results, index) =>
-                <li className = 'film__opening' key={index}>{opening[window.id][index]}<span className = 'transparent'>.</span></li>
+            const listOpening = opening[Number(sessionStorage.getItem('filmId'))].map((results, index) =>
+                <li className = 'film__opening' key={index}>{opening[Number(sessionStorage.getItem('filmId'))][index]}<span className = 'transparent'>.</span></li>
             );
 
             //const listCharacters = results[window.id].characters.map((characters, index) =>
@@ -109,15 +117,15 @@ class ActiveFilm extends React.Component {
               <div className = 'film__logo-container'>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Episode number:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].episode_id}</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[Number(sessionStorage.getItem('filmId'))].episode_id}</p>
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Director:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].director}</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[Number(sessionStorage.getItem('filmId'))].director}</p>
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Release date:</p>
-                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[window.id].release_date.substring(0,4)}</p>
+                  <p className = 'film__logo-right-text film__logo-right-text--appear'>{results[Number(sessionStorage.getItem('filmId'))].release_date.substring(0,4)}</p>
                 </div>
                 <div className = 'film__logo-row'>
                   <p className = 'film__logo-right-text'>Characters:</p>
@@ -140,12 +148,12 @@ class ActiveFilm extends React.Component {
       //sessionStorage.setItem("point", 0);
       document.querySelector('.film__first-window').classList.remove('visually-hidden');
       document.querySelector('.film__second-window').classList.add('visually-hidden');
-      console.log(window.id);
-      console.log(this.state.data.results[window.id].characters);
+      console.log(Number(sessionStorage.getItem('filmId')));
+      console.log(this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters);
       
       console.log(this.state.point);
       function rendAll() {
-        render(<Person user={this.state.data.results[window.id].characters[0]} characters={this.state.data.results[window.id].characters} point={this.state.point} />, document.getElementById('first-window-line'));
+        render(<Person user={this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters[0]} characters={this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters} point={this.state.point} />, document.getElementById('first-window-line'));
       }
     }
 
@@ -159,12 +167,12 @@ class ActiveFilm extends React.Component {
       this.setState({planetPoint: 0}, rendAllPlanets);
       document.querySelector('.film__second-window').classList.remove('visually-hidden');
       document.querySelector('.film__first-window').classList.add('visually-hidden');
-      console.log(window.id);
-      console.log(this.state.data.results[window.id].planets);
+      console.log(Number(sessionStorage.getItem('filmId')));
+      console.log(this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets);
 
       console.log(this.state.planetPoint);
       function rendAllPlanets() {
-        render(<Planet elem={this.state.data.results[window.id].planets[0]} planets={this.state.data.results[window.id].planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
+        render(<Planet elem={this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets[0]} planets={this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets} planetPoint={this.state.planetPoint} />, document.getElementById('second-window-line'));
       }
     }
 
@@ -174,7 +182,7 @@ class ActiveFilm extends React.Component {
 
     personRightClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      const arrLength = this.state.data.results[window.id].characters.length;
+      const arrLength = this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters.length;
       console.log('было', this.state.point);
       
       if ((this.state.point + 1) === Number(arrLength)) {
@@ -186,13 +194,13 @@ class ActiveFilm extends React.Component {
       }
       console.log('стало', this.state.point);
       function rend() {
-        render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+        render(<Person user={this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters[this.state.point]} />, document.getElementById('first-window-line'));
       }
     }
 
     personLeftClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('first-window-line'));
-      const arrLength = this.state.data.results[window.id].characters.length;
+      const arrLength = this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters.length;
       console.log('было', this.state.point);
 
       if ((this.state.point - 1) === -1) {
@@ -205,13 +213,13 @@ class ActiveFilm extends React.Component {
       console.log('стало', this.state.point);
       
       function rend() {
-        render(<Person user={this.state.data.results[window.id].characters[this.state.point]} />, document.getElementById('first-window-line'));
+        render(<Person user={this.state.data.results[Number(sessionStorage.getItem('filmId'))].characters[this.state.point]} />, document.getElementById('first-window-line'));
       }
     }
 
     planetRightClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
-      const arrLength = this.state.data.results[window.id].planets.length;
+      const arrLength = this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets.length;
       console.log('было', this.state.planetPoint);
       if ((this.state.planetPoint + 1) === Number(arrLength)) {
         //this.state.planetPoint = 0;
@@ -224,13 +232,13 @@ class ActiveFilm extends React.Component {
       }
       console.log('стало', this.state.planetPoint);
       function rendPlanet() {
-        render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+        render(<Planet elem={this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
       }
     }
 
     planetLeftClick = (e) => {
       ReactDOM.unmountComponentAtNode(document.getElementById('second-window-line'));
-      const arrLength = this.state.data.results[window.id].planets.length;
+      const arrLength = this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets.length;
       console.log('было', this.state.planetPoint);
       if ((this.state.planetPoint - 1) === -1) {
         //this.state.planetPoint = Number(arrLength) - 1;
@@ -242,7 +250,7 @@ class ActiveFilm extends React.Component {
       console.log('стало', this.state.planetPoint);
 
       function rendPlanet() {
-        render(<Planet elem={this.state.data.results[window.id].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
+        render(<Planet elem={this.state.data.results[Number(sessionStorage.getItem('filmId'))].planets[this.state.planetPoint]} />, document.getElementById('second-window-line'));
       }
     }
     

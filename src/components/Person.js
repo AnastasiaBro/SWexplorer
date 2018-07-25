@@ -19,6 +19,7 @@ class Person extends React.Component {
       }
 
       componentDidMount() {
+        this._isMounted = true;
         const xhr = new XMLHttpRequest();
         console.log('это новый url ', this.props.user);
         xhr.open('GET', this.props.user, true);
@@ -33,16 +34,23 @@ class Person extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
-            this.setState({
-              data: JSON.parse(xhr.responseText),
-              isLoading: false,
-            })
+            if (this._isMounted) {
+              this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+              })
+            }
           }
         }
       }
-	renderOnePerson(){
+
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
+	    renderOnePerson() {
         const { data } = this.state
-        if (data !== undefined) {
+        if (data !== undefined && this._isMounted) {
 
           function changeSymbol(str) {
             if (str !== undefined) {

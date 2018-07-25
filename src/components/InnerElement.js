@@ -44,6 +44,7 @@ class InnerElement extends React.Component {
       }
 
       componentDidMount() {
+        this._isMounted = true;
         if (this.props.url !== null) {
           const xhr = new XMLHttpRequest();
           //console.log(this.props.name);
@@ -61,16 +62,23 @@ class InnerElement extends React.Component {
             if (xhr.status !== 200) {
               console.log(xhr.status + ': ' + xhr.statusText)
             } else {
-              this.setState({
-                data: JSON.parse(xhr.responseText),
-                isLoading: false,
-              })
+              if (this._isMounted) {
+                this.setState({
+                  data: JSON.parse(xhr.responseText),
+                  isLoading: false,
+                })
+              }
             }
           }
         }
       }
 
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
 	  renderName(){
+      if (this._isMounted) {
         const { data } = this.state
           //console.log(this.props.url);
           if (this.props.url === null) {
@@ -82,6 +90,7 @@ class InnerElement extends React.Component {
           } else {
               return (<p className = 'card__text'><span className = 'card__link' onClick={this.onNameClick}>{data.name}</span></p>)
           }
+      }
     }
 
     onNameClick = (e) => {

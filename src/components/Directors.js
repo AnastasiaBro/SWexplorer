@@ -80,6 +80,7 @@ class Directors extends React.Component {
     }
 
     componentDidMount() {
+        this._isMounted = true;
         this.callthebase();
 
         const xhr4 = new XMLHttpRequest();
@@ -95,37 +96,43 @@ class Directors extends React.Component {
             if (xhr4.status !== 200) {
                 console.log(xhr4.status + ': ' + xhr4.statusText)
             } else {
-                this.setState({
-                data4: JSON.parse(xhr4.responseText),
-                isLoading4: false,
-                })
-                //const allTitles = [];
-                const indexes = [];
-                const titlesIndexes = [];
+                if (this._isMounted) {
+                    this.setState({
+                    data4: JSON.parse(xhr4.responseText),
+                    isLoading4: false,
+                    })
+                    //const allTitles = [];
+                    const indexes = [];
+                    const titlesIndexes = [];
 
-                const map = {};
-                if (this.state.data4.results !== undefined) {
-                    for (let i = 0; i < this.state.data4.results.length; i++) {
-                        //allTitles.push(this.state.data4.results[i].title);
-                        //let key = this.state.data4.results[i].title;
-                        indexes.push(i + 1);
-                        titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
+                    const map = {};
+                    if (this.state.data4.results !== undefined) {
+                        for (let i = 0; i < this.state.data4.results.length; i++) {
+                            //allTitles.push(this.state.data4.results[i].title);
+                            //let key = this.state.data4.results[i].title;
+                            indexes.push(i + 1);
+                            titlesIndexes.push(Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1)));
 
-                        map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
+                            map[Number(this.state.data4.results[i].url.substring(27, this.state.data4.results[i].url.length - 1))] = this.state.data4.results[i].title + "";
+                        }
+                        //console.log(allTitles);
+                        //console.log(indexes);
+                        //console.log(titlesIndexes);
+                        //console.log(map);
+                        this.setState({map: map});
+                        //localStorage.setItem("map", map);
+                        console.log(this.state.map);
+                        this.setState({indexes: indexes});
+                        //console.log(this.state.indexes);
                     }
-                    //console.log(allTitles);
-                    //console.log(indexes);
-                    //console.log(titlesIndexes);
-                    //console.log(map);
-                    this.setState({map: map});
-                    //localStorage.setItem("map", map);
-                    console.log(this.state.map);
-                    this.setState({indexes: indexes});
-                    //console.log(this.state.indexes);
                 }
             }
         }
         
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     onChangeName = (e) => {

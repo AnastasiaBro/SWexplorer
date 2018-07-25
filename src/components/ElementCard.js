@@ -19,6 +19,7 @@ class ElementCard extends React.Component {
       }
 
       componentDidMount() {
+        this._isMounted = true;
         const xhr = new XMLHttpRequest();
         //console.log(this.props.name);
         //console.log(this.props.variant);
@@ -34,16 +35,23 @@ class ElementCard extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
-            this.setState({
-              data: JSON.parse(xhr.responseText),
-              isLoading: false,
-            })
+            if (this._isMounted) {
+              this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+              })
+            }
           }
         }
       }
-	renderElement(){
+
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
+	    renderElement() {
         const { data } = this.state
-        if (data.results !== undefined) {
+        if (data.results !== undefined && this._isMounted) {
             if (this.props.variant === 'people') {
 
               const films = [];
@@ -83,6 +91,8 @@ class ElementCard extends React.Component {
               const speciesList = species.map((species, index) =>
                 <InnerElement key={index} url={species}/>
               );
+
+              if (this._isMounted) {
 
               return (
                   
@@ -164,6 +174,8 @@ class ElementCard extends React.Component {
                     </div>
                   
                 )
+              }
+              
           } else
 
           if (this.props.variant === 'planets') {

@@ -22,6 +22,7 @@ class Planet extends React.Component {
       }
 
       componentDidMount() {
+        this._isMounted = true;
         const xhr = new XMLHttpRequest();
         //console.log(window.personId);
         //const URL = 'https://swapi.co/api/people/';
@@ -39,17 +40,24 @@ class Planet extends React.Component {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
             console.log('HERE');
-            this.setState({
-              data: JSON.parse(xhr.responseText),
-              isLoading: false,
-            })
+            if (this._isMounted) {
+              this.setState({
+                data: JSON.parse(xhr.responseText),
+                isLoading: false,
+              })
+            }
           
           }
         }
       }
-	renderOnePlanet(){
+
+      componentWillUnmount() {
+        this._isMounted = false;
+      }
+
+	    renderOnePlanet(){
         const { data } = this.state
-        if (data !== undefined) {
+        if (data !== undefined && this._isMounted) {
             
 
             return (

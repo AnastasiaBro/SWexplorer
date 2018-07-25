@@ -52,6 +52,7 @@ class Apphome extends React.Component {
     }
   }
   componentDidMount() {
+    this._isMounted = true;
     const xhr = new XMLHttpRequest();
     const URL = URLS[getRandomInt(0, 1)];
     xhr.open('GET', URL, true);
@@ -66,12 +67,18 @@ class Apphome extends React.Component {
       if (xhr.status !== 200) {
         console.log(xhr.status + ': ' + xhr.statusText)
       } else {
-        this.setState({
-          data: JSON.parse(xhr.responseText),
-          isLoading: false,
-        })
+        if (this._isMounted) {
+          this.setState({
+            data: JSON.parse(xhr.responseText),
+            isLoading: false,
+          })
+        }
       }
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   renderWeather() {
@@ -79,7 +86,7 @@ class Apphome extends React.Component {
     if (isLoading) {
       return <p className = 'first-text'>A long time ago in a galaxy far,<br></br> far away...</p> // рисуем прелоадер
     } else {
-      if (data.results !== undefined) { //проверка, что data.results загружен
+      if (data.results !== undefined && this._isMounted) { //проверка, что data.results загружен
           const results = [];  //данные
           
           //console.log(number);
@@ -320,13 +327,15 @@ class Apphome extends React.Component {
   }
 
   render() {
-    return (
-      <div className='Apphome'>
-        <div className='weather'>
-          {this.renderWeather()}
+    //if (this._isMounted) {
+      return (
+        <div className='Apphome'>
+          <div className='weather'>
+            {this.renderWeather()}
+          </div>
         </div>
-      </div>
-    )
+      )
+    //}
   }
 }
 
