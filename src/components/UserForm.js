@@ -38,7 +38,7 @@ class UserForm extends React.Component {
         xhr.send(body);
         console.log('запощено!');
         this.props.updateData(this.state.name);
-        console.log('----------------------------');
+        //console.log('----------------------------');
 
         this.setState({user: ''});
         this.setState({comment: ''});

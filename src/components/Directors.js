@@ -130,7 +130,7 @@ class Directors extends React.Component {
                         //console.log(map);
                         this.setState({map: map});
                         //localStorage.setItem("map", map);
-                        console.log('mapping ', this.state.map);
+                        //console.log('mapping ', this.state.map);
                         this.setState({indexes: indexes});
                         //console.log(this.state.indexes);
                     }
@@ -483,10 +483,10 @@ class Directors extends React.Component {
         this.setState({filmsList: []});
         this.setState({freeFilms: []});
         this.setState({data2: []});
-        console.log('number of dir ', number);
+        //console.log('number of dir ', number);
         const xhr = new XMLHttpRequest();
         const URL = document.querySelectorAll('.directors__films')[number].innerHTML; //это фильмы конкретного режиссера
-        console.log('URL для вывода фильмов', URL);
+        //console.log('URL для вывода фильмов', URL);
         xhr.open('GET', URL, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -505,50 +505,52 @@ class Directors extends React.Component {
                 })
                 
                 //console.log('Пришли новые ссылки на фильмы', this.state.data2._embedded.films);
-                const films = this.state.data2._embedded.films;
+                if (this.state.data2._embedded) {
+                    const films = this.state.data2._embedded.films;
 
-                const rel = [];
+                    const rel = [];
 
-                let userLogin = JSON.parse(localStorage.getItem('user'));
+                    let userLogin = JSON.parse(localStorage.getItem('user'));
 
-                if (userLogin !== null && userLogin.username === "admin") {
-                
-                    const filmsList = films.map((film, index) =>
-                        <li className = 'directors-films__item' key={index}>
-                            <label className = 'directors-films__item-text' htmlFor={index} onClick={this.onFilmClick}>
-                                <input className = 'directors-films__input directors-films__input-chosen input-chosen--chosen' id={index} type="checkbox" name="first" defaultChecked></input>
-                                <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
-                                <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
-                            </label>
-                        </li>
-                    );
+                    if (userLogin !== null && userLogin.username === "admin") {
                     
-                    
-                    this.setState({filmsList: filmsList});
-                } else {
-                    const filmsList = films.map((film, index) =>
-                        <li className = 'directors-films__item' key={index}>
-                            <label className = 'directors-films__item-text' htmlFor={index}>
-                                <input className = 'directors-films__input' id={index} type="checkbox" name="first" checked readOnly></input>
-                                <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
-                                <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
-                            </label>
-                        </li>
-                    );
-                    
-                    
-                    this.setState({filmsList: filmsList});
-                }
-                
-                //console.log(this.state.data2._embedded);
-
-                //if (films._links) {
-                    for (let i = 0; i < films.length; i++) {
-                        rel.push(films[i]._links.film.href.substring(40));
+                        const filmsList = films.map((film, index) =>
+                            <li className = 'directors-films__item' key={index}>
+                                <label className = 'directors-films__item-text' htmlFor={index} onClick={this.onFilmClick}>
+                                    <input className = 'directors-films__input directors-films__input-chosen input-chosen--chosen' id={index} type="checkbox" name="first" defaultChecked></input>
+                                    <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
+                                    <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
+                                </label>
+                            </li>
+                        );
+                        
+                        
+                        this.setState({filmsList: filmsList});
+                    } else {
+                        const filmsList = films.map((film, index) =>
+                            <li className = 'directors-films__item' key={index}>
+                                <label className = 'directors-films__item-text' htmlFor={index}>
+                                    <input className = 'directors-films__input' id={index} type="checkbox" name="first" checked readOnly></input>
+                                    <span className = 'directors-films__span'>{this.state.map[film._links.film.href.substring(40)]}</span>
+                                    <h6 className = 'directors-films__index visually-hidden'>{film._links.film.href.substring(40)}</h6>
+                                </label>
+                            </li>
+                        );
+                        
+                        
+                        this.setState({filmsList: filmsList});
                     }
-                    localStorage.setItem('relFilms', rel);
-                    console.log('номер фильма выбранного режиссера ', localStorage.getItem('relFilms'));
-                //}
+                    
+                    //console.log(this.state.data2._embedded);
+
+                    //if (films._links) {
+                        for (let i = 0; i < films.length; i++) {
+                            rel.push(films[i]._links.film.href.substring(40));
+                        }
+                        localStorage.setItem('relFilms', rel);
+                        //console.log('номер фильма выбранного режиссера ', localStorage.getItem('relFilms'));
+                    //}
+                }
                 
             }
         }
@@ -586,7 +588,7 @@ class Directors extends React.Component {
                     }
                     
                     allFilms.sort(compareNumeric);
-                    console.log('все занятые фильмы', allFilms);
+                    //console.log('все занятые фильмы', allFilms);
                     this.setState({allFilms: allFilms});
 
 
@@ -602,7 +604,7 @@ class Directors extends React.Component {
                         //console.log(arrIndex);
                     }
                     
-                    console.log('все свободные индексы', arrIndex);
+                    //console.log('все свободные индексы', arrIndex);
 
                     let userLogin = JSON.parse(localStorage.getItem('user'));
 
@@ -641,7 +643,7 @@ class Directors extends React.Component {
                     }
                     //console.log(this.state.filmsList);
                     //console.log(this.state.freeList);
-                }, 1500);
+                }, 1000);
                 this.setState({isResizeble: true});
             }
         //}      
@@ -650,7 +652,7 @@ class Directors extends React.Component {
     onItemClick = (e) => {
         //if (this.state.map !== {}) {
         
-        console.log('-------------------------------------------');
+        //console.log('-------------------------------------------');
         //console.log(e);
         e.preventDefault();
         let eventTag = "";
@@ -716,8 +718,8 @@ class Directors extends React.Component {
         xhr.responseType = 'json';
         const URL = document.querySelectorAll('.directors__href')[this.state.index].innerHTML;
         const name = this.state.name;
-        console.log('director ', name);
-        console.log(URL);
+        //console.log('director ', name);
+        //console.log(URL);
         let userLogin = JSON.parse(localStorage.getItem('user'));
         
         
@@ -730,7 +732,7 @@ class Directors extends React.Component {
         
         xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
         xhr.setRequestHeader('Content-Type', 'application/json');
-        console.log(body);
+        //console.log(body);
         xhr.send(body);
 
         xhr.onreadystatechange = function() {
@@ -753,15 +755,15 @@ class Directors extends React.Component {
 
                 const timing = setInterval(setTimeout(function() {
                     let directorNumber;
-                    const count = document.querySelectorAll('.directors__item').length;
+                    //const count = document.querySelectorAll('.directors__item').length;
                     
                     const names = document.querySelectorAll('.directors__name');
                     //console.log(names);
-                    console.log('кол-во режиссеров ', count);
+                    //console.log('кол-во режиссеров ', count);
                     for (let i = 0; i < names.length; i++) {
                         if (names[i].innerHTML === name) {
                             directorNumber = i;
-                            console.log(directorNumber);
+                            //console.log(directorNumber);
                         }
                     }
                     (document.querySelectorAll('.directors__item')[directorNumber]).click();
@@ -797,9 +799,9 @@ class Directors extends React.Component {
         e.preventDefault();
         this.getRelAndChosenFilms(sessionStorage.getItem("number"));
 
-        console.log(localStorage.getItem("relFilms"));
+        //console.log(localStorage.getItem("relFilms"));
         const array = localStorage.getItem('relFilms').split(',');
-        console.log(array);
+        //console.log(array);
 
         if (array[0] !== '') {
             for (let j = 0; j < array.length; j++) {
@@ -836,12 +838,12 @@ class Directors extends React.Component {
 
         const xhr = new XMLHttpRequest();
         //const index  = Number(e.target.querySelector('.index').innerHTML);
-        console.log("-------------------------------------"); 
-        console.log('URL for delete ', URL);
+        //console.log("-------------------------------------"); 
+        //console.log('URL for delete ', URL);
         xhr.open('DELETE', URL, true);
 
-        console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-        console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+        //console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+        //console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
         xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
 
         xhr.send();
@@ -891,7 +893,7 @@ class Directors extends React.Component {
         
         xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
         xhr.setRequestHeader('Content-Type', 'application/json');
-        console.log(body);
+        //console.log(body);
         xhr.send(body);
 
         xhr.onreadystatechange = function() {
@@ -961,7 +963,7 @@ class Directors extends React.Component {
             eventTarget = e.target.parentNode.parentNode.parentNode;
             
         }
-        console.log('Событие клик на выбранные фильмы ', eventTarget);
+        //console.log('Событие клик на выбранные фильмы ', eventTarget);
         if (eventTarget.querySelector('.input-chosen--chosen')) {
             eventTarget.querySelector('.directors-films__input-chosen').classList.remove('input-chosen--chosen');
             eventTarget.querySelector('.directors-films__input-chosen').checked = false;
@@ -1053,20 +1055,20 @@ class Directors extends React.Component {
         function postRequests(callback) {
 
             const allItems = document.querySelectorAll('.directors-films__input');
-            console.log('все чекбоксы ', allItems);
+            //console.log('все чекбоксы ', allItems);
 
             for (var i = 0; i < allItems.length; i++) {
                 if (allItems[i].classList.contains('directors-films__input-chosen') && !allItems[i].classList.contains('input-chosen--chosen')) {
                     let URL = 'http://192.168.148.30:8554/api/v2/films/' + allItems[i].nextSibling.nextSibling.innerHTML;
-                    console.log(URL);
+                    //console.log(URL);
 
                     let userLogin = JSON.parse(localStorage.getItem('user'));
 
                     const xhr = new XMLHttpRequest();
                     xhr.open('DELETE', URL, true);
 
-                    console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-                    console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    //console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    //console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
                     xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
 
                     xhr.send();
@@ -1088,21 +1090,21 @@ class Directors extends React.Component {
                     }
                 } else if (allItems[i].classList.contains('directors-films__input-free') && allItems[i].classList.contains('input-free--chosen')) {
                     const URL = 'http://192.168.148.30:8554/api/v2/films/';
-                    console.log(URL);
+                    //console.log(URL);
                     let userLogin = JSON.parse(localStorage.getItem('user'));
 
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', URL, true);
 
-                    console.log('dirId ', (document.querySelector('.directors__item--active').querySelector('.directors__href').innerHTML).substring(44));
+                    //console.log('dirId ', (document.querySelector('.directors__item--active').querySelector('.directors__href').innerHTML).substring(44));
 
                     const body = JSON.stringify({
                         id: allItems[i].nextSibling.nextSibling.innerHTML,
                         directorId: (document.querySelector('.directors__item--active').querySelector('.directors__href').innerHTML).substring(44)
                     });
 
-                    console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-                    console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    //console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+                    //console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
                     xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
                     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -1157,7 +1159,7 @@ class Directors extends React.Component {
             eventTarget = e.target.parentNode.parentNode.parentNode;
             
         }
-        console.log('Событие клик на выбранные фильмы ', eventTarget);
+        //console.log('Событие клик на выбранные фильмы ', eventTarget);
         if (eventTarget.querySelector('.input-free--chosen')) {
             eventTarget.querySelector('.directors-films__input-free').classList.remove('input-free--chosen');
             eventTarget.querySelector('.directors-films__input-free').checked = false;

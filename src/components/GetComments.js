@@ -95,18 +95,18 @@ class GetComments extends React.Component {
       if (this.state.data.page && this.state.data.page.totalElements % 5 === 0) {
         if (userLogin === null || userLogin.username !== "admin") {
           localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments/search/removedIsFalse?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
-          console.log(localStorage.getItem("lastPage"));
+          //console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
-          console.log('третий стейт - обычный', this.state.URL);
-          console.log('последняя страница', this.state.data._links.last.href);
+          //console.log('третий стейт - обычный', this.state.URL);
+          //console.log('последняя страница', this.state.data._links.last.href);
         } else {
           localStorage.setItem("lastPage", 'http://192.168.148.30:8554/api/v2/comments?page=' + (Number(this.state.data.page.totalPages) + '&size=5'));
-          console.log(localStorage.getItem("lastPage"));
+          //console.log(localStorage.getItem("lastPage"));
           this.setState({URL: localStorage.getItem("lastPage")});
 
-          console.log('третий стейт - админ', this.state.URL);
-          console.log('последняя страница', this.state.data._links.last.href);
+          //console.log('третий стейт - админ', this.state.URL);
+          //console.log('последняя страница', this.state.data._links.last.href);
         }
 
       } else {
@@ -389,8 +389,8 @@ class GetComments extends React.Component {
       console.log('URL for delete ', URL);
       xhr.open('DELETE', URL, true);
 
-      console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
-      console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      //console.log('token =', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
+      //console.log('fresh = ', document.cookie.replace(/(?:(?:^|.*;\s*)fresh\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
       xhr.setRequestHeader('Authorization', 'Bearer ' + document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1"));
 
       xhr.send();

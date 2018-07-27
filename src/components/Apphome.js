@@ -145,8 +145,8 @@ class Apphome extends React.Component {
           if (document.cookie === "" || document.cookie === "token=" || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") {
             
             localStorage.setItem('user', null);
-            let userLogin = JSON.parse(localStorage.getItem('user'));
-            console.log(userLogin);
+            //let userLogin = JSON.parse(localStorage.getItem('user'));
+            //console.log(userLogin);
           }
 
             if (document.cookie === "" || document.cookie === "token=" || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") {
@@ -402,11 +402,11 @@ class Apphome extends React.Component {
     if (document.getElementById('element').innerHTML === "") {
       render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
     } else {
-    console.log(e.target);
+    //console.log(e.target);
     ReactDOM.unmountComponentAtNode(document.getElementById('search'));
     //const text = e.target.value.trim();   // удаляем пробелы
     //console.log(text);
-    console.log(e.target);
+    //console.log(e.target);
     //this.setState({text: e.target.value.trim()}, console.log('text', this.state.text));
       
         render(<Search name={checkLanguage(e.target.value.trim())} variant={this.state.group} />, document.getElementById('search'));
@@ -416,7 +416,7 @@ class Apphome extends React.Component {
   onGroupClick = (e) => {
     document.querySelector('.search__group--active').classList.remove('search__group--active');
     e.target.classList.add('search__group--active');
-    this.setState({group: e.target.innerHTML.toLowerCase()}, console.log('group', this.state.group));
+    this.setState({group: e.target.innerHTML.toLowerCase()});
     document.querySelector('.search__input').value = '';
     document.querySelector('.search__input').placeholder = GROUPS[e.target.innerHTML.toLowerCase()];
     //this.onFieldChanged(<input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} />);

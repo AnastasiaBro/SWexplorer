@@ -21,7 +21,7 @@ class Search extends React.Component {
       componentDidMount() {
         this._isMounted = true;
         const xhr = new XMLHttpRequest();
-        console.log(this.props.name);
+        //console.log(this.props.name);
         xhr.open('GET', 'https://swapi.co/api/' + this.props.variant + '/?search=' + this.props.name, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -93,7 +93,7 @@ class Search extends React.Component {
     }
 
     onElementClick = (e) => {
-        console.log(e.target);
+        //console.log(e.target);
         ReactDOM.unmountComponentAtNode(document.getElementById('element'));
         const value = e.target.innerHTML;
         document.querySelector('.search__input').value = value;
