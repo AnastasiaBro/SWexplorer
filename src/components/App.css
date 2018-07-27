@@ -27,6 +27,26 @@
     font-family: 'Droid Sans', arial, sans-serif;
 }
 
+.start-text {
+    color: transparent;
+    background-color: transparent;
+    width: 600px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 200px;
+    margin-bottom: 732px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
+    font-family: 'Droid Sans', arial, sans-serif;
+}
+
 .film {
     width: 1150px;
     margin: auto;
@@ -1140,6 +1160,10 @@
 .cite__block:hover .cite__text {
     transform: translateY(-5px);
     transition: all 0.5s ease;
+}
+
+.page-main {
+    min-height: 850px;
 }
 
 .page-footer {
@@ -2731,6 +2755,7 @@
     border-radius: 10px;
     display: inline-block;
     background-color: black;
+    overflow-wrap: break-word;
 }
 
 .review__button-box {
@@ -3463,6 +3488,7 @@
 }
 
 .page-container {
+    min-height: 800px;
     display: flex;
     flex-direction: column;
 }
@@ -3472,6 +3498,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    min-height: 800px;
 }
 
 .directors, .directors-data, .directors-add, .directors-films {
@@ -3480,6 +3507,7 @@
     margin-top: 140px;
     margin-bottom: 180px;
     margin-right: 50px;
+    min-height: 480px;
 }
 
 .directors-data__row {
@@ -3637,6 +3665,10 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.directors-films__list {
+    min-height: 30px;
 }
 
 .directors__list {

@@ -89,6 +89,7 @@ class Apphome extends React.Component {
       if (data.results !== undefined && this._isMounted) { //проверка, что data.results загружен
           const results = [];  //данные
           
+          
           //console.log(number);
 
           for (var i = 0; i < this.state.data.results.length; i++) {
@@ -142,9 +143,14 @@ class Apphome extends React.Component {
           //console.log(userLogin);
           //window.onload = function() {
           if (document.cookie === "" || document.cookie === "token=" || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") {
+            
             localStorage.setItem('user', null);
             let userLogin = JSON.parse(localStorage.getItem('user'));
-          console.log(userLogin);
+            console.log(userLogin);
+          }
+
+            if (document.cookie === "" || document.cookie === "token=" || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "") {
+            if (userLogin === null) {
           return (
           <div>
             <div className = 'description'>
@@ -212,13 +218,88 @@ class Apphome extends React.Component {
             </div>
             
             <div id="search"></div>
-            <div id="element"><ElementCard name={'Luke Skywalker'} variant={'people'} /></div>
+            <div id="element"></div>
             <div id="reviews"><Review/></div>
 
             
 
           </div>
-          )
+          )} else {
+            return (
+              <div>
+                <div className = 'description'>
+                  <div className="home-page__container home-page__container--apphome">
+                      <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
+                      <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
+                  </div>
+                  <div className = 'description-third__container'>
+                    <h1 className = 'description-third__text description-third__text--first'>Star Wars</h1>
+                    <div className = 'description-third__blocks'>
+                      <div className = 'description-third__left-block'>
+                        <h2 className = 'description-third__title'>SWexplorer</h2>
+                        <p className = 'description-third__left-block-text'>This application named Star Wars explorer is a set of web pages and scripts for visual display of the received data.</p>
+                        <p className = 'description-third__left-block-text'>The data displayed in the application is obtained from the external freely available web service <a className = 'description-third__link description-third__link--light' href='https://swapi.co'>SWAPI</a>.</p>
+                      </div>
+                      <div className = 'description-third__central-block'>
+                        <p className = 'description-third__central-block-text'>— is an American epic space opera media franchise, centered on a film series created by <a className = 'description-third__link' href='https://en.wikipedia.org/wiki/George_Lucas'>George Lucas</a>. It depicts the adventures of characters "a long time ago in a galaxy far, far away".</p>
+                        <p className = 'description-third__central-block-text description-third__central-block-text--last'>The Star Wars franchise takes place in a distant unnamed fictional galaxy at an undetermined point in the ancient past, where many species of aliens (often humanoid) co-exist. People own robotic droids, who assist them in their daily routines, and space travel is common.</p>
+                      </div>
+                      <div className = 'description-third__right-block'>
+                        <h2 className = 'description-third__title'>SWAPI</h2>
+                        <p className = 'description-third__right-block-text'>The Star Wars API is the world's first quantified and programmatically-formatted set of Star Wars data.</p>
+                        <p className = 'description-third__right-block-text'>After hours of watching films and trawling through content online, they present to us all the People, Films, Species, Starships, Vehicles and Planets from Star Wars.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div className='weather__container'>
+                  <div className = 'weather__block'>
+                    <img className = 'weather__image' src={'http://localhost:7070/' + results[number].name + '.jpg'} alt='weather'></img>
+                    <img className = 'weather__gif' src={WEATHER[variant]} alt='weather-gif'></img>
+                    <div className = 'weather__bottom-line'>
+                      <p className = 'weather__temp'>{TEMP[variant]}</p>
+                      <img className = 'weather__png' src={ICONS[variant]} alt='icon'></img>
+                      <span className = 'weather__desc'>{DESCRIPTION[variant]}</span>
+                      <span className = 'weather__name'>{results[number].name}</span>
+                    </div>
+                  </div>
+    
+                  <div className='search__block'>
+                    <h3 className='search__title'>Search area</h3>
+                    <p className='search__text'>What kind of information do you want to find?</p>
+                    <div className='search__groups'>
+                      <p className='search__group search__group--active' onClick={this.onGroupClick.bind(this)}>People</p>
+                      <p className='search__group' onClick={this.onGroupClick.bind(this)}>Planets</p>
+                      <p className='search__group' onClick={this.onGroupClick}>Vehicles</p>
+                      <p className='search__group' onClick={this.onGroupClick}>Starships</p>
+                      <p className='search__group' onClick={this.onGroupClick}>Species</p>
+                      <p className='search__group' onClick={this.onGroupClick}>Films</p>
+                    </div>
+                    <label className='search__label'>
+                      <input className='search__input' placeholder="Luke Skywalker" id="input-main-search" onChange={this.onFieldChanged} pattern="[A-Za-z]" />
+                    </label>
+                  </div>
+    
+                  <div className = 'cite__block'>
+                    <img className = 'cite__bg' src='http://localhost:7070/Tatooine.jpg' alt='tatooine'></img>
+                    <div className = 'cite__right-block'>
+                      <img className = 'cite__image' src='http://localhost:7070/Yoda-cite.png' alt='yoda'></img>
+                    </div>
+                    <p className = 'cite__text'>{CITES[citeRandom]}</p>
+                    <p className = 'cite__film'>{FILMS[citeRandom]}</p>
+                  </div>
+                </div>
+                
+                <div id="search"></div>
+                <div id="element"></div>
+                <div id="reviews"><Review/></div>
+    
+                
+    
+              </div>
+              )
+          }
         } else if (userLogin !== null) {
           return (
             <div>
@@ -287,7 +368,7 @@ class Apphome extends React.Component {
               </div>
               
               <div id="search"></div>
-              <div id="element"><ElementCard name={'Luke Skywalker'} variant={'people'} /></div>
+              <div id="element"></div>
               <div id="reviews"><Review/></div>
   
               
@@ -297,17 +378,39 @@ class Apphome extends React.Component {
         }
       }
       
+      
     }
+    //window.onload = function () {
+      //if (document.getElementById('element')) {
+        //render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
+      //}
+    //}
+    const timeId = setInterval(function () {
+      if (document.querySelector('.search__input')) {
+        //console.log('bbbb');
+        //document.querySelector('.search__input').onchange();
+        render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
+      }
+    }, 800);
+    setTimeout(function() {clearInterval(timeId)}, 2000);
+    
   }
   
 
+
   onFieldChanged = (e) => {
+    if (document.getElementById('element').innerHTML === "") {
+      render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));
+    } else {
+    console.log(e.target);
     ReactDOM.unmountComponentAtNode(document.getElementById('search'));
     //const text = e.target.value.trim();   // удаляем пробелы
     //console.log(text);
     console.log(e.target);
     //this.setState({text: e.target.value.trim()}, console.log('text', this.state.text));
-    render(<Search name={checkLanguage(e.target.value.trim())} variant={this.state.group} />, document.getElementById('search'));
+      
+        render(<Search name={checkLanguage(e.target.value.trim())} variant={this.state.group} />, document.getElementById('search'));
+    }
   }
 
   onGroupClick = (e) => {
@@ -325,6 +428,7 @@ class Apphome extends React.Component {
     document.cookie = "token=; path=/; expires=;";
     window.location.reload(true);
   }
+  
 
   render() {
     //if (this._isMounted) {
@@ -338,6 +442,12 @@ class Apphome extends React.Component {
     //}
   }
 }
+
+//window.onload = function () {
+  //console.log('aaaa');
+  
+//}
+
 
 /*if (document.querySelector('#element') && document.querySelector('#reviews')) {
 render(<ElementCard name={'Luke Skywalker'} variant={'people'} />, document.getElementById('element'));

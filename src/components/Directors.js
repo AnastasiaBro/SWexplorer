@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 //import ReactDOM from 'react-dom';
 //import {render} from 'react-dom';
 
-//import { userActions } from './_actions';
+//import { userActions } from './_actions';  
 
 //const directors = [{"name": "George Lucas", "date": "May 14, 1944", "birthplace": "Modesto, California, U.S.", "biography": ""}, {"name": "Richard Marquand", "date": "Sept. 22, 1937", "birthplace": "Llanishen, Cardiff, Wales", "biography": ""}, {"name": "Irvin Kershner", "date": "Apr. 29, 1923", "birthplace": "Philadelphia, Pennsylvania, U.S.", "biography": ""}, {"name": "J. J. Abrams", "date": "June 27, 1966", "birthplace": "New York City, New York, U.S.", "biography": ""}];
 
@@ -20,6 +20,14 @@ function getPhoto(str, name) {
         return 'http://localhost:7070/no-photo.png';
     }
 }
+
+/*function showVariant(param) {
+    if (param == '') {
+        return 'No films'
+    } else {
+        return param
+    }
+}*/
 
 class Directors extends React.Component {
     constructor(props) {
@@ -42,7 +50,8 @@ class Directors extends React.Component {
             freeFilms: '',
             allFilms: [],
             map: {},
-            indexes: []
+            indexes: [],
+            isResizeble: false
         };
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeBorn = this.onChangeBorn.bind(this);
@@ -121,7 +130,7 @@ class Directors extends React.Component {
                         //console.log(map);
                         this.setState({map: map});
                         //localStorage.setItem("map", map);
-                        console.log(this.state.map);
+                        console.log('mapping ', this.state.map);
                         this.setState({indexes: indexes});
                         //console.log(this.state.indexes);
                     }
@@ -176,8 +185,10 @@ class Directors extends React.Component {
     }
 
     renderDirectors () {
+         
       //const { user, users } = this.props;
       const { data } = this.state;
+      
       if (data._embedded !== undefined) {
 
       const directors = this.state.data._embedded.directors;
@@ -313,7 +324,69 @@ class Directors extends React.Component {
           </div>
           
         );
-        } else {
+        } else if (userLogin !== null && userLogin.username !== "admin") {
+            return (
+                <div>
+                    <div className="home-page">
+                        <div className="home-page__container">
+                            <h3 className="home-page__title">Welcome, <span className="home-page__text--blue">{userLogin.firstName}!</span></h3>
+                            <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Logout</Link>
+                        </div>
+                            
+                        <div className="page-container">
+      
+                            <div className="blocks">
+                                <div className="directors">
+                                    <p className="directors__text">Directors:</p>
+                                    <ul className="directors__list">{usersList}</ul>
+                                    <p className="directors__text directors__count">Count: {directors.length}</p>
+                                    <div className="directors__button-container">
+                                        
+                                    </div>
+                                </div>
+      
+                                <div className="directors-data visually-hidden">
+                                    <div className="directors-data__row directors-data__row--wide">
+                                        <p className="directors-data__text">Information:</p>
+                                        <button className="directors-data__close" onClick={this.onCloseClick}><span className="visually-hidden">Close</span></button>
+                                    </div>
+                                    <div className="directors-data__list">
+                                        <div className="directors-data__row">
+                                            <p className="directors-data__item-text--no-user">Name:</p>
+                                            <p className="directors-data__item-text--no-user">{this.state.name}</p>
+                                        </div>
+                                        <div className="directors-data__row">
+                                            <p className="directors-data__item-text--no-user">Born:</p>
+                                            <p className="directors-data__item-text--no-user">{this.state.born}</p>
+                                        </div>
+                                        <div className="directors-data__row">
+                                            <p className="directors-data__item-text--no-user">Biography:</p>
+                                            <p className="directors-data__item-text--no-user directors-data__item-text--wide">{this.state.biography}</p>
+                                        </div>
+                                        
+                                    </div>
+      
+                                </div>
+    
+                                <div className="directors-films visually-hidden">
+                                  <div className="directors-data__row directors-data__row--wide">
+                                      <p className="directors-data__text">Films of this director:</p>
+                                  </div>
+                                    
+                                  
+                                  <ul className = "directors-films__list">{this.state.filmsList}</ul>
+                                  <p className="directors__text directors__count directors--absolute">chosen films by all directors: {this.state.allFilms.length}</p>
+                                
+                                </div>
+      
+                            </div>
+      
+                        </div>
+                    </div>
+                </div>
+                
+              );
+        } else if (userLogin === null) {
 
           return (
             <div>
@@ -377,7 +450,7 @@ class Directors extends React.Component {
             
           );
         }
-
+        
         
       }
     }
@@ -406,10 +479,11 @@ class Directors extends React.Component {
     }
 
     getRelAndChosenFilms(number) {
+        
         this.setState({filmsList: []});
         this.setState({freeFilms: []});
         this.setState({data2: []});
-        console.log(number);
+        console.log('number of dir ', number);
         const xhr = new XMLHttpRequest();
         const URL = document.querySelectorAll('.directors__films')[number].innerHTML; //это фильмы конкретного режиссера
         console.log('URL для вывода фильмов', URL);
@@ -430,7 +504,7 @@ class Directors extends React.Component {
                     isLoading: false,
                 })
                 
-                console.log('Пришли новые ссылки на фильмы', this.state.data2._embedded.films);
+                //console.log('Пришли новые ссылки на фильмы', this.state.data2._embedded.films);
                 const films = this.state.data2._embedded.films;
 
                 const rel = [];
@@ -466,7 +540,7 @@ class Directors extends React.Component {
                     this.setState({filmsList: filmsList});
                 }
                 
-                console.log(this.state.data2._embedded);
+                //console.log(this.state.data2._embedded);
 
                 //if (films._links) {
                     for (let i = 0; i < films.length; i++) {
@@ -512,7 +586,7 @@ class Directors extends React.Component {
                     }
                     
                     allFilms.sort(compareNumeric);
-                    console.log('все связанные фильмы', allFilms);
+                    console.log('все занятые фильмы', allFilms);
                     this.setState({allFilms: allFilms});
 
 
@@ -528,7 +602,7 @@ class Directors extends React.Component {
                         //console.log(arrIndex);
                     }
                     
-                    console.log('все нужные индексы', arrIndex);
+                    console.log('все свободные индексы', arrIndex);
 
                     let userLogin = JSON.parse(localStorage.getItem('user'));
 
@@ -551,35 +625,40 @@ class Directors extends React.Component {
                       
                 }
             }
+
+            
         }
 
         //if (this.state.map === {}) {
             //document.querySelector('.directors__item--active').click();
         //}
-        if (document.querySelectorAll('.directors-films__span')[0] && (document.querySelectorAll('.directors-films__span')[0].innerHTML == "")) {
-            //setTimeout(function() {
-                document.querySelector('.directors__item--active').click();
-            //}, 1000);
-        }
-                
-                    
-                
-            
         
+        //if (document.querySelectorAll('.directors-films__list')[1] !== undefined && document.querySelectorAll('.directors-films__list')[0] !== undefined) {
+            if (this.state.isResizeble === false && document.querySelector('.directors__item--active') !== null) {
+                setTimeout(function() {
+                    if (document.querySelector('.directors__item--active')) {
+                        document.querySelector('.directors__item--active').click();
+                    }
+                    //console.log(this.state.filmsList);
+                    //console.log(this.state.freeList);
+                }, 1500);
+                this.setState({isResizeble: true});
+            }
+        //}      
     }
 
     onItemClick = (e) => {
         //if (this.state.map !== {}) {
         
         console.log('-------------------------------------------');
-        console.log(e);
+        //console.log(e);
         e.preventDefault();
         let eventTag = "";
         
         sessionStorage.setItem("tar", e.target);
         this.setState({filmsList: []});
         this.setState({data2: []});
-        console.log('Старые ссылки на фильмы', this.state.data2._embedded);
+        //console.log('Старые ссылки на фильмы', this.state.data2._embedded);
         document.querySelector('.directors-data').classList.remove('visually-hidden');
         if (document.querySelector('.directors-films')) {
             document.querySelector('.directors-films').classList.remove('visually-hidden');
@@ -591,10 +670,10 @@ class Directors extends React.Component {
         
         if (e.target.classList == 'directors__item') {
             eventTag = e.target;
-            console.log('Событие ', eventTag);
+            //console.log('Событие ', eventTag);
         } else {
             eventTag = e.target.parentNode;
-            console.log('Событие ', eventTag);
+            //console.log('Событие ', eventTag);
         }
         
 
@@ -620,8 +699,10 @@ class Directors extends React.Component {
         }
         sessionStorage.setItem("number", number);
         //const lalala = sessionStorage.getItem("number", number);
-
+        
         this.getRelAndChosenFilms(sessionStorage.getItem("number"));
+        
+        //setTimeout(this.getRelAndChosenFilms(sessionStorage.getItem("number")), 1000);
     //}
     }
 
@@ -635,7 +716,7 @@ class Directors extends React.Component {
         xhr.responseType = 'json';
         const URL = document.querySelectorAll('.directors__href')[this.state.index].innerHTML;
         const name = this.state.name;
-        console.log('Имя', name);
+        console.log('director ', name);
         console.log(URL);
         let userLogin = JSON.parse(localStorage.getItem('user'));
         
@@ -675,8 +756,8 @@ class Directors extends React.Component {
                     const count = document.querySelectorAll('.directors__item').length;
                     
                     const names = document.querySelectorAll('.directors__name');
-                    console.log(names);
-                    console.log('кол-во режиссеров', count);
+                    //console.log(names);
+                    console.log('кол-во режиссеров ', count);
                     for (let i = 0; i < names.length; i++) {
                         if (names[i].innerHTML === name) {
                             directorNumber = i;
@@ -748,9 +829,9 @@ class Directors extends React.Component {
 
         e.preventDefault();
 
-        console.log(e);
+        //console.log(e);
         const URL = document.querySelectorAll('.directors__href')[this.state.index].innerHTML;
-        console.log(URL);
+        //console.log(URL);
         let userLogin = JSON.parse(localStorage.getItem('user'));
 
         const xhr = new XMLHttpRequest();
@@ -1154,7 +1235,7 @@ class Directors extends React.Component {
             }
         }
     }*/
-
+    
 }
 
 export default Directors;

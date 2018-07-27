@@ -41,7 +41,7 @@ class MapComponent extends React.Component {
                 <div className="map">
                     <div className="home-page__container">
                         <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
-                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
+                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Login</Link>
                     </div>
                     <div className="map__container">
                       <h3 className="map__title">Pages:</h3>

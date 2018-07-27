@@ -55,6 +55,8 @@ class Search extends React.Component {
             //const urls = [];
             const results = [];
 
+            
+
             for (var i = 0; i < this.state.data.results.length; i++) {
                 //names[i] = this.state.data.results[i].name;
                 //urls[i] = this.state.data.results[i].url;
@@ -91,6 +93,7 @@ class Search extends React.Component {
     }
 
     onElementClick = (e) => {
+        console.log(e.target);
         ReactDOM.unmountComponentAtNode(document.getElementById('element'));
         const value = e.target.innerHTML;
         document.querySelector('.search__input').value = value;

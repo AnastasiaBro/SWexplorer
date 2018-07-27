@@ -2,6 +2,13 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 //import {render} from 'react-dom';
 
+function changeSymbol(str) {
+  if (str !== undefined) {
+      const newstr = str.replace(/é/i, 'e');
+      return newstr;
+  }
+}
+
 class Person extends React.Component {
 	constructor(props) {
         super(props)
@@ -21,7 +28,7 @@ class Person extends React.Component {
       componentDidMount() {
         this._isMounted = true;
         const xhr = new XMLHttpRequest();
-        console.log('это новый url ', this.props.user);
+        //console.log('это новый url ', this.props.user);
         xhr.open('GET', this.props.user, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -52,17 +59,12 @@ class Person extends React.Component {
         const { data } = this.state
         if (data !== undefined && this._isMounted) {
 
-          function changeSymbol(str) {
-            if (str !== undefined) {
-                const newstr = str.replace(/é/i, 'e');
-                return newstr;
-            }
-          }
+          
             
 
             return (
                 <div className = 'person'>
-                  <p className = 'person__name'><span className = 'person__elem'>[ </span><a className = 'person__link' href={data.url}>{data.name}</a><span className = 'person__elem'> ]</span></p>
+                  <p className = 'person__name'><span className = 'person__elem'>[ </span><span className = 'person__link'>{data.name}</span><span className = 'person__elem'> ]</span></p>
                   <div className = 'person__blocks'>
                     <ul className = 'person__left-block'>  
                       <li className = 'person__row'>
@@ -87,12 +89,21 @@ class Person extends React.Component {
                       </li>
                     </ul>
                     <div className = 'person__right-block'>
-                      <img className = 'person__image' src={'http://localhost:7070/' + changeSymbol(data.name) + '.jpg'} alt=""></img>
+                      <img className = 'person__image' src={imgLoaded('http://localhost:7070/' + changeSymbol(data.name) + '.jpg')} alt=""></img>
                       
                     </div>
                   </div>
                 </div>
               )
+        }
+
+        function imgLoaded() {
+          while (data.name === undefined) {
+            return 'http://localhost:7070/no-photo.png'
+          }
+          if (data.name !== undefined) {
+            return 'http://localhost:7070/' + changeSymbol(data.name) + '.jpg'
+          }
         }
     }
     

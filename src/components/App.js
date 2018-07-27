@@ -75,7 +75,7 @@ class App extends React.Component {
 
             /*--------------------------*/
 
-            console.log(titles);
+            //console.log(titles);
 
             const propsValues = {
               items: titles
@@ -246,7 +246,7 @@ class App extends React.Component {
             <div className='film' id="film">
                     <div className="home-page__container home-page__container--app">
                         <h3 className="home-page__title visually-hidden">Welcome, <span className="home-page__text--blue"></span></h3>
-                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/logout'>Login</Link>
+                        <Link className="home-page__logout" onClick={this.onLoginClick} to='/login'>Login</Link>
                     </div>
                 <h1 className = 'film__text'>Films</h1>
                 <p className = 'film__text'>Count: {data.count}</p>

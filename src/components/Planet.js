@@ -26,7 +26,7 @@ class Planet extends React.Component {
         const xhr = new XMLHttpRequest();
         //console.log(window.personId);
         //const URL = 'https://swapi.co/api/people/';
-        console.log('это новый url ', this.props.elem);
+        //console.log('это новый url ', this.props.elem);
         xhr.open('GET', this.props.elem, true);
         xhr.send();
         this.setState({ isLoading: true })
@@ -39,7 +39,7 @@ class Planet extends React.Component {
           if (xhr.status !== 200) {
             console.log(xhr.status + ': ' + xhr.statusText)
           } else {
-            console.log('HERE');
+            //console.log('HERE');
             if (this._isMounted) {
               this.setState({
                 data: JSON.parse(xhr.responseText),
@@ -62,7 +62,7 @@ class Planet extends React.Component {
 
             return (
                 <div className = 'person'>
-                  <p className = 'planet__name'><span className = 'person__elem'>[ </span><a className = 'person__link' href={data.url}>{data.name}</a><span className = 'person__elem'> ]</span></p>
+                  <p className = 'planet__name'><span className = 'person__elem'>[ </span><span className = 'person__link'>{data.name}</span><span className = 'person__elem'> ]</span></p>
                   <div className = 'person__blocks'>
                     <ul className = 'person__left-block'>  
                       <li className = 'person__row'>
@@ -91,11 +91,20 @@ class Planet extends React.Component {
                       </li>
                     </ul>
                     <div className = 'planet__right-block'>
-                      <img className = 'planet__image' src={'http://localhost:7070/' + data.name + '.jpg'} alt=""></img>
+                      <img className = 'planet__image' src={imgLoaded('http://localhost:7070/' + data.name + '.jpg')} alt=""></img>
                     </div>
                   </div>
                 </div>
               )
+        }
+
+        function imgLoaded() {
+          while (data.name === undefined) {
+            return 'http://localhost:7070/space.jpg'
+          }
+          if (data.name !== undefined) {
+            return 'http://localhost:7070/' + data.name + '.jpg'
+          }
         }
     }
     

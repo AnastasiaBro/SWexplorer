@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
         const { dispatch } = this.props;
         if (username && password) {
             dispatch(userActions.login(username, password));
-        }
+        
 
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
@@ -72,6 +72,7 @@ class LoginPage extends React.Component {
         //xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
         console.log(body);
         xhr.send(body);
+        }
     }
 
     render() {
@@ -98,6 +99,7 @@ class LoginPage extends React.Component {
         if (!userLogin) {
             localStorage.setItem("token", "null");
             document.cookie = "";
+            document.cookie = "fresh=; path=/; expires=;";
         }
 
         return (
