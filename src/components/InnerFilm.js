@@ -24,7 +24,7 @@ class InnerFilm extends React.Component {
     callthebase = () => {
         const xhr = new XMLHttpRequest();
         
-        const URL = 'https://swapi.co/api/films/' + this.props.url;
+        const URL = 'https://swapi.dev/api/films/' + this.props.url;
         console.log(URL);
         xhr.open('GET', URL, true);
         xhr.send();
