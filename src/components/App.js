@@ -30,7 +30,7 @@ class App extends React.Component {
     componentDidMount() {
       this._isMounted = true;
       const xhr = new XMLHttpRequest();
-      const URL = 'https://swapi.co/api/films';
+      const URL = 'https://swapi.dev/api/films';
       xhr.open('GET', URL, true);
       xhr.send();
       this.setState({ isLoading: true })
